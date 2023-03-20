@@ -548,7 +548,7 @@
             //for setting category in modal
             let span = "";
             for (var i = 0; i < data.length; i++) {
-                span += `<section class="catinmodal" onclick="deleteCategory('${data[i].id}')">${data[i].category}&nbsp;&nbsp;<i class="fa fa-trash" id="ii" /></i></section>`;
+                span += `<section class="catinmodal" onclick="deleteCategory('${data[i]._id}')">${data[i].category}&nbsp;&nbsp;<i class="fa fa-trash" id="ii" /></i></section>`;
             }
 
             document.getElementById("catInModal").innerHTML = span; //for the modal

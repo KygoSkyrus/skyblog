@@ -530,7 +530,7 @@
             });
 
             const data = await res.json();
-            console.log(data);
+            console.log('datatattatat',data);
 
             console.log("x", x); //all the blogs data
 
@@ -547,6 +547,7 @@
                         categoryCount.push(x[j].category);
                     }
                 }
+                console.log('_id',data[i]._id)
                 //for counting the super categories make an array of all those categories and then use the above loop
                 boxes += `<div class="col-md-6 col-lg-3">
                             <div class="d-flex flex-column p-3 mb-3 bg-white shadow-sm rounded">
@@ -560,7 +561,7 @@
                             </div>
                         </div>
                 `;
-                span += `<section class="catinmodal" onclick="deleteCategory('${data[i].id}')">${data[i].category}&nbsp;&nbsp;<i class="fa fa-trash" id="ii" /></i></section>`;
+                span += `<section class="catinmodal" onclick="deleteCategory('${data[i]._id}')">${data[i].category}&nbsp;&nbsp;<i class="fa fa-trash" id="ii" /></i></section>`;
             }
 
             document.getElementById("boxesHolder").innerHTML = boxes; //for the modal

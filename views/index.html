@@ -941,7 +941,7 @@
 			});
 
 			const data = await res.json();
-			//console.log(data);
+			//console.log('fetchcategory',data);
 
 		//	console.log("x", x);
 
@@ -982,21 +982,20 @@
 				document.getElementById("ulCategory").innerHTML = ulCategory; //for setting the categories in navbar
 			}
 
-			//use data.length insted of 8 to show all categories
-			for (var i = 0; i < 8; i++) {
+			//use 8 insted of data.length to show just 8 categories
+			for (var i = 0; i < x.length; i++) {
 				var categoryCount = [];
 				for (var j = 0; j < x.length; j++) {
-					if (x[j].category == data[i].category) {
-						//console.log(x[j].category)
+					if (x[j]?.category == data[i]?.category) {
 						categoryCount.push(x[j].category);
 					}
 				}
 
 				options += `<li class="t-mb-15">
-								<a target="blank" href="/category/${data[i].category}" class="t-link category-list__link w-100 ${clr[i].bg}">
-									<span class="t-link t-link--light tag tag--skew ${clr[i].skewBg} text-uppercase t-mr-16">
+								<a target="blank" href="/category/${data[i]?.category}" class="t-link category-list__link w-100 ${clr[i]?.bg}">
+									<span class="t-link t-link--light tag tag--skew ${clr[i]?.skewBg} text-uppercase t-mr-16">
 										<span class="tag__skew-reverse">
-											${data[i].category}
+											${data[i]?.category}
 										</span>
 									</span>
 									<span class="category-list__text t-text-light text-capitalize">${categoryCount.length} posts</span>
@@ -1073,10 +1072,10 @@
 				}
 			}
 
-			//console.log(featuredArray);
-			//console.log(popularArray);
-			//console.log(trendingArray);
-			//console.log(todaysArray);
+			console.log(featuredArray);
+			console.log(popularArray);
+			console.log(trendingArray);
+			console.log(todaysArray);
 
 			//category
 			var tech = "";
@@ -1103,7 +1102,7 @@
 			loopCategory("politics", politics, politicsArray, arrP, "tag-zeta");
 			loopCategory("sports", sports, sportsArray, arrS, "tag-epsilon");
 
-			//console.log(techArray, politicsArray, sportsArray);
+			console.log(techArray, politicsArray, sportsArray);
 
 			hero += `<div class="col-md-6 t-mb-30 mb-md-0">
 						<div class="row">
@@ -1111,7 +1110,7 @@
 								<div class="post-slider">
 									<div class="post-slider__item">
 										<div class="post post--in">
-											<img src="/upload/${featuredArray[0].image}" alt="blog" class="img-fluid w-100" />
+											<img src="${featuredArray[0].image}" alt="blog" class="img-fluid w-100" />
 											<a href="/${featuredArray[0].url}" class="post__overlay t-link"></a>
 											<div class="post--in-content post--in-content-gap">
 												<ul class="list d-flex align-items-center">
@@ -1148,7 +1147,7 @@
 							</div>
 							<div class="col-12">
 								<div class="post post--in">
-									<img src="/upload/${politicsArray[0].image}" alt="blog" class="img-fluid w-100" />
+									<img src="${politicsArray[0].image}" alt="blog" class="img-fluid w-100" />
 									<a href="/${politicsArray[0].url}" class="post__overlay t-link"></a>
 									<div class="post--in-content post--in-content-gap">
 										<ul class="list d-flex align-items-center">
@@ -1187,7 +1186,7 @@
 						<div class="row">
 							<div class="col-12 t-mb-30">
 								<div class="post post--in">
-									<img src="/upload/${sportsArray[0].image}" alt="blog" class="img-fluid w-100" />
+									<img src="${sportsArray[0].image}" alt="blog" class="img-fluid w-100" />
 									<a href="/${sportsArray[0].url}" class="post__overlay t-link"></a>
 									<div class="post--in-content post--in-content-gap">
 										<ul class="list d-flex align-items-center">
@@ -1223,7 +1222,7 @@
 
 							<div class="col-12">
 								<div class="post post--in">
-									<img src="/upload/${techArray[0].image}" alt="blog" class="img-fluid w-100" />
+									<img src="${techArray[0].image}" alt="blog" class="img-fluid w-100" />
 									<a href="/${techArray[0].url}" class="post__overlay t-link"></a>
 									<div class="post--in-content post--in-content-gap">
 										<ul class="list d-flex align-items-center">
@@ -1259,9 +1258,10 @@
 						</div>
 					</div>`;
 
+					//to this popular and other multi blogs holder i had hardcoded the array by index,,so now i dont have that much data thats why changing everything to [0],,we have to fix this,cannot put index manuualy,must be dynamic
 			popular += `<div class="col-md-4 t-mb-30">
 							<div class="post">
-								<img src="/upload/${popularArray[0].image}" alt="blog" class="img-fluid w-100" />
+								<img src="${popularArray[0].image}" alt="blog" class="img-fluid w-100" />
 
 								<div class="post--right-content t-flex-100 t-pt-15">
 									<ul class="list d-flex align-items-center">
@@ -1290,28 +1290,28 @@
 						</div>
 						<div class="col-md-4 t-mb-30">
 							<div class="post">
-								<img src="/upload/${popularArray[1].image}" alt="blog" class="img-fluid w-100" />
+								<img src="${popularArray[0].image}" alt="blog" class="img-fluid w-100" />
 
 								<div class="post--right-content t-flex-100 t-pt-15">
 									<ul class="list d-flex align-items-center">
 										<li class="t-mr-16">
-											<a target="blank" href="/${popularArray[1].url}"
+											<a target="blank" href="/${popularArray[0].url}"
 												class="t-link t-link--light tag tag--skew tag-zeta text-uppercase">
 												<span class="tag__skew-reverse">
-													${popularArray[1].category}
+													${popularArray[0].category}
 												</span>
 											</a>
 										</li>
 										<li>
-											<a target="blank" href="/${popularArray[1].url}" class="t-link t-link--secondary ex-sm-text text-capitalize">
+											<a target="blank" href="/${popularArray[0].url}" class="t-link t-link--secondary ex-sm-text text-capitalize">
 												<span class="las la-clock sm-text"></span>
 												10 min read
 											</a>
 										</li>
 									</ul>
 									<h5 class="post__title post__title-sm t-mt-10 mb-0">
-										<a target="blank" href="/${popularArray[1].url}" class="t-link t-link--secondary">
-											${popularArray[1].title}
+										<a target="blank" href="/${popularArray[0].url}" class="t-link t-link--secondary">
+											${popularArray[0].title}
 										</a>
 									</h5>
 								</div>
@@ -1319,28 +1319,28 @@
 						</div>
 						<div class="col-md-4 t-mb-30">
 							<div class="post">
-								<img src="/upload/${popularArray[2].image}" alt="blog" class="img-fluid w-100" />
+								<img src="${popularArray[0].image}" alt="blog" class="img-fluid w-100" />
 
 								<div class="post--right-content t-flex-100 t-pt-15">
 									<ul class="list d-flex align-items-center">
 										<li class="t-mr-16">
-											<a target="blank" href="/${popularArray[2].url}"
+											<a target="blank" href="/${popularArray[0].url}"
 												class="t-link t-link--light tag tag--skew tag-beta text-uppercase">
 												<span class="tag__skew-reverse">
-													${popularArray[2].category}
+													${popularArray[0].category}
 												</span>
 											</a>
 										</li>
 										<li>
-											<a target="blank" href="/${popularArray[2].url}" class="t-link t-link--secondary ex-sm-text text-capitalize">
+											<a target="blank" href="/${popularArray[0].url}" class="t-link t-link--secondary ex-sm-text text-capitalize">
 												<span class="las la-clock sm-text"></span>
 												10 min read
 											</a>
 										</li>
 									</ul>
 									<h5 class="post__title post__title-sm t-mt-10 mb-0">
-										<a target="blank" href="/${popularArray[2].url}" class="t-link t-link--secondary">
-											${popularArray[2].title}
+										<a target="blank" href="/${popularArray[0].url}" class="t-link t-link--secondary">
+											${popularArray[0].title}
 										</a>
 									</h5>
 								</div>
@@ -1348,34 +1348,34 @@
 						</div>
 						<div class="col-md-8 t-mb-30 mb-md-0">
 							<div class="post post--in">
-								<img src="/upload/${popularArray[3].image}" alt="blog" class="img-fluid w-100" />
-								<a target="blank" href="/${popularArray[3].url}" class="post__overlay t-link"></a>
+								<img src="${popularArray[0].image}" alt="blog" class="img-fluid w-100" />
+								<a target="blank" href="/${popularArray[0].url}" class="post__overlay t-link"></a>
 								<div class="post--in-content post--in-content-gap">
 									<ul class="list d-flex align-items-center">
 										<li class="t-mr-16">
-											<a target="blank" href="/${popularArray[3].url}"
+											<a target="blank" href="/${popularArray[0].url}"
 												class="t-link t-link--light tag tag--skew tag-delta text-uppercase">
 												<span class="tag__skew-reverse">
-													${popularArray[3].category}
+													${popularArray[0].category}
 												</span>
 											</a>
 										</li>
 										<li class="t-mr-16">
-											<a target="blank" href="/${popularArray[3].url}" class="t-link t-link--light ex-sm-text">
+											<a target="blank" href="/${popularArray[0].url}" class="t-link t-link--light ex-sm-text">
 												<span class="las la-calendar-alt sm-text"></span>
-												${popularArray[3].date}
+												${popularArray[0].date}
 											</a>
 										</li>
 										<li class="d-none d-lg-block">
-											<a target="blank" href="/${popularArray[3].url}" class="t-link t-link--light ex-sm-text">
+											<a target="blank" href="/${popularArray[0].url}" class="t-link t-link--light ex-sm-text">
 												<span class="las la-clock sm-text"></span>
 												8 min read
 											</a>
 										</li>
 									</ul>
 									<h3 class="post__title mb-0 t-mt-10">
-										<a target="blank" href="/${popularArray[3].url}" class="t-link t-link--light">
-											${popularArray[3].title}
+										<a target="blank" href="/${popularArray[0].url}" class="t-link t-link--light">
+											${popularArray[0].title}
 										</a>
 									</h3>
 								</div>
@@ -1383,28 +1383,28 @@
 						</div>
 						<div class="col-md-4">
 							<div class="post">
-								<img src="/upload/${popularArray[4].image}" alt="blog" class="img-fluid w-100" />
+								<img src="${popularArray[0].image}" alt="blog" class="img-fluid w-100" />
 
 								<div class="post--right-content t-flex-100 t-pt-15">
 									<ul class="list d-flex align-items-center">
 										<li class="t-mr-16">
-											<a target="blank" href="/${popularArray[4].url}"
+											<a target="blank" href="/${popularArray[0].url}"
 												class="t-link t-link--light tag tag--skew tag-alpha text-uppercase">
 												<span class="tag__skew-reverse">
-													${popularArray[4].category}
+													${popularArray[0].category}
 												</span>
 											</a>
 										</li>
 										<li>
-											<a target="blank" href="/${popularArray[4].url}" class="t-link t-link--secondary ex-sm-text text-capitalize">
+											<a target="blank" href="/${popularArray[0].url}" class="t-link t-link--secondary ex-sm-text text-capitalize">
 												<span class="las la-clock sm-text"></span>
 												10 min read
 											</a>
 										</li>
 									</ul>
 									<h5 class="post__title post__title-sm t-mt-10 mb-0">
-										<a target="blank" href="/${popularArray[4].url}" class="t-link t-link--secondary">
-											${popularArray[4].title}
+										<a target="blank" href="/${popularArray[0].url}" class="t-link t-link--secondary">
+											${popularArray[0].title}
 										</a>
 									</h5>
 								</div>
@@ -1415,7 +1415,7 @@
 							<div class="row">
 								<div class="col-12 t-mb-30">
 									<div class="post post--in">
-										<img src="/upload/${featuredArray[0].image}" alt="blog" class="img-fluid w-100" />
+										<img src="${featuredArray[0].image}" alt="blog" class="img-fluid w-100" />
 										<a target="blank" href="/${featuredArray[0].url}" class="post__overlay t-link"></a>
 										<div class="post--in-content post--in-content-gap">
 											<ul class="list d-flex align-items-center">
@@ -1450,21 +1450,21 @@
 								</div>
 								<div class="col-lg-6 t-mb-30 mb-lg-0">
 									<div class="post">
-										<a target="blank" href="/${featuredArray[1].url}">
-										<img src="/upload/${featuredArray[1].image}" alt="blog" class="img-fluid w-100" />
+										<a target="blank" href="/${featuredArray[0].url}">
+										<img src="${featuredArray[0].image}" alt="blog" class="img-fluid w-100" />
 
 										<div class="post--right-content t-flex-100 t-pt-15">
 											<ul class="list d-flex align-items-center">
 												<li class="t-mr-16">
-													<a target="blank" href="/${featuredArray[1].url}"
+													<a target="blank" href="/${featuredArray[0].url}"
 														class="t-link t-link--light tag tag--skew tag-beta text-uppercase">
 														<span class="tag__skew-reverse">
-															${featuredArray[1].category}
+															${featuredArray[0].category}
 														</span>
 													</a>
 												</li>
 												<li>
-													<a target="blank" href="/${featuredArray[1].url}"
+													<a target="blank" href="/${featuredArray[0].url}"
 														class="t-link t-link--secondary ex-sm-text text-capitalize">
 														<span class="las la-clock sm-text"></span>
 														10 min read
@@ -1472,8 +1472,8 @@
 												</li>
 											</ul>
 											<h5 class="post__title post__title-sm t-mt-10 mb-0">
-												<a target="blank" href="/${featuredArray[1].url}" class="t-link t-link--secondary">
-													${featuredArray[1].title}
+												<a target="blank" href="/${featuredArray[0].url}" class="t-link t-link--secondary">
+													${featuredArray[0].title}
 												</a>
 											</h5>
 										</div>
@@ -1482,21 +1482,21 @@
 								</div>
 								<div class="col-lg-6">
 									<div class="post">
-										<a target="blank" href="/${featuredArray[2].url}">
-										<img src="/upload/${featuredArray[2].image}" alt="blog" class="img-fluid w-100" />
+										<a target="blank" href="/${featuredArray[0].url}">
+										<img src="${featuredArray[0].image}" alt="blog" class="img-fluid w-100" />
 
 										<div class="post--right-content t-flex-100 t-pt-15">
 											<ul class="list d-flex align-items-center">
 												<li class="t-mr-16">
-													<a target="blank" href="/${featuredArray[2].url}"
+													<a target="blank" href="/${featuredArray[0].url}"
 														class="t-link t-link--light tag tag--skew tag-delta text-uppercase">
 														<span class="tag__skew-reverse">
-															${featuredArray[2].category}
+															${featuredArray[0].category}
 														</span>
 													</a>
 												</li>
 												<li>
-													<a target="blank" href="/${featuredArray[2].url}"
+													<a target="blank" href="/${featuredArray[0].url}"
 														class="t-link t-link--secondary ex-sm-text text-capitalize">
 														<span class="las la-clock sm-text"></span>
 														10 min read
@@ -1504,8 +1504,8 @@
 												</li>
 											</ul>
 											<h5 class="post__title post__title-sm t-mt-10 mb-0">
-												<a target="blank" href="/${featuredArray[2].url}" class="t-link t-link--secondary">
-													${featuredArray[2].title}
+												<a target="blank" href="/${featuredArray[0].url}" class="t-link t-link--secondary">
+													${featuredArray[0].title}
 												</a>
 											</h5>
 										</div>
@@ -1518,21 +1518,21 @@
 							<div class="row">
 								<div class="col-12 t-mb-30">
 									<div class="post">
-										<a target="blank" href="/${featuredArray[3].url}">
-										<img src="/upload/${featuredArray[3].image}" alt="blog" class="img-fluid w-100" />
+										<a target="blank" href="/${featuredArray[0].url}">
+										<img src="${featuredArray[0].image}" alt="blog" class="img-fluid w-100" />
 
 										<div class="post--right-content t-flex-100 t-pt-15">
 											<ul class="list d-flex align-items-center">
 												<li class="t-mr-16">
-													<a target="blank" href="/${featuredArray[3].url}"
+													<a target="blank" href="/${featuredArray[0].url}"
 														class="t-link t-link--light tag tag--skew tag-alpha text-uppercase">
 														<span class="tag__skew-reverse">
-															${featuredArray[3].category}
+															${featuredArray[0].category}
 														</span>
 													</a>
 												</li>
 												<li>
-													<a target="blank" href="/${featuredArray[3].url}"
+													<a target="blank" href="/${featuredArray[0].url}"
 														class="t-link t-link--secondary ex-sm-text text-capitalize">
 														<span class="las la-clock sm-text"></span>
 														10 min read
@@ -1540,8 +1540,8 @@
 												</li>
 											</ul>
 											<h5 class="post__title post__title-sm t-mt-10 mb-0">
-												<a target="blank" href="/${featuredArray[3].url}" class="t-link t-link--secondary">
-													${featuredArray[3].title}
+												<a target="blank" href="/${featuredArray[0].url}" class="t-link t-link--secondary">
+													${featuredArray[0].title}
 												</a>
 											</h5>
 										</div>
@@ -1550,21 +1550,21 @@
 								</div>
 								<div class="col-12">
 									<div class="post">
-										<a target="blank" href="/${featuredArray[4].url}">
-										<img src="/upload/${featuredArray[4].image}" alt="blog" class="img-fluid w-100" />
+										<a target="blank" href="/${featuredArray[0].url}">
+										<img src="${featuredArray[0].image}" alt="blog" class="img-fluid w-100" />
 
 										<div class="post--right-content t-flex-100 t-pt-15">
 											<ul class="list d-flex align-items-center">
 												<li class="t-mr-16">
-													<a target="blank" href="/${featuredArray[4].url}" 
+													<a target="blank" href="/${featuredArray[0].url}" 
 														class="t-link t-link--light tag tag--skew tag-epsilon text-uppercase">
 														<span class="tag__skew-reverse">
-															${featuredArray[4].category}
+															${featuredArray[0].category}
 														</span>
 													</a>
 												</li>
 												<li>
-													<a target="blank" href="/${featuredArray[4].url}"
+													<a target="blank" href="/${featuredArray[0].url}"
 														class="t-link t-link--secondary ex-sm-text text-capitalize">
 														<span class="las la-clock sm-text"></span>
 														10 min read
@@ -1572,8 +1572,8 @@
 												</li>
 											</ul>
 											<h5 class="post__title post__title-sm t-mt-10 mb-0">
-												<a target="blank" href="/${featuredArray[4].url}" class="t-link t-link--secondary">
-													${featuredArray[4].title}
+												<a target="blank" href="/${featuredArray[0].url}" class="t-link t-link--secondary">
+													${featuredArray[0].title}
 												</a>
 											</h5>
 										</div>
@@ -1585,7 +1585,7 @@
 
 			todays += `<div class="col-lg-8 t-mb-30 mb-lg-0">
 								<div class="post">
-									<img src="/upload/${todaysArray[0].image}" alt="blog" class="img-fluid w-100" />
+									<img src="${todaysArray[0].image}" alt="blog" class="img-fluid w-100" />
 
 									<div class="post--right-content t-flex-100 t-pt-15">
 										<ul class="list d-flex align-items-center">
@@ -1626,29 +1626,29 @@
 								<div class="row">
 									<div class="col-12 t-mb-30">
 										<div class="post">
-											<img src="/upload/${todaysArray[1].image}" alt="blog" class="img-fluid w-100" />
+											<img src="${todaysArray[0].image}" alt="blog" class="img-fluid w-100" />
 
 											<div class="post--right-content t-flex-100 t-pt-15">
 												<ul class="list d-flex align-items-center">
 													<li class="t-mr-16">
-														<a target="blank" href="/${todaysArray[1].url}"
+														<a target="blank" href="/${todaysArray[0].url}"
 															class="t-link t-link--light tag tag--skew tag-zeta text-uppercase">
 															<span class="tag__skew-reverse">
-																${todaysArray[1].category}
+																${todaysArray[0].category}
 															</span>
 														</a>
 													</li>
 													<li>
-														<a target="blank" href="/${todaysArray[1].url}"
+														<a target="blank" href="/${todaysArray[0].url}"
 															class="t-link t-link--secondary ex-sm-text text-capitalize">
 															<span class="las la-calendar-alt sm-text"></span>
-															${todaysArray[1].date}
+															${todaysArray[0].date}
 														</a>
 													</li>
 												</ul>
 												<h5 class="post__title post__title-sm t-mt-10 mb-0">
-													<a target="blank" href="/${todaysArray[1].url}" class="t-link t-link--secondary">
-														${todaysArray[1].title}
+													<a target="blank" href="/${todaysArray[0].url}" class="t-link t-link--secondary">
+														${todaysArray[0].title}
 													</a>
 												</h5>
 											</div>
@@ -1656,29 +1656,29 @@
 									</div>
 									<div class="col-12">
 										<div class="post">
-											<img src="/upload/${todaysArray[2].image}" alt="blog" class="img-fluid w-100" />
+											<img src="${todaysArray[0].image}" alt="blog" class="img-fluid w-100" />
 
 											<div class="post--right-content t-flex-100 t-pt-15">
 												<ul class="list d-flex align-items-center">
 													<li class="t-mr-16">
-														<a target="blank" href="/${todaysArray[2].url}"
+														<a target="blank" href="/${todaysArray[0].url}"
 															class="t-link t-link--light tag tag--skew tag-gamma text-uppercase">
 															<span class="tag__skew-reverse">
-																${todaysArray[2].category}
+																${todaysArray[0].category}
 															</span>
 														</a>
 													</li>
 													<li>
-														<a target="blank" href="/${todaysArray[2].url}"
+														<a target="blank" href="/${todaysArray[0].url}"
 															class="t-link t-link--secondary ex-sm-text text-capitalize">
 															<span class="las la-calendar-alt sm-text"></span>
-															${todaysArray[2].date}
+															${todaysArray[0].date}
 														</a>
 													</li>
 												</ul>
 												<h5 class="post__title post__title-sm t-mt-10 mb-0">
-													<a target="blank" href="/${todaysArray[2].url}" class="t-link t-link--secondary">
-														${todaysArray[2].title}
+													<a target="blank" href="/${todaysArray[0].url}" class="t-link t-link--secondary">
+														${todaysArray[0].title}
 													</a>
 												</h5>
 											</div>
@@ -1691,7 +1691,7 @@
 			for (var i = trendingArray.length - 1; i >= 0; i--) {
 				trending += `<div class="col-md-6 col-lg-3 t-mb-30 mb-lg-0">
 							<div class="post post--in">
-								<img src="/upload/${trendingArray[i].image}" alt="blog" class="img-fluid w-100" />
+								<img src="${trendingArray[i].image}" alt="blog" class="img-fluid w-100" />
 								<a target="blank" href="/${trendingArray[i].url}" class="post__overlay t-link"></a>
 								<div class="post--in-content">
 									<ul class="list d-flex align-items-center">
@@ -1731,7 +1731,7 @@
 					catVar += `<div class="col-12 t-mt-30 t-mb-30">
 									<div class="post post--right">
 										<div class="post--right-img t-flex-100 t-mr-16">
-											<img src="/upload/${catArray[i].image}" alt="blog" class="img-fluid w-100" />
+											<img src="${catArray[i].image}" alt="blog" class="img-fluid w-100" />
 										</div>
 										<div class="post--right-content t-flex-100">
 											<ul class="list d-flex align-items-center">

@@ -5,6 +5,8 @@ const nodemailer = require("nodemailer");
 var bodyParser = require("body-parser");
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 
+const BLOG=require("../schema/blog")
+const CONTACT =require("../schema/contact")
 
 //sender's email
 const pswrd = "";
@@ -74,22 +76,10 @@ router.post("/message", urlencodedParser, (req, res) => {
 //for showing database messages records
 router.post("/showMessage", async (req, res) => {
   try {
-    //database credentials
-    var con = mysql.createConnection({
-      host: "localhost",
-      user: "root",
-      password: "",
-      database: "bloggingsite",
-    });
-    con.connect(function (err) {
-      if (err) throw err;
-      console.log("Connected!");
-      con.query("SELECT * FROM contact", function (err, result, fields) {
-        if (err) throw err;
-        console.log(result);
-        res.send(result);
-      });
-    });
+   
+    let ret =await CONTACT.find({})
+    console.log("contact message",ret)
+    res.send(ret)
   } catch (err) {
     console.log(err);
   }
@@ -109,27 +99,14 @@ router.post("/showMessage", async (req, res) => {
 //for showing database blogs records
 router.post("/show", async (req, res) => {
   try {
-    //database credentials
-    var con = mysql.createConnection({
-      host: "localhost",
-      user: "root",
-      password: "",
-      database: "bloggingsite",
-    });
-    con.connect(function (err) {
-      if (err) throw err;
-      console.log("Connected!");
-      con.query("SELECT * FROM blog", function (err, result, fields) {
-        if (err) throw err;
-        //console.log(result);
-       // res.send(result);
-    //    const category = new CATEGORY(c);
-    // await category.save();
 
-        const filteredArray = result.filter(obj => obj.status !== '1');//only sending the blogs that are marked visible
-        res.send(filteredArray);
-      });
-    });
+
+    let ret =await BLOG.find({})
+    console.log("blogs",ret)
+
+    const filteredArray = ret.filter(obj => obj.status !== '1');//only sending the blogs that are marked visible
+    res.send(filteredArray);
+
   } catch (err) {
     console.log(err);
   }
@@ -138,22 +115,10 @@ router.post("/show", async (req, res) => {
 //for showing database blogs records in blogs-management (admin panel)
 router.post("/show2", async (req, res) => {
   try {
-    //database credentials
-    var con = mysql.createConnection({
-      host: "localhost",
-      user: "root",
-      password: "",
-      database: "bloggingsite",
-    });
-    con.connect(function (err) {
-      if (err) throw err;
-      console.log("Connected!");
-      con.query("SELECT * FROM blog", function (err, result, fields) {
-        if (err) throw err;
-        //console.log(result);
-        res.send(result);
-      });
-    });
+    
+    let ret =await BLOG.find({})
+    console.log("BLOGS",ret)
+    res.send(ret)
   } catch (err) {
     console.log(err);
   }

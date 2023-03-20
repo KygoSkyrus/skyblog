@@ -692,7 +692,7 @@
             let span = ""
             for (var i = 0; i < data.length; i++) {
                 options += `<option value="${data[i].category}">${data[i].category}</option>`;
-                span += `<section class="catinmodal" onclick="deleteCategory('${data[i].id}')">${data[i].category}&nbsp;&nbsp;<i class="fa fa-trash" id="ii" /></i></section>`;
+                span += `<section class="catinmodal" onclick="deleteCategory('${data[i]._id}')">${data[i].category}&nbsp;&nbsp;<i class="fa fa-trash" id="ii" /></i></section>`;
             }
 
 

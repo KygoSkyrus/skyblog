@@ -5,14 +5,21 @@ const cookieParser = require("cookie-parser");
 const multer = require("multer");
 const path = require("path");
 const fs = require("fs");
+const mongoose = require('mongoose');
+const dotenv = require('dotenv');
 
 const articles = require("./routes/articles");
 const blogEdit = require("./routes/edit");
 const categorySingle = require("./routes/category");
 const admin = require("./routes/admin");
 
-app.set("view engine", "ejs");
+const ADMIN=require("./schema/admin")
+const BLOG=require("./schema/blog")
+const CONTACT =require("./schema/contact")
+const CATEGORY = require("./schema/category")
 
+dotenv.config({ path: './env/config.env' });
+app.set("view engine", "ejs");
 app.use(cookieParser());
 
 var bodyParser = require("body-parser");
@@ -26,6 +33,18 @@ app.use(express.json());
 const handleError = (err, res) => {
   res.status(500).contentType("text/plain").end("Oops! Something went wrong!");
 };
+
+ 
+const db = process.env.dbURI;
+//useNewUrlParser flag to allow users to fall back to the old parser if they find a bug in the new parser.
+//useUnifiedTopology: Set to true to opt in to using the MongoDB driver's new connection management engine. 
+mongoose.connect(db, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+}).then(() => {
+  console.log('db connected');
+}).catch((err) => console.log(err));
+
 
 const upload = multer({
   dest: "./views/upload",
@@ -479,34 +498,43 @@ app.post("/showCategory", async (req, res) => {
   console.log("sc");
 
   try {
+    let ret =await CATEGORY.find({})
+    console.log("RET",ret)
+
+    res.send(ret);
+    /*
     con.query("SELECT * FROM category", function (err, result, fields) {
       if (err) throw err;
       //console.log(result);
       res.send(result);
-    });
+    });*/
   } catch (err) {
     console.log(err);
   }
 });
 
 //for adding category records
-app.post("/addCategory", (req, res) => {
+app.post("/addCategory",async (req, res) => {
   const details = req.body;
-  console.log(details);
+  console.log('datils',details);
 
   try {
-    con.query("SELECT * FROM category", function (err, result, fields) {
-      if (err) throw err;
-      console.log("restlt", result);
+    // con.query("SELECT * FROM category", function (err, result, fields) {
+    //   if (err) throw err;
+    let result =await CATEGORY.find({})
+    console.log("categories ",result)
+
 
       if (result.length === 0) {
         console.log("lengthiszero");
-        var sql = `INSERT INTO category (category) VALUES ('${details.cat}')`;
-        con.query(sql, function (err, result) {
-          if (err) throw err;
+       // var sql = `INSERT INTO category (category) VALUES ('${details.cat}')`;
+       // con.query(sql, function (err, result) {
+        //  if (err) throw err;
+        let category=new CATEGORY({category:details.cat})
+        category.save()//saving category in db
           console.log("category inserted!!!");
           res.send({ message: "categoryAdded" });
-        });
+        //});
       } else {
         let answer = "";
 
@@ -525,15 +553,18 @@ app.post("/addCategory", (req, res) => {
         console.log(answer);
         if (answer !== "exist") {
           console.log("i work yeah");
-          var sql = `INSERT INTO category (category) VALUES ('${details.cat}')`;
-          con.query(sql, function (err, result) {
-            if (err) throw err;
+        //  var sql = `INSERT INTO category (category) VALUES ('${details.cat}')`;
+        //  con.query(sql, function (err, result) {
+         //   if (err) throw err;
+         let category=new CATEGORY({category:details.cat})
+         category.save()//saving category in db
+         //console.log("categories ",r)
             console.log("category inserted!!!");
             res.send({ message: "categoryAdded" });
-          });
+         // });
         }
       }
-    });
+   // });
   } catch (err) {
     console.log(err);
   }
@@ -542,15 +573,17 @@ app.post("/addCategory", (req, res) => {
 //for deleting category records
 app.post("/deleteCategory", async (req, res) => {
   const details = req.body;
-  console.log(details);
-
+  console.log('details',details);
+  console.log('detailsid',details.id);
   try {
-    var sql = `DELETE FROM category WHERE id = ${details.id}`;
-    con.query(sql, function (err, result) {
-      if (err) throw err;
-      console.log("Number of records deleted: " + result.affectedRows);
-      res.send({ affectedRows: result.affectedRows, message: "deleted" });
-    });
+    // var sql = `DELETE FROM category WHERE id = ${details.id}`;
+    // con.query(sql, function (err, result) {
+    //   if (err) throw err;
+   let resp=await CATEGORY.deleteOne({_id:details.id})
+   console.log(resp)
+       console.log("Number of records deleted: " + resp.deletedCount);
+      res.send({ affectedRows: resp.deletedCount, message: "deleted" });
+    //});
   } catch (err) {
     console.log(err);
   }
@@ -585,9 +618,12 @@ app.post("/admin/login", urlencodedParser, async (req, res) => {
   console.log(credentials);
 
   try {
-    var sql = `SELECT * FROM admin WHERE username = '${credentials.userName}' AND password = '${credentials.password}'`;
-    con.query(sql, function (err, result) {
-      if (err) throw err;
+    // var sql = `SELECT * FROM admin WHERE username = '${credentials.userName}' AND password = '${credentials.password}'`;
+
+    const result = await ADMIN.find({ username: credentials.userName,password:credentials.password })
+console.log('res for admin',result)
+   // con.query(sql, function (err, result) {
+   //   if (err) throw err;
 
       if (result.length >= 1) {
         if (
@@ -606,7 +642,7 @@ app.post("/admin/login", urlencodedParser, async (req, res) => {
           text: "Credentials mismatched!! Try again",
         });
       }
-    });
+   // });
   } catch (err) {
     console.log(err);
   }

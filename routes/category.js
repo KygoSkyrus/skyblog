@@ -2,7 +2,10 @@ const express = require("express");
 const router = express("router");
 const mysql = require("mysql");
 
-router.get("/:category", (req, res) => {
+const CATEGORY = require("../schema/category")
+
+
+router.get("/:category", async (req, res) => {
    
   console.log("im workin");
 
@@ -11,16 +14,11 @@ router.get("/:category", (req, res) => {
   console.log(lastPart);
 
   try {
-    var con = mysql.createConnection({
-      host: "localhost",
-      user: "root",
-      password: "",
-      database: "bloggingsite",
-    });
-    con.query("SELECT * FROM category", function (err, result, fields) {
-      if (err) throw err;
+   
+    let result =await CATEGORY.find({})
+    console.log("RET",result)
 
-      for (var i = 0; i < result.length; i++){
+    for (var i = 0; i < result.length; i++){
          if(result[i].category==lastPart){
             res.render("../views/category-single.ejs", {text:"..."} );
             break;
@@ -31,8 +29,22 @@ router.get("/:category", (req, res) => {
             }
          }
       }
-      console.log(result);
-    });
+    // con.query("SELECT * FROM category", function (err, result, fields) {
+    //   if (err) throw err;
+
+    //   for (var i = 0; i < result.length; i++){
+    //      if(result[i].category==lastPart){
+    //         res.render("../views/category-single.ejs", {text:"..."} );
+    //         break;
+    //      }
+    //      else{
+    //         if(i===result.length-1){
+    //            res.render("../views/error.ejs", {text:"..."} );
+    //         }
+    //      }
+    //   }
+    //   console.log(result);
+    // });
   } catch (err) {
     console.log(err);
   }
