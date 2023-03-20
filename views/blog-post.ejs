@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from kotha.softtechthemes.com/html/kotha/business.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 07 Mar 2022 11:34:30 GMT -->
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+
+    <meta name="google-signin-client_id" content="371526208721-u9ce3pinmkt2aa959r57j9u2q9crul09.apps.googleusercontent.com">
+
+    <title>Blog</title>
+
+    <!-- favicon -->
+    <link rel="icon" href="/assets/img/favicon.png" sizes="16x16" type="image/png" />
+
+
+    <!-- FONTAWESOME -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+
+    <!-- Stylesheet Link -->
+    <link rel="stylesheet" href="/assets/css/style.css" />
+
+
+
+
+
+
+    <!--Global Styles(used by all pages)-->
+    <link href="/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/assets/plugins/metisMenu/metisMenu.min.css" rel="stylesheet" />
+    <link href="/assets/plugins/fontawesome/css/all.min.css" rel="stylesheet" />
+    <link href="/assets/plugins/typicons/src/typicons.min.css" rel="stylesheet" />
+    <link href="/assets/plugins/themify-icons/themify-icons.min.css" rel="stylesheet" />
+    <!--Third party Styles(used by this page)-->
+    <link href="/assets/plugins/glyphicons/glyphicons.css" rel="stylesheet" />
+    <!--Third party Styles(used by this page)-->
+    <link href="/assets/plugins/summernote/summernote.css" rel="stylesheet" />
+    <link href="/assets/plugins/summernote/summernote-bs4.css" rel="stylesheet" />
+    <!--Third party Styles(used by this page)-->
+    <link href="/assets/plugins/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" />
+    <!--Third party Styles(used by this page)-->
+    <link href="/assets/plugins/select2/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="/assets/plugins/select2-bootstrap4/dist/select2-bootstrap4.min.css" rel="stylesheet" />
+    <link href="/assets/plugins/jquery.sumoselect/sumoselect.min.css" rel="stylesheet" />
+    <link href="/assets/dist/css/select.html" rel="stylesheet" type="text/css" />
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+
+
+</head>
+
+<body>
+
+    <style>
+        .wrapper11 {
+            display: flex;
+            background: #fff;
+            height: auto;
+            width: 100%;
+            align-items: center;
+            /* justify-content: space-evenly; */
+            border-radius: 5px;
+            padding: 9px 11px;
+            border: 1px solid #e4e5e7;
+            /* height: calc(1.8em + .75rem + 2px); */
+        }
+
+        .wrapper11 .option {
+            background: #fff;
+            height: 100%;
+            width: fit-content;
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+            margin: 0 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            padding: 4px 10px;
+            border: 2px solid lightgrey;
+            transition: all 0.3s ease;
+        }
+
+        .wrapper11 .option .dot {
+            height: 14px;
+            width: 14px;
+            background: #d9d9d9;
+            border-radius: 50%;
+            position: relative;
+        }
+
+        .wrapper11 .option .dot::before {
+            position: absolute;
+            content: "";
+            top: 3px;
+            left: 3px;
+            width: 8px;
+            height: 8px;
+            background: #0069d9;
+            border-radius: 50%;
+            opacity: 0;
+            transform: scale(1.5);
+            transition: all 0.3s ease;
+        }
+
+        input[type="radio"] {
+            display: none;
+        }
+
+        #option-1:checked:checked~.option-1,
+        #option-2:checked:checked~.option-2,
+        #option-3:checked:checked~.option-3,
+        #option-4:checked:checked~.option-4,
+        #option-5:checked:checked~.option-5 {
+            border-color: #0069d9;
+            background: #0069d9;
+        }
+
+        #option-1:checked:checked~.option-1 .dot,
+        #option-2:checked:checked~.option-2 .dot,
+        #option-3:checked:checked~.option-3 .dot,
+        #option-4:checked:checked~.option-4 .dot,
+        #option-5:checked:checked~.option-5 .dot {
+            background: #fff;
+        }
+
+        #option-1:checked:checked~.option-1 .dot::before,
+        #option-2:checked:checked~.option-2 .dot::before,
+        #option-3:checked:checked~.option-3 .dot::before,
+        #option-4:checked:checked~.option-4 .dot::before,
+        #option-5:checked:checked~.option-5 .dot::before {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .wrapper .option span {
+            /* font-size: 20px; */
+            color: #808080;
+        }
+
+        #option-1:checked:checked~.option-1 span,
+        #option-2:checked:checked~.option-2 span,
+        #option-3:checked:checked~.option-3 span,
+        #option-4:checked:checked~.option-4 span,
+        #option-5:checked:checked~.option-5 span {
+            color: #fff;
+        }
+
+        @media (max-width:768px) {
+            .wrapper11 {
+                flex-direction: column;
+                justify-content: unset;
+            }
+
+            .wrapper11 .option {
+                width: 100%;
+                justify-content: unset;
+            }
+
+            .catinmodal {
+                margin: 2px;
+            }
+        }
+    </style>
+
+
+
+    <!-- Preloader -->
+    <div class="preloader js-preloader flex-center">
+        <div class="dots">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+        </div>
+    </div>
+    <!-- Preloader End -->
+
+
+
+    <!-- Nav Top -->
+    <div class="nav-top">
+        <div class="container">
+            <div class="row justify-content-between">
+                <div class="col-md-6 d-flex align-items-center">
+                    <a href="#" class="t-link t-link--light">
+                        <span class="t-mr-8 d-inline-block">
+                            <span class="las la-envelope-open"></span>
+                        </span>
+                        <span class="sm-text">
+                            Mail: support@blognews.com
+                        </span>
+                    </a>
+                </div>
+                <div class="col-md-6 d-none d-lg-block">
+                    <ul class="list d-flex justify-content-end">
+                        <li class="t-text-light  d-flex align-items-center">
+                            <span class="sm-text" id="date"></span>
+                        </li>
+                        <li class="t-text-light">
+                            <ul class="list d-flex w-100 t-pl-30 t-pr-30 t-pt-30 pt-lg-0">
+                                <li class="list__item t-mr-16">
+                                    <a href="#" class="t-link t-link--light navbars__list-link">
+                                        <span class="lab la-facebook-f"></span>
+                                    </a>
+                                </li>
+                                <li class="list__item t-mr-16">
+                                    <a href="#" class="t-link t-link--light navbars__list-link">
+                                        <span class="lab la-twitter"></span>
+                                    </a>
+                                </li>
+                                <li class="list__item t-mr-16">
+                                    <a href="#" class="t-link t-link--light navbars__list-link">
+                                        <span class="lab la-instagram"></span>
+                                    </a>
+                                </li>
+                                <li class="list__item">
+                                    <a href="#" class="t-link t-link--light navbars__list-link">
+                                        <span class="lab la-youtube"></span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Nav Top End -->
+
+    <!-- Header  -->
+    <header class="header">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-4 t-mb-16 mb-md-0">
+                    <div class="brand">
+                        <a href="/" class="t-link">
+                            <img src="/assets/images/logo.png" alt="kotha" class="img-fluid w-100" />
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-5 t-mb-16 mb-md-0">
+                    <a href="#" class="t-link">
+                        <img src="/assets/img/ad-sm.jpg" alt="kotha" class="img-fluid w-100" />
+                    </a>
+                </div>
+                <div class="col-md-3">
+                    <div class="search-form">
+                        <input type="text" name="search" id="search" class="search-form__input"
+                         placeholder="search blogs" />
+                        <span class="search-form__icon srch" onclick="getBlogFromSearch()">
+                            <span class="las la-search"></span>
+                        </span>
+                    </div>
+                    <div class="results" id="results">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </header>
+    <!-- Header End -->
+
+    <!-- Navbar  -->
+    <div class="navbars">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-right d-lg-none">
+                    <a href="#" class="navbars__hamburger t-link">
+                        <span class="las la-bars"></span>
+                    </a>
+                </div>
+                <div class="col-12">
+                    <div class="navbars__menu">
+                        <div class="navbars__cross d-lg-none">
+                            <span class="las la-times"></span>
+                        </div>
+
+                        <ul class="list w-100 t-pl-30 t-pr-30 navbars__list pl-lg-0">
+                            <li class="list__item navbars__list-item  ">
+                                <a href="/" class="t-link t-link--light text-uppercase navbars__list-link w-100">
+                                    home
+                                </a>
+                            </li>
+                            <style>
+                                .dropbtn {
+                                    background-color: #14213d;
+                                    color: white;
+                                    padding: 16px;
+                                    font-size: 16px;
+                                    border: none;
+                                    cursor: pointer;
+                                    margin-bottom: 0;
+                                    padding-top: 15px;
+                                    padding-bottom: 15px;
+                                    font-size: 14px;
+                                    font-weight: 500;
+                                    letter-spacing: 2px;
+                                }
+
+                                .dropdown {
+                                    position: relative;
+                                    display: inline-block;
+                                }
+
+                                .dropdown-content {
+                                    display: none;
+                                    display: none;
+                                    width: auto;
+                                    position: absolute;
+                                    left: -25%;
+                                    padding: 6px 0;
+                                    background-color: #f9f9f9;
+                                    min-width: 780px;
+                                    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+                                    z-index: 1;
+                                }
+
+                                .dropdown-content a {
+                                    color: black;
+                                    padding: 8px 16px;
+                                    text-decoration: none;
+                                    display: inline-block;
+                                }
+
+                                .dropdown-content a:hover {
+                                    color: #00b9f1 !important;
+                                    background: #f9f9f9;
+                                }
+
+                                .dropdown:hover .dropdown-content {
+                                    display: flex;
+                                    flex-wrap: wrap;
+                                }
+
+                                .dropdown:hover .dropbtn {
+
+                                    color: #00b9f1 !important;
+                                }
+
+                                @media screen and (min-width: 992px) {
+                                    .sub-menu__item {
+                                        border-bottom: 0px solid rgba(230, 230, 230, 0.5);
+                                    }
+                                }
+
+                                @media screen and (max-width: 768px) {
+                                    .dropdown-content {
+                                        position: static;
+                                        left: 0;
+                                        min-width: unset;
+                                        background-color: inherit;
+                                    }
+
+                                    .dropbtn {
+                                        padding: 0;
+                                        font-size: 18px;
+                                    }
+                                }
+
+                                .sub-menu__item {
+                                    width: 130px;
+                                    text-align: center;
+                                    border-bottom: 0px solid rgba(230, 230, 230, 0.5);
+                                }
+                            </style>
+
+                            <li class="dropdown list__item navbars__list-item">
+                                <button class="dropbtn">CATEGORIES <i class="fa fa-angle-down"
+                                        style="font-size:18px;"></i></button>
+                                <div class="dropdown-content" id="ulCategory">
+                                </div>
+                            </li>
+                            <li class="list__item navbars__list-item">
+                                <a href="/category/tech"
+                                    class="t-link t-link--light text-uppercase navbars__list-link w-100">
+                                    tech
+                                </a>
+                            </li>
+                            <li class="list__item navbars__list-item">
+                                <a href="/category/travel"
+                                    class="t-link t-link--light text-uppercase navbars__list-link w-100">
+                                    travel
+                                </a>
+                            </li>
+                            <li class="list__item navbars__list-item">
+                                <a href="/category/lifestyle"
+                                    class="t-link t-link--light text-uppercase navbars__list-link w-100">
+                                    lifestyle
+                                </a>
+                            </li>
+                            <li class="list__item navbars__list-item">
+                                <a href="/category/business"
+                                    class="t-link t-link--light text-uppercase navbars__list-link w-100">
+                                    business
+                                </a>
+                            </li>
+                            <li class="list__item navbars__list-item">
+                                <a href="/contact" class="t-link t-link--light text-uppercase navbars__list-link w-100">
+                                    contact
+                                </a>
+                            </li>
+                            <li class="list__item navbars__list-item">
+                                <a href="/blog-post"
+                                    class="t-link t-link--light text-uppercase navbars__list-link w-100">
+                                    post a blog
+                                </a>
+                            </li>
+                        </ul>
+
+                        <!-- <div class="d-lg-flex align-items-center t-w-lg-initial">
+                            <div
+                                class="d-none k-lang d-lg-flex align-items-center justify-content-lg-end w-100 t-pl-30 t-pr-30">
+
+                                <select>
+                                    <option data-display="Language">
+                                        French
+                                    </option>
+                                    <option value="1">
+                                        English
+                                    </option>
+                                    <option value="2">
+                                        Espanol
+                                    </option>
+                                </select>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Navbar End -->
+
+
+  <!-- google login  -->
+    <div id="google" class="">
+        <div class="g-signin2" data-onsuccess="onSignIn"></div>
+   </div>
+
+
+
+
+    <!-- Banner  -->
+    <div class="container dnone" id="head">
+        <div class="row">
+            <div class="col-12">
+                <div class="t-pt-70 t-pb-70 t-bg-secondary">
+                    <h4 class="mt-0 t-text-light text-capitalize text-center" >Post a Blog</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Banner End -->
+
+    <div class="t-pt-70 t-pb-70 dnone" id="content">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 t-mb-30 mb-lg-0">
+                    <div class="row">
+
+                        <div class="col-12">
+                            <div class="row d-flex justify-content-center" id="data">
+
+                                <div class="col-9  c12">
+                                    <h4 class="mt-0 text-capitalize text-center">
+                                        write a blog
+                                    </h4>
+
+
+                                    <div class="row mt-4">
+                                        <div class="col-xs-12 col-sm-12 col-md-12 p-l-30 p-r-30">
+                                            <span id="frm">
+                                                <div class="form-group">
+                                                    <label for="Email" class="font-weight-600">Email</label>
+                                                    <input type="email" class="form-control" name="email" id="email"
+                                                        autocomplete="off" placeholder="Enter your email"
+                                                       />
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="title" class="font-weight-600">Title</label>
+                                                    <input type="text" class="form-control" name="title" id="title"
+                                                        autocomplete="off" placeholder="Enter Title"
+                                                        onchange="settingUrl()" />
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="url" class="font-weight-600">Project Url</label>
+                                                    <input type="text" class="form-control" name="url" id="url"
+                                                        autocomplete="off" placeholder="Project URL" />
+                                                </div>
+
+
+                                                <style>
+                                                    .nice-select {
+                                                        width: 100%;
+                                                        /* margin-bottom: 16px; */
+
+                                                    }
+
+                                                    .nice-select .current {
+                                                        /* color: #6c6c6c; */
+                                                        font-size: 16px;
+                                                    }
+
+                                                    .nice-select.open .list {
+                                                        width: 100%;
+                                                        /* box-shadow: 0 0 10px #9d9d9d; */
+                                                        z-index: 999;
+                                                    }
+                                                </style>
+
+                                                <!-- <div class="form-group">
+                                                    <label for="category" class="font-weight-600">Category</label>
+                                                    <div class="">
+                                                      <select class="form-select " aria-label="Default select example">
+                                                        <option selected>Category</option>
+                                                        <option value="1">One</option>
+                                                        <option value="2">Two</option>
+                                                        <option value="3">Three</option>
+                                                        <option value="1">One</option>
+                                                        <option value="2">Two</option>
+                                                        <option value="3">Three</option><option value="1">One</option>
+                                                        <option value="2">Two</option>
+                                                        <option value="3">Three</option>
+                                                      </select>
+                                                    </div>
+                                                </div> -->
+
+                                                <div class="form-group">
+                                                    <label for="category" class="font-weight-600">Category</label>
+                                                    <input type="text" class="form-control" name="category"
+                                                        id="category" autocomplete="off" placeholder="Category" />
+                                                </div>
+
+                                                <label for="select" class="font-weight-600">Select</label>
+                                                <div class="form-group wrapper11">
+                                                    <input type="radio" name="select" id="option-1"
+                                                        value="featured blogs" />
+                                                    <input type="radio" name="select" id="option-2"
+                                                        value="trending blogs" />
+                                                    <input type="radio" name="select" id="option-3"
+                                                        value="popular blogs" />
+                                                    <input type="radio" name="select" id="option-4"
+                                                        value="todays blogs" />
+                                                    <input type="radio" name="select" id="option-5" value="none" />
+
+                                                    <label for="option-1" class="option option-1">
+                                                        <div class="dot"></div>
+                                                        <span>&nbsp;Featured Blogs</span>
+                                                    </label>
+                                                    <label for="option-2" class="option option-2">
+                                                        <div class="dot"></div>
+                                                        <span>&nbsp;Trending Blogs</span>
+                                                    </label>
+                                                    <label for="option-3" class="option option-3">
+                                                        <div class="dot"></div>
+                                                        <span>&nbsp;Popular Blogs</span>
+                                                    </label>
+                                                    <label for="option-4" class="option option-4">
+                                                        <div class="dot"></div>
+                                                        <span>&nbsp;Todays Blogs</span>
+                                                    </label>
+                                                    <label for="option-5" class="option option-5">
+                                                        <div class="dot"></div>
+                                                        <span>&nbsp;None</span>
+                                                    </label>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="summernote" class="font-weight-600">Blog Content</label>
+                                                    <textarea id="summernote" name="summernote"></textarea>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="shortdesc" class="font-weight-600">Short
+                                                        Description</label>
+                                                    <textarea name="shortdesc" placeholder="" class="form-control"
+                                                        id="shortdesc" rows="3"></textarea>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="image" class="font-weight-600 d-block">File</label>
+                                                    <input type="file" name="image" id="image" class="custom-input-file"
+                                                        data-multiple-caption="{count} files selected" accept="image/*"
+                                                        multiple required="required" />
+                                                    <label for="image" class="form-group" style="position: absolute;
+                                                    left: 15px;
+                                                    background: #ffffff;
+                                                    border-radius: 4px;
+                                                    width: calc(100% - 30px);
+                                                    padding: 5px;
+                                                    padding-left: 14px;
+                                                    border: 1px solid #ced4da;
+                                                    color: #6c6c6c;">
+                                                        <i class="fa fa-upload"></i>
+                                                        <span>Choose a file…</span>
+                                                    </label>
+
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="author" class="font-weight-600">Author Name</label>
+                                                    <input type="text" class="form-control" name="author" id="author"
+                                                        autocomplete="off" placeholder="Author Name" />
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="metatitle" class="font-weight-600">Meta Title</label>
+                                                    <input type="text" class="form-control" name="metatitle"
+                                                        id="metatitle" autocomplete="off" placeholder="Meta Title" />
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="metakeyword" class="font-weight-600">Meta
+                                                        Keyword</label>
+                                                    <input type="text" class="form-control" name="metakeyword"
+                                                        id="metakeyword" autocomplete="off"
+                                                        placeholder="Meta Keyword" />
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="metadesc" class="font-weight-600">Meta
+                                                        Description</label>
+                                                    <input type="text" class="form-control" name="metadesc"
+                                                        id="metadesc" autocomplete="off"
+                                                        placeholder="Meta Description" />
+                                                </div>
+                                                <div class="d-flex justify-content-center">
+                                                    <button id="go" class="newsletter__button " type="submit"
+                                                        style="padding-left: 30px; padding-right: 30px;">
+                                                        send blog
+                                                        <span class="st-btn-icon">
+                                                            <span class="las la-arrow-right"></span>
+                                                        </span>
+                                                    </button>
+                                                </div>
+
+                                            </span>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-6 p-l-30 p-r-30"></div>
+                                    </div>
+
+
+                                </div>
+
+
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    <!-- Footer  -->
+    <footer class="t-bg-secondary footer">
+        <%-include('footer.ejs') %> 
+    </footer>
+    <!-- Footer End -->
+
+    <!-- jquery -->
+    <script src="/assets/js/jquery.js"></script>
+    <!-- Bootstrap -->
+    <script src="/assets/js/bootstrap.bundle.min.js"></script>
+    <!-- Nice Select -->
+    <script src="/assets/js/jquery.nice-select.min.js"></script>
+    <!-- Slick Slider  -->
+    <script src="/assets/js/slick.min.js"></script>
+    <!-- Main script -->
+    <script src="/assets/js/main.js"></script>
+
+
+    <script src="/assets/plugins/jQuery/jquery-3.4.1.min.js"></script>
+    <script src="/assets/dist/js/popper.min.js"></script>
+    <script src="/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <!-- Third Party Scripts(used by this page)-->
+    <script src="/assets/plugins/summernote/summernote.min.js"></script>
+    <script src="/assets/plugins/summernote/summernote-bs4.min.js"></script>
+    <!-- Third Party Scripts(used by this page)-->
+    <script src="/assets/plugins/select2/dist/js/select2.min.js"></script>
+    <script src="/assets/plugins/jquery.sumoselect/jquery.sumoselect.min.js"></script>
+    <!--Page Active Scripts(used by this page)-->
+    <script src="/assets/dist/js/pages/demo.select2.js"></script>
+    <script src="/assets/dist/js/pages/demo.jquery.sumoselect.js"></script>
+    <!--Page Active Scripts(used by this page)-->
+    <script src="/assets/dist/js/pages/forms-basic.active.js"></script>
+    <!--Page Active Scripts(used by this page)-->
+    <script src="/assets/plugins/summernote/summernote.active.js"></script>
+
+    <!-- GOOGLE -->
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+
+
+
+    <script>
+
+        // async function hhh() {
+        window.onload = async function () {
+
+
+            var months = ["January", "February", "March", "April", "May", "June",
+                "July", "August", "September", "October", "November", "December"];
+
+            var dateObj = new Date();
+            var month = dateObj.getUTCMonth() + 1; //months from 1-12
+            var day = dateObj.getUTCDate();
+            var year = dateObj.getUTCFullYear();
+
+            mm = months[month - 1];
+            newdate = mm + " " + day + ", " + year;
+            document.getElementById("date").innerText = newdate;
+
+
+
+var auth2;
+var googleUser; // The current user
+
+gapi.load('auth2', function(){
+    auth2 = gapi.auth2.init({
+        client_id: '371526208721-u9ce3pinmkt2aa959r57j9u2q9crul09.apps.googleusercontent.com'
+    });
+    auth2.isSignedIn.listen(signinChanged);
+});  
+
+var signinChanged = function (val) {
+    console.log('Signin state changed to ', val);
+    if(val){
+        document.getElementById("google").classList.add('dnone');
+        document.getElementById("content").classList.remove('dnone');
+        document.getElementById("head").classList.remove('dnone');
+    }else{
+        document.getElementById("google").classList.remove('dnone');
+        document.getElementById("content").classList.add('dnone');
+        document.getElementById("head").classList.add('dnone');
+    }
+};
+
+function signOut() {
+    auth2.signOut().then(function () {
+        console.log('User signed out.');
+    });
+}        
+
+            const res1 = await fetch("/showCategory", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({}),
+            });
+
+            const data1 = await res1.json();
+            //console.log(data1);
+
+            //for setting category
+            let ulCategory = "";
+            let footerCat = '';
+            let catinnav = ["tech", "lifestyle", "business", "travel"];//categories that are in navbar
+
+            let arrAllCat = [];
+            for (var i = 0; i < data1.length; i++) {
+                arrAllCat.push(data1[i].category)
+            }
+           // console.log(arrAllCat)
+
+            var final = arrAllCat.filter(function (item) {
+                return !catinnav.includes(item);
+            })
+           // console.log('final', final)
+
+
+            for (var i = 0; i < final.length; i++) {
+
+                ulCategory += `<li class="sub-menu__item">
+            										<a target="blank" href="/category/${final[i]}"
+            											class="t-link sub-menu__link text-uppercase">
+            											${final[i]}
+            										</a>
+            									</li>`;
+
+                if (i < 5) {
+                    footerCat += `<li class="t-mb-10">
+								<a href="/category/${final[i]}" class="t-link text-capitalize t-link--light sm-text">
+									${final[i]}
+								</a>
+							    </li>`;
+                }
+            }
+            document.getElementById("footerCat").innerHTML = footerCat;//for setting the categories in footer
+            document.getElementById("ulCategory").innerHTML = ulCategory;//for setting the categories in navbar 
+        }
+    </script>
+
+
+
+    <script>
+        function settingUrl() {
+            var title = document.getElementById("title").value;
+            str = title.replace(/\s+/g, "-").toLowerCase();
+            document.getElementById("url").value = str;
+        }
+    </script>
+
+
+
+    <script>
+
+        $("#go").on("click", function () {
+
+            //console.log("go");
+
+            var image = $("#image")[0].files[0];
+
+            var email = $("#email").val();
+            var title = $("#title").val();
+            var url = $("#url").val();
+
+            var category = $("#category").val();
+            var select = $("input[type=radio][name=select]:checked").val();
+
+            var shortdesc = $("#shortdesc").val();
+            var author = $("#author").val();
+
+            var metatitle = $("#metatitle").val();
+            var metakeyword = $("#metakeyword").val();
+            var metadesc = $("#metadesc").val();
+
+            var hvalue = $(".note-editable").html(); //summernote
+
+
+
+            let allimg = document.querySelector('.note-editable').getElementsByTagName('img');
+         //   console.log('allimng', allimg)
+
+            let totalsize = 0;
+
+            for (var i = 0; i < allimg.length; i++) {
+                base64String = allimg[i].getAttribute("src");//base64 data
+
+                var stringLength = base64String.length - 'data:image/png;base64,'.length;
+                var sizeInBytes = 4 * Math.ceil((stringLength / 3)) * 0.5624896334383812;
+                var sizeInKb = sizeInBytes / 1000000;
+                totalsize += sizeInKb;
+            }
+
+
+
+        //    // console.log(
+        //         image,
+        //         email,
+        //         title,
+        //         url,
+        //         category,
+        //         select,
+        //         shortdesc,
+        //         author,
+        //         metatitle,
+        //         metakeyword,
+        //         metadesc
+        //     );
+         //   console.log(hvalue);
+
+
+
+            var formdata = new FormData();
+            formdata.append("image", image);
+            formdata.append("email", email);
+            formdata.append("title", title);
+            formdata.append("url", url);
+            formdata.append("category", category);
+            formdata.append("select", select);
+            formdata.append("shortdesc", shortdesc);
+            formdata.append("author", author);
+            formdata.append("metatitle", metatitle);
+            formdata.append("metakeyword", metakeyword);
+            formdata.append("metadesc", metadesc);
+
+
+
+            var formdata1 = new FormData();
+            formdata1.append("summernote", hvalue);
+
+            formdata1.append("email", email);
+            formdata1.append("title", title);
+            formdata1.append("url", url);
+            formdata1.append("category", category);
+            formdata1.append("select", select);
+            formdata1.append("shortdesc", shortdesc);
+            formdata1.append("author", author);
+            formdata1.append("metatitle", metatitle);
+            formdata1.append("metakeyword", metakeyword);
+            formdata1.append("metadesc", metadesc);
+
+          //  console.log(formdata1);
+
+
+
+
+
+
+            if (totalsize > 2) {
+                alert("Image size is too big!");
+                //document.querySelector('.note-editor').style.border = "2px solid #db0000";
+            } else {
+
+                $.ajax({
+                        url: "/usersblogdata",
+                        data: formdata,
+                        contentType: false,
+                        processData: false,
+                        type: "POST",
+                        success: function (data) {
+                            location.reload();
+                        },
+                    });
+
+                setTimeout(function () {
+
+                    $.ajax({
+                        url: "/usersblogdataEditor",
+                        data: formdata1,
+                        contentType: false,
+                        processData: false,
+                        type: "POST",
+                        success: function (data) {
+                            location.reload();
+                        },
+                    });
+                }, 4000);
+            }
+
+        });
+    </script>
+
+
+<script>
+    function getBlogFromSearch() {
+        var value = $("#search").val();
+
+        var container = $(".results"); //result container
+        var srch = $(".srch"); //search button
+
+        let reslt = document.getElementById("results");
+        reslt.classList.remove("dnone");
+
+        var formdata1 = new FormData();
+
+        formdata1.append("val", value);
+
+       // console.log(value);
+
+        $.ajax({
+            url: "/searchblog",
+            data: formdata1,
+            contentType: false,
+            processData: false,
+            type: "POST",
+            success: function (data) {
+              //  console.log(data);
+                let resultsdata = "";
+
+                //if there is no result then this will show
+                if (data.length === 0) {
+                 //   console.log("is zero");
+                    resultsdata += `<section class="" style="padding:8px; text-align:center;background:#14213d;color:white;">No related blogs found!!!</section>`;
+                }
+
+                for (var i = 0; i < data.length; i++) {
+                    resultsdata += `<a href="/blogs/${data[i].url}" target="_blank"><section class="results-data">${data[i].title}</section></a>`;
+                }
+                $(".results").html(resultsdata);
+
+                $(document).click(function (e) {
+                    // if the target of the click isn't the container nor a descendant of the container
+                    if (
+                        !container.is(e.target) &&
+                        container.has(e.target).length === 0
+                    ) {
+                        if (!srch.is(e.target)) {
+                            reslt.classList.add("dnone");
+                        }
+                    }
+                });
+            },
+        });
+    }
+</script>
+
+<script>
+
+
+
+
+
+
+</script>
+
+
+</body>
+
+
+</html>

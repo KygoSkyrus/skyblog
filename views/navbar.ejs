@@ -1,0 +1,268 @@
+   <!-- Nav Top -->
+   <div class="nav-top">
+    <div class="container">
+        <div class="row justify-content-between">
+            <div class="col-md-6 d-flex align-items-center">
+                <a href="#" class="t-link t-link--light">
+                    <span class="t-mr-8 d-inline-block">
+                        <span class="las la-envelope-open"></span>
+                    </span>
+                    <span class="sm-text">
+                    <span class="sm-text"> Mail: support@blognews.com  </span>
+                 
+                    </span>
+                </a>
+            </div>
+            <div class="col-md-6 d-none d-lg-block">
+                <ul class="list d-flex justify-content-end">
+                    <li class="t-text-light  d-flex align-items-center">
+                        <span class="sm-text" id="date">
+
+                        </span>
+                    </li>
+                    <li class="t-text-light">
+                        <ul class="list d-flex w-100 t-pl-30 t-pr-30 t-pt-30 pt-lg-0">
+                            <li class="list__item t-mr-16">
+                                <a href="#" class="t-link t-link--light navbars__list-link">
+                                    <span class="lab la-facebook-f"></span>
+                                </a>
+                            </li>
+                            <li class="list__item t-mr-16">
+                                <a href="#" class="t-link t-link--light navbars__list-link">
+                                    <span class="lab la-twitter"></span>
+                                </a>
+                            </li>
+                            <li class="list__item t-mr-16">
+                                <a href="#" class="t-link t-link--light navbars__list-link">
+                                    <span class="lab la-instagram"></span>
+                                </a>
+                            </li>
+                            <li class="list__item">
+                                <a href="#" class="t-link t-link--light navbars__list-link">
+                                    <span class="lab la-youtube"></span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Nav Top End -->
+
+
+
+
+<!-- Header  -->
+<header class="header">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-4 t-mb-16 mb-md-0">
+                <div class="brand">
+                    <a href="/" class="t-link">
+                        <img src="/assets/img/logo.png" alt="kotha" class="img-fluid w-100" />
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-5 t-mb-16 mb-md-0">
+                <a href="#" class="t-link">
+                    <img src="/assets/img/ad-sm.jpg" alt="kotha" class="img-fluid w-100" />
+                </a>
+            </div>
+            <div class="col-md-3">
+                <div class="search-form">
+                    <input type="text" name="search" id="search" class="search-form__input"
+                         placeholder="search blogs" />
+                    <span class="search-form__icon srch" onclick="getBlogFromSearch()">
+                        <span class="las la-search"></span>
+                    </span>
+                </div>
+                <div class="results" id="results">
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- Header End -->
+
+<!-- Navbar  -->
+<div class="navbars">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-right d-lg-none">
+                <a href="#" class="navbars__hamburger t-link">
+                    <span class="las la-bars"></span>
+                </a>
+            </div>
+            <div class="col-12">
+                <div class="navbars__menu">
+                    <div class="navbars__cross d-lg-none">
+                        <span class="las la-times"></span>
+                    </div>
+
+                    <ul class="list w-100 t-pl-30 t-pr-30 navbars__list pl-lg-0">
+                        <li class="list__item navbars__list-item  ">
+                            <a href="/" class="t-link t-link--light text-uppercase navbars__list-link w-100">
+                                home
+                            </a>
+                        </li>
+                        <!-- <li class="list__item navbars__list-item navbars__current navbars__list-item-has-sub">
+                            <a href="#" class="t-link t-link--light text-uppercase navbars__list-link w-100">
+                                category
+                            </a>
+                            <ul class="list sub-menu"  id="ulCategory">
+                               
+                            </ul>
+                        </li> -->
+                        <style>
+                            .dropbtn {
+                                background-color: #14213d;
+                                color: white;
+                                padding: 16px;
+                                font-size: 16px;
+                                border: none;
+                                cursor: pointer;
+                                margin-bottom: 0;
+                                padding-top: 15px;
+                                padding-bottom: 15px;
+                                font-size: 14px;
+                                font-weight: 500;
+                                letter-spacing: 2px;
+                            }
+
+                            .dropdown {
+                                position: relative;
+                                display: inline-block;
+                            }
+
+                            .dropdown-content {
+                                display: none;
+                                display: none;
+                                width: auto;
+                                position: absolute;
+                                left: -25%;
+                                padding: 6px 0;
+                                background-color: #f9f9f9;
+                                min-width: 780px;
+                                box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+                                z-index: 1;
+                            }
+
+                            .dropdown-content a {
+                                color: black;
+                                padding: 8px 16px;
+                                text-decoration: none;
+                                display: inline-block;
+                            }
+
+                            .dropdown-content a:hover {
+                                color: #00b9f1 !important;
+                                background: #f9f9f9;
+                            }
+
+                            .dropdown:hover .dropdown-content {
+                                display: flex;
+                                flex-wrap: wrap;
+                            }
+
+                            .dropdown:hover .dropbtn {
+
+                                color: #00b9f1 !important;
+                            }
+
+                            @media screen and (min-width: 992px) {
+                                .sub-menu__item {
+                                    border-bottom: 0px solid rgba(230, 230, 230, 0.5);
+                                }
+                            }
+
+                            @media screen and (max-width: 768px) {
+                                .dropdown-content {
+                                    position: static;
+                                    left: 0;
+                                    min-width: unset;
+                                    background-color: inherit;
+                                }
+
+                                .dropbtn {
+                                    padding: 0;
+                                    font-size: 18px;
+                                }
+                            }
+
+                            .sub-menu__item {
+                                width: 130px;
+                                text-align: center;
+                                border-bottom: 0px solid rgba(230, 230, 230, 0.5);
+                            }
+                        </style>
+
+                        <li class="dropdown list__item navbars__list-item">
+                            <button class="dropbtn">CATEGORIES <i class="fa fa-angle-down"
+                                    style="font-size:18px;"></i></button>
+                            <div class="dropdown-content" id="ulCategory">
+                            </div>
+                        </li>
+                        <li class="list__item navbars__list-item">
+                            <a href="/category/tech"
+                                class="t-link t-link--light text-uppercase navbars__list-link w-100">
+                                tech
+                            </a>
+                        </li>
+                        <li class="list__item navbars__list-item">
+                            <a href="/category/travel"
+                                class="t-link t-link--light text-uppercase navbars__list-link w-100">
+                                travel
+                            </a>
+                        </li>
+                        <li class="list__item navbars__list-item">
+                            <a href="/category/lifestyle"
+                                class="t-link t-link--light text-uppercase navbars__list-link w-100">
+                                lifestyle
+                            </a>
+                        </li>
+                        <li class="list__item navbars__list-item">
+                            <a href="/category/business"
+                                class="t-link t-link--light text-uppercase navbars__list-link w-100">
+                                business
+                            </a>
+                        </li>
+                        <li class="list__item navbars__list-item">
+                            <a href="/contact" class="t-link t-link--light text-uppercase navbars__list-link w-100">
+                                contact
+                            </a>
+                        </li>
+                        <li class="list__item navbars__list-item">
+                            <a href="/blog-post"
+                                class="t-link t-link--light text-uppercase navbars__list-link w-100">
+                                post a blog
+                            </a>
+                        </li>
+                    </ul>
+
+                    <!-- <div class="d-lg-flex align-items-center w-100 t-w-lg-initial">
+                        <div
+                            class="d-none k-lang d-lg-flex align-items-center justify-content-lg-end w-100 t-pl-30 t-pr-30">
+
+                            <select>
+                                <option data-display="Language">
+                                    French
+                                </option>
+                                <option value="1">
+                                    English
+                                </option>
+                                <option value="2">
+                                    Espanol
+                                </option>
+                            </select>
+                        </div>
+
+
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Navbar End -->

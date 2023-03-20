@@ -1,0 +1,1794 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title> blogs </title>
+
+	<!-- favicon -->
+	<link rel="icon" href="assets/img/favicon.png" sizes="16x16" type="image/png" />
+
+	<!-- FONTAWESOME -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+
+	<!-- Stylesheet Link -->
+	<link rel="stylesheet" href="assets/css/style.css" />
+</head>
+
+<body>
+	<!-- Preloader -->
+	<div class="preloader js-preloader flex-center">
+		<div class="dots">
+			<div class="dot"></div>
+			<div class="dot"></div>
+			<div class="dot"></div>
+		</div>
+	</div>
+	<!-- Preloader End -->
+
+	<!-- Nav Top -->
+	<div class="nav-top">
+		<div class="container">
+			<div class="row justify-content-between">
+				<div class="col-md-6 d-flex align-items-center">
+					<a href="#" class="t-link t-link--light">
+						<span class="t-mr-8 d-inline-block">
+							<span class="las la-envelope-open"></span>
+						</span>
+						<span class="sm-text"> Mail: support@blognews.com </span>
+					</a>
+				</div>
+				<div class="col-md-6 d-none d-lg-block">
+					<ul class="list d-flex justify-content-end">
+						<li class="t-text-light d-flex align-items-center">
+							<span class="sm-text" id="date"> </span>
+						</li>
+						<li class="t-text-light">
+							<ul class="list d-flex w-100 t-pl-30 t-pr-30 t-pt-30 pt-lg-0">
+								<li class="list__item t-mr-16">
+									<a href="#" class="t-link t-link--light navbars__list-link">
+										<span class="lab la-facebook-f"></span>
+									</a>
+								</li>
+								<li class="list__item t-mr-16">
+									<a href="#" class="t-link t-link--light navbars__list-link">
+										<span class="lab la-twitter"></span>
+									</a>
+								</li>
+								<li class="list__item t-mr-16">
+									<a href="#" class="t-link t-link--light navbars__list-link">
+										<span class="lab la-instagram"></span>
+									</a>
+								</li>
+								<li class="list__item">
+									<a href="#" class="t-link t-link--light navbars__list-link">
+										<span class="lab la-youtube"></span>
+									</a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Nav Top End -->
+
+	<!-- Header  -->
+	<header class="t-pt-30 t-pb-45">
+		<div class="container">
+			<div class="row align-items-center justify-content-between">
+				<div class="col-md-6 t-mb-16 mb-md-0">
+					<a href="#" class="t-link w-100">
+						<img src="assets/img/ad-sm.jpg" alt="blog" class="img-fluid w-100" />
+					</a>
+				</div>
+				<div class="col-md-3">
+					<div class="search-form">
+						<input type="text" name="search" id="search" class="search-form__input"
+							placeholder="search blogs" />
+						<span class="search-form__icon srch" onclick="getBlogFromSearch()">
+							<span class="las la-search"></span>
+						</span>
+					</div>
+					<div class="results dnone" id="results"></div>
+				</div>
+			</div>
+		</div>
+	</header>
+	<!-- Header End -->
+
+	<div class="t-bg-secondary t-pb-30">
+		<!-- Navbar  -->
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<div class="navbars navbars--2">
+						<div class="row">
+							<div class="col-12 text-right d-lg-none">
+								<a href="#" class="navbars__hamburger t-link">
+									<span class="las la-bars"></span>
+								</a>
+							</div>
+							<div class="col-12">
+								<div class="navbars__menu">
+									<div class="navbars__cross d-lg-none">
+										<span class="las la-times"></span>
+									</div>
+
+									<div class="brand t-mr-lg-60 t-mb-30 mb-lg-0 t-pl-30 pl-lg-0">
+										<a href="/" class="t-link">
+											<img src="assets/images/logo-white.png" alt="blog" class="img-fluid w-100" />
+										</a>
+									</div>
+
+									<ul class="list w-100 t-pl-30 t-pr-30 navbars__list pl-lg-0">
+										<style>
+											.dropbtn {
+												background-color: #14213d;
+												color: white;
+												font-size: 16px;
+												border: none;
+												cursor: pointer;
+												margin-bottom: 0;
+												padding-top: 15px;
+												padding-bottom: 15px;
+												font-size: 14px;
+												font-weight: 500;
+												letter-spacing: 2px;
+											}
+
+											.dropdown {
+												position: relative;
+												display: inline-block;
+											}
+
+											.dropdown-content {
+												display: none;
+												display: none;
+												width: auto;
+												position: absolute;
+												left: -3%;
+												background-color: #f9f9f9;
+												padding: 6px 0;
+												min-width: 650px;
+												box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+												z-index: 1;
+											}
+
+											.dropdown-content a {
+												color: black;
+												padding: 8px 16px;
+												text-decoration: none;
+												display: inline-block;
+											}
+
+											.dropdown-content a:hover {
+												color: #00b9f1 !important;
+												background: #f9f9f9;
+											}
+
+											.dropdown:hover .dropdown-content {
+												display: flex;
+												flex-wrap: wrap;
+											}
+
+											.dropdown:hover .dropbtn {
+												color: #00b9f1 !important;
+											}
+
+											@media screen and (min-width: 992px) {
+												.sub-menu__item {
+													border-bottom: 0px solid rgba(230, 230, 230, 0.5);
+												}
+											}
+
+											@media screen and (max-width: 768px) {
+												.dropdown-content {
+													position: static;
+													left: 0;
+													min-width: unset;
+													background-color: inherit;
+												}
+
+												.dropbtn {
+													padding: 0;
+													font-size: 18px;
+												}
+											}
+
+											.sub-menu__item {
+												width: 130px;
+												text-align: center;
+												border-bottom: 0px solid rgba(230, 230, 230, 0.5);
+											}
+										</style>
+
+										<li class="dropdown list__item navbars__list-item">
+											<button class="dropbtn">
+												CATEGORIES
+												<i class="fa fa-angle-down" style="font-size: 18px"></i>
+											</button>
+											<div class="dropdown-content" id="ulCategory"></div>
+										</li>
+
+										<li class="list__item navbars__list-item">
+											<a href="/category/tech"
+												class="t-link t-link--light text-uppercase navbars__list-link w-100">
+												tech
+											</a>
+										</li>
+										<li class="list__item navbars__list-item">
+											<a href="/category/travel"
+												class="t-link t-link--light text-uppercase navbars__list-link w-100">
+												travel
+											</a>
+										</li>
+										<li class="list__item navbars__list-item">
+											<a href="/category/lifestyle"
+												class="t-link t-link--light text-uppercase navbars__list-link w-100">
+												lifestyle
+											</a>
+										</li>
+										<li class="list__item navbars__list-item">
+											<a href="/category/business"
+												class="t-link t-link--light text-uppercase navbars__list-link w-100">
+												business
+											</a>
+										</li>
+										<li class="list__item navbars__list-item">
+											<a href="/contact"
+												class="t-link t-link--light text-uppercase navbars__list-link w-100">
+												contact
+											</a>
+										</li>
+										<li class="list__item navbars__list-item">
+											<a href="/blog-post"
+												class="t-link t-link--light text-uppercase navbars__list-link w-100">
+												post a blog
+											</a>
+										</li>
+									</ul>
+
+									<!-- <div class="d-lg-flex align-items-center w-100 t-w-lg-initial">
+										<div
+											class="d-none k-lang d-lg-flex align-items-center justify-content-lg-end w-100 t-pl-30 t-pr-30">
+											<select>
+												<option data-display="Languages">
+													French
+												</option>
+												<option value="1">
+													English
+												</option>
+												<option value="2">
+													Espanol
+												</option>
+											</select>
+										</div>
+
+
+									</div> -->
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Navbar End -->
+
+		<!-- Hero  -->
+		<div class="hero t-mt-30">
+			<div class="container">
+				<div class="row" id="hero">
+				</div>
+			</div>
+		</div>
+		<!-- Hero End -->
+	</div>
+
+	<!-- Popular News  -->
+	<section class="t-pt-70 t-pb-70">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<div class="section-title">
+						<div class="tag tag--skew tag-delta d-inline-block">
+							<h5 class="tag__skew-reverse t-text-light text-capitalize mt-0 mb-0">
+								popular news
+							</h5>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-9 t-mt-30 t-mb-30 mb-lg-0">
+					<div class="row" id="popular">
+					</div>
+				</div>
+				<div class="col-lg-3">
+					<div class="row">
+						<div class="col-12">
+							<a href="#" class="t-link">
+								<img src="assets/img/ad-sqr.jpg" alt="blog" class="img-fluid w-100" />
+							</a>
+						</div>
+					</div>
+					<div class="row t-mt-30">
+						<div class="col-12">
+							<div class="section-title d-flex justify-content-between align-items-center">
+								<div class="tag tag--skew tag-delta d-inline-block">
+									<h5 class="tag__skew-reverse t-text-light text-capitalize mt-0 mb-0">
+										stay connected
+									</h5>
+								</div>
+							</div>
+							<ul class="list row t-mt-30">
+								<li class="t-mr-16 t-mb-10">
+									<a href="#" class="t-link">
+										<span class="social-counter">
+											<span class="social-counter__icon social-counter__icon--be t-mr-8">
+												<span class="social-counter__icon-is">
+													<i class="lab la-behance"></i>
+												</span>
+											</span>
+											<span class="social-counter__text">
+												<span class="social-counter__num"> 500 </span>
+												<span class="social-counter__follow sm-text text-capitalize">
+													followers
+												</span>
+											</span>
+										</span>
+									</a>
+								</li>
+								<li class="t-mr-16 t-mb-10">
+									<a href="#" class="t-link">
+										<span class="social-counter">
+											<span class="social-counter__icon social-counter__icon--fb t-mr-8">
+												<span class="social-counter__icon-is">
+													<i class="lab la-facebook-f"></i>
+												</span>
+											</span>
+											<span class="social-counter__text">
+												<span class="social-counter__num"> 300 </span>
+												<span class="social-counter__follow sm-text text-capitalize">
+													followers
+												</span>
+											</span>
+										</span>
+									</a>
+								</li>
+								<li class="t-mr-16 t-mb-10">
+									<a href="#" class="t-link">
+										<span class="social-counter">
+											<span class="social-counter__icon social-counter__icon--tw t-mr-8">
+												<span class="social-counter__icon-is">
+													<i class="lab la-twitter"></i>
+												</span>
+											</span>
+											<span class="social-counter__text">
+												<span class="social-counter__num"> 450 </span>
+												<span class="social-counter__follow sm-text text-capitalize">
+													followers
+												</span>
+											</span>
+										</span>
+									</a>
+								</li>
+								<li class="t-mr-16 t-mb-10">
+									<a href="#" class="t-link">
+										<span class="social-counter">
+											<span class="social-counter__icon social-counter__icon--ins t-mr-8">
+												<span class="social-counter__icon-is">
+													<i class="lab la-instagram"></i>
+												</span>
+											</span>
+											<span class="social-counter__text">
+												<span class="social-counter__num"> 500 </span>
+												<span class="social-counter__follow sm-text text-capitalize">
+													followers
+												</span>
+											</span>
+										</span>
+									</a>
+								</li>
+								<li>
+									<a href="#" class="t-link">
+										<span class="social-counter">
+											<span class="social-counter__icon social-counter__icon--in t-mr-8">
+												<span class="social-counter__icon-is">
+													<i class="lab la-linkedin-in"></i>
+												</span>
+											</span>
+											<span class="social-counter__text">
+												<span class="social-counter__num"> 500 </span>
+												<span class="social-counter__follow sm-text text-capitalize">
+													followers
+												</span>
+											</span>
+										</span>
+									</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Popular News End -->
+
+	<!-- CTA  -->
+	<div class="container">
+		<div class="t-bg-secondary t-pt-70 t-pb-70 t-pl-15 t-pr-15">
+			<div class="row justify-content-around align-items-center">
+				<div class="col-md-6 col-xl-5 t-mb-30 mb-md-0">
+					<p class="mb-0 sm-text t-text-light">
+						Don’t miss our future updates News!
+					</p>
+					<h3 class="mb-0 t-text-light text-capitalize t-mt-10">
+						Get subscribe today!
+					</h3>
+				</div>
+				<div class="col-md-6 col-xl-5">
+					<form action="#" class="newsletter__form">
+						<div class="row align-items-center no-gutters">
+							<div class="col-md-8">
+								<input type="email" placeholder="enter your email"
+									class="newsletter__input w-100 t-mb-10 mb-md-0" />
+							</div>
+							<div class="col-md-4">
+								<button class="newsletter__button w-100">sign up</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- CTA End -->
+
+	<!-- Featured News  -->
+	<section class="t-pt-70 t-pb-70">
+		<div class="container">
+			<div class="row">
+				<div class="col-12 col-lg-9">
+					<div class="section-title t-mb-30">
+						<div class="tag tag--skew tag-delta d-inline-block">
+							<h5 class="tag__skew-reverse t-text-light text-capitalize mt-0 mb-0">
+								featured news
+							</h5>
+						</div>
+					</div>
+					<div class="row" id="featured">
+					</div>
+				</div>
+				<div class="col-lg-3">
+					<div class="col-12 t-mb-30">
+						<div class="section-title">
+							<div class="tag tag--skew tag-delta d-inline-block">
+								<h5 class="tag__skew-reverse t-text-light text-capitalize mt-0 mb-0">
+									category
+								</h5>
+							</div>
+						</div>
+					</div>
+					<div class="col-12">
+						<ul class="list category-list" id="categoryList">
+						</ul>
+					</div>
+					<div class="col-12 t-mt-30">
+						<a href="#" class="t-link">
+							<img src="assets/img/ad-sqr.jpg" alt="blog" class="img-fluid w-100" />
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Featured News End -->
+
+	<!-- Viral News -->
+	<section class="t-bg-secondary t-pt-70 t-pb-70">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<div class="section-title">
+						<div class="tag tag--skew tag-delta d-inline-block">
+							<h5 class="tag__skew-reverse t-text-light text-capitalize mt-0 mb-0">
+								viral news
+							</h5>
+						</div>
+					</div>
+				</div>
+				<div class="col-12 t-mt-30">
+					<div class="row" id="trending">
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Viral News Ends -->
+
+	<!-- News Today  -->
+	<section class="t-pb-70 t-pt-70">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-9 t-mb-30 mb-lg-0">
+					<div class="row">
+						<div class="col-12">
+							<div class="section-title t-mb-30">
+								<div class="tag tag--skew tag-delta d-inline-block">
+									<h5 class="tag__skew-reverse t-text-light text-capitalize mt-0 mb-0">
+										today's news
+									</h5>
+								</div>
+							</div>
+						</div>
+						<div id="todays" class="row">
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-3">
+					<div class="row">
+						<div class="col-12">
+							<div class="section-title">
+								<div class="tag tag--skew tag-delta d-inline-block">
+									<h5 class="tag__skew-reverse t-text-light text-capitalize mt-0 mb-0">
+										other news
+									</h5>
+								</div>
+							</div>
+						</div>
+						<div class="col-12 t-mt-30">
+							<ul class="list">
+								<li>
+									<div class="row no-gutters">
+										<div class="col-4">
+											<div class="post--right-img t-flex-100 t-mr-8">
+												<img src="assets/img/img-26.jpg" alt="blog" class="img-fluid w-100" />
+											</div>
+										</div>
+										<div class="col-8">
+											<div class="post--right-content t-flex-100">
+												<ul class="list d-flex align-items-center">
+													<li>
+														<a href="#"
+															class="t-link t-link--secondary ex-sm-text text-capitalize">
+															<span class="las la-calendar-alt ex-sm-text"></span>
+															25 october
+														</a>
+													</li>
+												</ul>
+												<h4 class="post__title post__title-xsm mt-0 mb-0">
+													<a href="blog-details.html" class="t-link t-link--secondary">
+														The Tremendous improtance of Owning a perfect
+														piece
+													</a>
+												</h4>
+											</div>
+										</div>
+									</div>
+								</li>
+								<li>
+									<div class="row no-gutters t-mt-30">
+										<div class="col-4">
+											<div class="post--right-img t-flex-100 t-mr-8">
+												<img src="assets/img/img-27.jpg" alt="blog" class="img-fluid w-100" />
+											</div>
+										</div>
+										<div class="col-8">
+											<div class="post--right-content t-flex-100">
+												<ul class="list d-flex align-items-center">
+													<li>
+														<a href="#"
+															class="t-link t-link--secondary ex-sm-text text-capitalize">
+															<span class="las la-calendar-alt ex-sm-text"></span>
+															25 october
+														</a>
+													</li>
+												</ul>
+												<h4 class="post__title post__title-xsm mt-0 mb-0">
+													<a href="blog-details.html" class="t-link t-link--secondary">
+														The Tremendous improtance of Owning a perfect
+														piece
+													</a>
+												</h4>
+											</div>
+										</div>
+									</div>
+								</li>
+								<li>
+									<div class="row no-gutters t-mt-30">
+										<div class="col-4">
+											<div class="post--right-img t-flex-100 t-mr-8">
+												<img src="assets/img/img-28.jpg" alt="blog" class="img-fluid w-100" />
+											</div>
+										</div>
+										<div class="col-8">
+											<div class="post--right-content t-flex-100">
+												<ul class="list d-flex align-items-center">
+													<li>
+														<a href="#"
+															class="t-link t-link--secondary ex-sm-text text-capitalize">
+															<span class="las la-calendar-alt ex-sm-text"></span>
+															25 october
+														</a>
+													</li>
+												</ul>
+												<h4 class="post__title post__title-xsm mt-0 mb-0">
+													<a href="blog-details.html" class="t-link t-link--secondary">
+														The Tremendous improtance of Owning a perfect
+														piece
+													</a>
+												</h4>
+											</div>
+										</div>
+									</div>
+								</li>
+								<li>
+									<div class="row no-gutters t-mt-30">
+										<div class="col-4">
+											<div class="post--right-img t-flex-100 t-mr-8">
+												<img src="assets/img/img-29.jpg" alt="blog" class="img-fluid w-100" />
+											</div>
+										</div>
+										<div class="col-8">
+											<div class="post--right-content t-flex-100">
+												<ul class="list d-flex align-items-center">
+													<li>
+														<a href="#"
+															class="t-link t-link--secondary ex-sm-text text-capitalize">
+															<span class="las la-calendar-alt ex-sm-text"></span>
+															25 october
+														</a>
+													</li>
+												</ul>
+												<h4 class="post__title post__title-xsm mt-0 mb-0">
+													<a href="blog-details.html" class="t-link t-link--secondary">
+														The Tremendous improtance of Owning a perfect
+														piece
+													</a>
+												</h4>
+											</div>
+										</div>
+									</div>
+								</li>
+							</ul>
+						</div>
+						<div class="col-12 t-mt-30">
+							<a href="#" class="t-link">
+								<img src="assets/img/add-sm-sqr.jpg" alt="blog" class="img-fluid w-100" />
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- News Today End -->
+
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<a href="#" class="t-link">
+					<img src="assets/img/ad-lg.jpg" alt="blog" class="img-fluid w-100" />
+				</a>
+			</div>
+		</div>
+	</div>
+
+	<section class="t-pt-70 t-pb-70">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12 t-mb-30 mb-lg-0">
+					<div class="row">
+						<div class="col-lg-4 t-mb-30 mb-lg-0">
+							<div class="row">
+								<div class="col-12 t-mb-30">
+									<div class="section-title">
+										<div class="tag tag--skew tag-delta d-inline-block">
+											<h5 class="tag__skew-reverse t-text-light text-capitalize mt-0 mb-0">
+												technology
+											</h5>
+										</div>
+									</div>
+								</div>
+								<div id="tech"></div>
+							</div>
+						</div>
+						<div class="col-lg-4 t-mb-30 mb-lg-0">
+							<div class="row">
+								<div class="col-12 t-mb-30">
+									<div class="section-title">
+										<div class="tag tag--skew tag-delta d-inline-block">
+											<h5 class="tag__skew-reverse t-text-light text-capitalize mt-0 mb-0">
+												politics
+											</h5>
+										</div>
+									</div>
+								</div>
+								<div id="politics">
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-4 t-mb-30 mb-lg-0">
+							<div class="row">
+								<div class="col-12 t-mb-30">
+									<div class="section-title">
+										<div class="tag tag--skew tag-delta d-inline-block">
+											<h5 class="tag__skew-reverse t-text-light text-capitalize mt-0 mb-0">
+												sports
+											</h5>
+										</div>
+									</div>
+								</div>
+								<div id="sports">
+									
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Footer  -->
+	<footer class="t-bg-secondary footer">
+		<div class="container">
+			<div class="footer-top t-pt-40 t-pb-40">
+				<div class="row align-items-center justify-content-center justify-content-md-between">
+					<div class="col-md-4 t-mb-30 mb-md-0">
+						<div class="brand mx-auto mr-md-auto ml-md-0">
+							<a href="" class="t-link">
+								<img src="assets/images/logo-ow.png" alt="blog" class="img-fluid w-100" />
+							</a>
+						</div>
+					</div>
+					<div class="col-md-6 text-center">
+						<div class="d-flex align-items-center justify-content-center justify-content-md-end">
+							<div class="t-text-primary t-mr-16 t-h1">
+								<i class="las la-headset"></i>
+							</div>
+							<div class="text-left">
+								<div class="text-capitalize t-text-primary ex-sm-text">
+									24/7 help center
+								</div>
+								<h5 class="t-mt-10 mb-0 t-text-light">+12-2345678966</h5>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="footer-mid t-pt-40 t-pb-40">
+				<div class="row">
+					<div class="col-md-4 col-lg-2 t-mb-30 mb-lg-0">
+						<h5 class="t-text-light mt-0 text-capitalize">quick links</h5>
+						<ul class="list">
+							<li class="t-mb-10">
+								<a href="/" class="t-link text-capitalize t-link--light sm-text">
+									home
+								</a>
+							</li>
+							<li class="t-mb-10">
+								<a href="/contact" class="t-link text-capitalize t-link--light sm-text">
+									contact
+								</a>
+							</li>
+							<li class="t-mb-10">
+								<a href="/blog-post" class="t-link text-capitalize t-link--light sm-text">
+									post a blog
+								</a>
+							</li>
+						</ul>
+					</div>
+					<div class="col-md-4 col-lg-2 t-mb-30 mb-lg-0">
+						<h5 class="t-text-light mt-0 text-capitalize">top picks</h5>
+						<ul class="list">
+							<li class="t-mb-10">
+								<a href="/category/tech" class="t-link text-capitalize t-link--light sm-text">
+									tech
+								</a>
+							</li>
+							<li class="t-mb-10">
+								<a href="/category/travel" class="t-link text-capitalize t-link--light sm-text">
+									travel
+								</a>
+							</li>
+							<li class="t-mb-10">
+								<a href="/category/lifestyle" class="t-link text-capitalize t-link--light sm-text">
+									lifestyle
+								</a>
+							</li>
+							<li class="t-mb-10">
+								<a href="/category/business" class="t-link text-capitalize t-link--light sm-text">
+									business
+								</a>
+							</li>
+						</ul>
+					</div>
+					<div class="col-md-4 col-lg-2 t-mb-30 mb-lg-0">
+						<h5 class="t-text-light mt-0 text-capitalize">categories</h5>
+						<ul class="list" id="footerCat">
+							<li class="t-mb-10">
+								<a href="#" class="t-link text-capitalize t-link--light sm-text">
+								</a>
+							</li>
+						</ul>
+					</div>
+					<div class="col-md-6 col-lg-3 t-mb-30 mb-lg-0">
+						<h5 class="t-text-light mt-0 text-capitalize">get in touch</h5>
+						<p class="t-text-light sm-text">
+							1313 Broadway, New York NY-10001, United States of America
+						</p>
+						<p class="t-text-light sm-text">+12-2345687966 (For Ads)</p>
+						<p class="t-text-light sm-text mb-0">info@example.com</p>
+					</div>
+					<div class="col-md-6 col-lg-3 t-mb-30 mb-lg-0">
+						<h5 class="t-text-light mt-0 text-capitalize">follow us</h5>
+						<ul class="list row">
+							<li>
+								<a href="#" class="t-link">
+									<span class="social-counter__icon social-counter__icon--be t-mr-8">
+										<span class="social-counter__icon-is">
+											<i class="lab la-behance"></i>
+										</span>
+									</span>
+								</a>
+							</li>
+							<li>
+								<a href="#" class="t-link">
+									<span class="social-counter__icon social-counter__icon--fb t-mr-8">
+										<span class="social-counter__icon-is">
+											<i class="lab la-facebook-f"></i>
+										</span>
+									</span>
+								</a>
+							</li>
+							<li>
+								<a href="#" class="t-link">
+									<span class="social-counter__icon social-counter__icon--tw t-mr-8">
+										<span class="social-counter__icon-is">
+											<i class="lab la-twitter"></i>
+										</span>
+									</span>
+								</a>
+							</li>
+							<li>
+								<a href="#" class="t-link">
+									<span class="social-counter__icon social-counter__icon--ins t-mr-8">
+										<span class="social-counter__icon-is">
+											<i class="lab la-instagram"></i>
+										</span>
+									</span>
+								</a>
+							</li>
+							<li>
+								<a href="#" class="t-link">
+									<span class="social-counter__icon social-counter__icon--in t-mr-8">
+										<span class="social-counter__icon-is">
+											<i class="lab la-linkedin-in"></i>
+										</span>
+									</span>
+								</a>
+							</li>
+						</ul>
+						<div class="t-mt-30">
+							<h6 class="t-text-light text-capitalize">download app</h6>
+							<ul class="list row">
+								<li class="t-mr-8 t-mb-10 mb-xl-0">
+									<a href="#" class="t-link">
+										<img src="assets/img/g-play.png" alt="blog" class="img-fluid" />
+									</a>
+								</li>
+								<li>
+									<a href="#" class="t-link">
+										<img src="assets/img/i-store.png" alt="blog" class="img-fluid" />
+									</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="footer-bottom t-pb-40 t-pt-40">
+				<div class="row">
+					<div class="col-12 text-center">
+						<p class="mb-0 t-text-light sm-text">
+							&copy; 2018, blog Mag. Design by
+							<a href="#" class="t-link t-link--primary">whyshy</a>
+							. All Rights Reserved.
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer>
+	<!-- Footer End -->
+
+	<!-- jquery -->
+	<script src="assets/js/jquery.js"></script>
+	<!-- Bootstrap -->
+	<script src="assets/js/bootstrap.bundle.min.js"></script>
+	<!-- Nice Select -->
+	<script src="assets/js/jquery.nice-select.min.js"></script>
+	<!-- Slick Slider  -->
+	<script src="assets/js/slick.min.js"></script>
+	<!-- Main script -->
+	<script src="assets/js/main.js"></script>
+
+	<script>
+		const clr = [
+			{ bg: "t-bg-alpha", skewBg: "tag-epsilon" },
+			{ bg: "t-bg-beta", skewBg: "tag-zeta" },
+			{ bg: "t-bg-gamma", skewBg: "tag-delta" },
+			{ bg: "t-bg-delta", skewBg: "tag-beta" },
+			{ bg: "t-bg-epsilon", skewBg: "tag-gamma" },
+			{ bg: "t-bg-zeta", skewBg: "tag-alpha" },
+			{ bg: "t-bg-alpha", skewBg: "tag-epsilon" },
+			{ bg: "t-bg-beta", skewBg: "tag-zeta" },
+			{ bg: "t-bg-gamma", skewBg: "tag-delta" },
+			{ bg: "t-bg-delta", skewBg: "tag-beta" },
+			{ bg: "t-bg-epsilon", skewBg: "tag-gamma" },
+			{ bg: "t-bg-zeta", skewBg: "tag-alpha" },
+		];
+
+		async function fetchCategory(x) {
+			const res = await fetch("/showCategory", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({}),
+			});
+
+			const data = await res.json();
+			//console.log(data);
+
+		//	console.log("x", x);
+
+			//for setting category
+			let options = "";
+			let ulCategory = "";
+			let footerCat = "";
+
+			let catinnav = ["tech", "lifestyle", "business", "travel"]; //categories that are in navbar
+
+			let arrAllCat = [];
+			for (var i = 0; i < data.length; i++) {
+				arrAllCat.push(data[i].category);
+			}
+			console.log(arrAllCat);
+
+			var final = arrAllCat.filter(function (item) {
+				return !catinnav.includes(item);
+			});
+			//console.log("final", final);
+
+			for (var i = 0; i < final.length; i++) {
+				ulCategory += `<li class="sub-menu__item">
+													<a target="blank" href="/category/${final[i]}"
+														class="t-link sub-menu__link text-uppercase">
+														${final[i]}
+													</a>
+												</li>`;
+				if (i < 5) {
+					footerCat += `<li class="t-mb-10">
+								<a href="/category/${final[i]}" class="t-link text-capitalize t-link--light sm-text">
+									${final[i]}
+								</a>
+							    </li>`;
+				}
+
+				document.getElementById("footerCat").innerHTML = footerCat; //for setting the categories in footer
+				document.getElementById("ulCategory").innerHTML = ulCategory; //for setting the categories in navbar
+			}
+
+			//use data.length insted of 8 to show all categories
+			for (var i = 0; i < 8; i++) {
+				var categoryCount = [];
+				for (var j = 0; j < x.length; j++) {
+					if (x[j].category == data[i].category) {
+						//console.log(x[j].category)
+						categoryCount.push(x[j].category);
+					}
+				}
+
+				options += `<li class="t-mb-15">
+								<a target="blank" href="/category/${data[i].category}" class="t-link category-list__link w-100 ${clr[i].bg}">
+									<span class="t-link t-link--light tag tag--skew ${clr[i].skewBg} text-uppercase t-mr-16">
+										<span class="tag__skew-reverse">
+											${data[i].category}
+										</span>
+									</span>
+									<span class="category-list__text t-text-light text-capitalize">${categoryCount.length} posts</span>
+								</a>
+			             	</li>`;
+			}
+			document.getElementById("categoryList").innerHTML = options; //for setting category in sidebar
+		}
+           s();
+		async function s() {
+			var months = [
+				"January",
+				"February",
+				"March",
+				"April",
+				"May",
+				"June",
+				"July",
+				"August",
+				"September",
+				"October",
+				"November",
+				"December",
+			];
+
+			var dateObj = new Date();
+			var month = dateObj.getUTCMonth() + 1; //months from 1-12
+			var day = dateObj.getUTCDate();
+			var year = dateObj.getUTCFullYear();
+
+			mm = months[month - 1];
+			newdate = mm + " " + day + ", " + year;
+			document.getElementById("date").innerText = newdate;
+
+			const res = await fetch("/show", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({}),
+			});
+
+			const data = await res.json();
+			//console.log(data);
+
+			fetchCategory(data);
+
+			var arr = []; //for tracking records of no.of item displayed in viral
+			var arrT = []; //for tracking records of no.of item displayed in tech
+			var arrP = []; //for tracking records of no.of item displayed in politics
+			var arrS = []; //for tracking records of no.of item displayed in Sports
+
+			var hero = ""; //hero element (banner)
+
+			//var above than category(type)
+			var popular = "";
+			var featured = "";
+			var trending = "";
+			var todays = "";
+
+			var featuredArray = [];
+			var popularArray = [];
+			var trendingArray = [];
+			var todaysArray = [];
+
+			filterType("featured blogs", featuredArray);
+			filterType("popular blogs", popularArray);
+			filterType("trending blogs", trendingArray);
+			filterType("todays blogs", todaysArray);
+
+			function filterType(type, arr) {
+				for (var i = 0; i < data.length; i++) {
+					if (data[i].type === type) {
+						arr.push(data[i]);
+					}
+				}
+			}
+
+			//console.log(featuredArray);
+			//console.log(popularArray);
+			//console.log(trendingArray);
+			//console.log(todaysArray);
+
+			//category
+			var tech = "";
+			var politics = "";
+			var sports = "";
+
+			var techArray = [];
+			var politicsArray = [];
+			var sportsArray = [];
+
+			filterCategory("tech", techArray);
+			filterCategory("politics", politicsArray);
+			filterCategory("sports", sportsArray);
+
+			function filterCategory(category, arr) {
+				for (var i = 0; i < data.length; i++) {
+					if (data[i].category === category) {
+						arr.push(data[i]);
+					}
+				}
+			}
+
+			loopCategory("tech", tech, techArray, arrT, "tag-alpha");
+			loopCategory("politics", politics, politicsArray, arrP, "tag-zeta");
+			loopCategory("sports", sports, sportsArray, arrS, "tag-epsilon");
+
+			//console.log(techArray, politicsArray, sportsArray);
+
+			hero += `<div class="col-md-6 t-mb-30 mb-md-0">
+						<div class="row">
+							<div class="col-12 t-mb-30">
+								<div class="post-slider">
+									<div class="post-slider__item">
+										<div class="post post--in">
+											<img src="/upload/${featuredArray[0].image}" alt="blog" class="img-fluid w-100" />
+											<a href="/${featuredArray[0].url}" class="post__overlay t-link"></a>
+											<div class="post--in-content post--in-content-gap">
+												<ul class="list d-flex align-items-center">
+													<li class="t-mr-16">
+														<a href="/${featuredArray[0].url}"
+															class="t-link t-link--light tag tag--skew tag-delta text-uppercase">
+															<span class="tag__skew-reverse">
+																${featuredArray[0].category}
+															</span>
+														</a>
+													</li>
+													<li class="t-mr-16">
+														<a href="/${featuredArray[0].url}" class="t-link t-link--light ex-sm-text">
+															<span class="las la-calendar-alt sm-text"></span>
+															${featuredArray[0].date}
+														</a>
+													</li>
+													<li class="d-none d-lg-block">
+														<a href="/${featuredArray[0].url}" class="t-link t-link--light ex-sm-text">
+															<span class="las la-clock sm-text"></span>
+															8 min read
+														</a>
+													</li>
+												</ul>
+												<h4 class="post__title mb-0 t-mt-10">
+													<a href="/${featuredArray[0].url}" class="t-link t-link--light">
+														${featuredArray[0].title}
+													</a>
+												</h4>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-12">
+								<div class="post post--in">
+									<img src="/upload/${politicsArray[0].image}" alt="blog" class="img-fluid w-100" />
+									<a href="/${politicsArray[0].url}" class="post__overlay t-link"></a>
+									<div class="post--in-content post--in-content-gap">
+										<ul class="list d-flex align-items-center">
+											<li class="t-mr-16">
+												<a href="/${politicsArray[0].url}"
+													class="t-link t-link--light tag tag--skew tag-delta text-uppercase">
+													<span class="tag__skew-reverse">
+														${politicsArray[0].category}
+													</span>
+												</a>
+											</li>
+											<li class="t-mr-16">
+												<a href="/${politicsArray[0].url}" class="t-link t-link--light ex-sm-text">
+													<span class="las la-calendar-alt sm-text"></span>
+													${politicsArray[0].date}
+												</a>
+											</li>
+											<li class="d-none d-lg-block">
+												<a href="/${politicsArray[0].url}" class="t-link t-link--light ex-sm-text">
+													<span class="las la-clock sm-text"></span>
+													8 min read
+												</a>
+											</li>
+										</ul>
+										<h4 class="post__title mb-0 t-mt-10">
+											<a href="/${politicsArray[0].url}" class="t-link t-link--light">
+												${politicsArray[0].title}
+											</a>
+										</h4>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="row">
+							<div class="col-12 t-mb-30">
+								<div class="post post--in">
+									<img src="/upload/${sportsArray[0].image}" alt="blog" class="img-fluid w-100" />
+									<a href="/${sportsArray[0].url}" class="post__overlay t-link"></a>
+									<div class="post--in-content post--in-content-gap">
+										<ul class="list d-flex align-items-center">
+											<li class="t-mr-16">
+												<a href="/${sportsArray[0].url}"
+													class="t-link t-link--light tag tag--skew tag-beta text-uppercase">
+													<span class="tag__skew-reverse">
+														${sportsArray[0].category}
+													</span>
+												</a>
+											</li>
+											<li class="t-mr-16">
+												<a href="/${sportsArray[0].url}" class="t-link t-link--light ex-sm-text">
+													<span class="las la-calendar-alt sm-text"></span>
+													${sportsArray[0].date}
+												</a>
+											</li>
+											<li class="d-none d-lg-block">
+												<a href="/${sportsArray[0].url}" class="t-link t-link--light ex-sm-text">
+													<span class="las la-clock sm-text"></span>
+													8 min read
+												</a>
+											</li>
+										</ul>
+										<h4 class="post__title mb-0 t-mt-10">
+											<a href="/${sportsArray[0].url}" class="t-link t-link--light">
+												${sportsArray[0].title}
+											</a>
+										</h4>
+									</div>
+								</div>
+							</div>
+
+							<div class="col-12">
+								<div class="post post--in">
+									<img src="/upload/${techArray[0].image}" alt="blog" class="img-fluid w-100" />
+									<a href="/${techArray[0].url}" class="post__overlay t-link"></a>
+									<div class="post--in-content post--in-content-gap">
+										<ul class="list d-flex align-items-center">
+											<li class="t-mr-16">
+												<a href="/${techArray[0].url}"
+													class="t-link t-link--light tag tag--skew tag-zeta text-uppercase">
+													<span class="tag__skew-reverse">
+														${techArray[0].category}
+													</span>
+												</a>
+											</li>
+											<li class="t-mr-16">
+												<a href="/${techArray[0].url}" class="t-link t-link--light ex-sm-text">
+													<span class="las la-calendar-alt sm-text"></span>
+													${techArray[0].date}
+												</a>
+											</li>
+											<li class="d-none d-lg-block">
+												<a href="/${techArray[0].url}" class="t-link t-link--light ex-sm-text">
+													<span class="las la-clock sm-text"></span>
+													8 min read
+												</a>
+											</li>
+										</ul>
+										<h4 class="post__title mb-0 t-mt-10">
+											<a href="/${techArray[0].url}" class="t-link t-link--light">
+												${techArray[0].title}
+											</a>
+										</h4>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>`;
+
+			popular += `<div class="col-md-4 t-mb-30">
+							<div class="post">
+								<img src="/upload/${popularArray[0].image}" alt="blog" class="img-fluid w-100" />
+
+								<div class="post--right-content t-flex-100 t-pt-15">
+									<ul class="list d-flex align-items-center">
+										<li class="t-mr-16">
+											<a target="blank" href="/${popularArray[0].url}"
+												class="t-link t-link--light tag tag--skew tag-epsilon text-uppercase">
+												<span class="tag__skew-reverse">
+													${popularArray[0].category}
+												</span>
+											</a>
+										</li>
+										<li>
+											<a target="blank" href="/${popularArray[0].url}" class="t-link t-link--secondary ex-sm-text text-capitalize">
+												<span class="las la-clock sm-text"></span>
+												10 min read
+											</a>
+										</li>
+									</ul>
+									<h5 class="post__title post__title-sm t-mt-10 mb-0">
+										<a target="blank" href="/${popularArray[0].url}" class="t-link t-link--secondary">
+											${popularArray[0].title}
+										</a>
+									</h5>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-4 t-mb-30">
+							<div class="post">
+								<img src="/upload/${popularArray[1].image}" alt="blog" class="img-fluid w-100" />
+
+								<div class="post--right-content t-flex-100 t-pt-15">
+									<ul class="list d-flex align-items-center">
+										<li class="t-mr-16">
+											<a target="blank" href="/${popularArray[1].url}"
+												class="t-link t-link--light tag tag--skew tag-zeta text-uppercase">
+												<span class="tag__skew-reverse">
+													${popularArray[1].category}
+												</span>
+											</a>
+										</li>
+										<li>
+											<a target="blank" href="/${popularArray[1].url}" class="t-link t-link--secondary ex-sm-text text-capitalize">
+												<span class="las la-clock sm-text"></span>
+												10 min read
+											</a>
+										</li>
+									</ul>
+									<h5 class="post__title post__title-sm t-mt-10 mb-0">
+										<a target="blank" href="/${popularArray[1].url}" class="t-link t-link--secondary">
+											${popularArray[1].title}
+										</a>
+									</h5>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-4 t-mb-30">
+							<div class="post">
+								<img src="/upload/${popularArray[2].image}" alt="blog" class="img-fluid w-100" />
+
+								<div class="post--right-content t-flex-100 t-pt-15">
+									<ul class="list d-flex align-items-center">
+										<li class="t-mr-16">
+											<a target="blank" href="/${popularArray[2].url}"
+												class="t-link t-link--light tag tag--skew tag-beta text-uppercase">
+												<span class="tag__skew-reverse">
+													${popularArray[2].category}
+												</span>
+											</a>
+										</li>
+										<li>
+											<a target="blank" href="/${popularArray[2].url}" class="t-link t-link--secondary ex-sm-text text-capitalize">
+												<span class="las la-clock sm-text"></span>
+												10 min read
+											</a>
+										</li>
+									</ul>
+									<h5 class="post__title post__title-sm t-mt-10 mb-0">
+										<a target="blank" href="/${popularArray[2].url}" class="t-link t-link--secondary">
+											${popularArray[2].title}
+										</a>
+									</h5>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-8 t-mb-30 mb-md-0">
+							<div class="post post--in">
+								<img src="/upload/${popularArray[3].image}" alt="blog" class="img-fluid w-100" />
+								<a target="blank" href="/${popularArray[3].url}" class="post__overlay t-link"></a>
+								<div class="post--in-content post--in-content-gap">
+									<ul class="list d-flex align-items-center">
+										<li class="t-mr-16">
+											<a target="blank" href="/${popularArray[3].url}"
+												class="t-link t-link--light tag tag--skew tag-delta text-uppercase">
+												<span class="tag__skew-reverse">
+													${popularArray[3].category}
+												</span>
+											</a>
+										</li>
+										<li class="t-mr-16">
+											<a target="blank" href="/${popularArray[3].url}" class="t-link t-link--light ex-sm-text">
+												<span class="las la-calendar-alt sm-text"></span>
+												${popularArray[3].date}
+											</a>
+										</li>
+										<li class="d-none d-lg-block">
+											<a target="blank" href="/${popularArray[3].url}" class="t-link t-link--light ex-sm-text">
+												<span class="las la-clock sm-text"></span>
+												8 min read
+											</a>
+										</li>
+									</ul>
+									<h3 class="post__title mb-0 t-mt-10">
+										<a target="blank" href="/${popularArray[3].url}" class="t-link t-link--light">
+											${popularArray[3].title}
+										</a>
+									</h3>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="post">
+								<img src="/upload/${popularArray[4].image}" alt="blog" class="img-fluid w-100" />
+
+								<div class="post--right-content t-flex-100 t-pt-15">
+									<ul class="list d-flex align-items-center">
+										<li class="t-mr-16">
+											<a target="blank" href="/${popularArray[4].url}"
+												class="t-link t-link--light tag tag--skew tag-alpha text-uppercase">
+												<span class="tag__skew-reverse">
+													${popularArray[4].category}
+												</span>
+											</a>
+										</li>
+										<li>
+											<a target="blank" href="/${popularArray[4].url}" class="t-link t-link--secondary ex-sm-text text-capitalize">
+												<span class="las la-clock sm-text"></span>
+												10 min read
+											</a>
+										</li>
+									</ul>
+									<h5 class="post__title post__title-sm t-mt-10 mb-0">
+										<a target="blank" href="/${popularArray[4].url}" class="t-link t-link--secondary">
+											${popularArray[4].title}
+										</a>
+									</h5>
+								</div>
+							</div>
+						</div>`;
+
+			featured += `<div class="col-lg-8 t-mb-30 mb-lg-0">
+							<div class="row">
+								<div class="col-12 t-mb-30">
+									<div class="post post--in">
+										<img src="/upload/${featuredArray[0].image}" alt="blog" class="img-fluid w-100" />
+										<a target="blank" href="/${featuredArray[0].url}" class="post__overlay t-link"></a>
+										<div class="post--in-content post--in-content-gap">
+											<ul class="list d-flex align-items-center">
+												<li class="t-mr-16">
+													<a target="blank" href="/${featuredArray[0].url}"
+														class="t-link t-link--light tag tag--skew tag-delta text-uppercase">
+														<span class="tag__skew-reverse">
+															${featuredArray[0].category}
+														</span>
+													</a>
+												</li>
+												<li class="t-mr-16">
+													<a target="blank" href="/${featuredArray[0].url}" class="t-link t-link--light ex-sm-text">
+														<span class="las la-calendar-alt sm-text"></span>
+														${featuredArray[0].date}
+													</a>
+												</li>
+												<li class="d-none d-lg-block">
+													<a target="blank" href="/${featuredArray[0].url}" class="t-link t-link--light ex-sm-text">
+														<span class="las la-clock sm-text"></span>
+														8 min read
+													</a>
+												</li>
+											</ul>
+											<h3 class="post__title mb-0 t-mt-10">
+												<a target="blank" href="/${featuredArray[0].url}" class="t-link t-link--light">
+													${featuredArray[0].title}
+												</a>
+											</h3>
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-6 t-mb-30 mb-lg-0">
+									<div class="post">
+										<a target="blank" href="/${featuredArray[1].url}">
+										<img src="/upload/${featuredArray[1].image}" alt="blog" class="img-fluid w-100" />
+
+										<div class="post--right-content t-flex-100 t-pt-15">
+											<ul class="list d-flex align-items-center">
+												<li class="t-mr-16">
+													<a target="blank" href="/${featuredArray[1].url}"
+														class="t-link t-link--light tag tag--skew tag-beta text-uppercase">
+														<span class="tag__skew-reverse">
+															${featuredArray[1].category}
+														</span>
+													</a>
+												</li>
+												<li>
+													<a target="blank" href="/${featuredArray[1].url}"
+														class="t-link t-link--secondary ex-sm-text text-capitalize">
+														<span class="las la-clock sm-text"></span>
+														10 min read
+													</a>
+												</li>
+											</ul>
+											<h5 class="post__title post__title-sm t-mt-10 mb-0">
+												<a target="blank" href="/${featuredArray[1].url}" class="t-link t-link--secondary">
+													${featuredArray[1].title}
+												</a>
+											</h5>
+										</div>
+										</a>
+									</div>
+								</div>
+								<div class="col-lg-6">
+									<div class="post">
+										<a target="blank" href="/${featuredArray[2].url}">
+										<img src="/upload/${featuredArray[2].image}" alt="blog" class="img-fluid w-100" />
+
+										<div class="post--right-content t-flex-100 t-pt-15">
+											<ul class="list d-flex align-items-center">
+												<li class="t-mr-16">
+													<a target="blank" href="/${featuredArray[2].url}"
+														class="t-link t-link--light tag tag--skew tag-delta text-uppercase">
+														<span class="tag__skew-reverse">
+															${featuredArray[2].category}
+														</span>
+													</a>
+												</li>
+												<li>
+													<a target="blank" href="/${featuredArray[2].url}"
+														class="t-link t-link--secondary ex-sm-text text-capitalize">
+														<span class="las la-clock sm-text"></span>
+														10 min read
+													</a>
+												</li>
+											</ul>
+											<h5 class="post__title post__title-sm t-mt-10 mb-0">
+												<a target="blank" href="/${featuredArray[2].url}" class="t-link t-link--secondary">
+													${featuredArray[2].title}
+												</a>
+											</h5>
+										</div>
+									    </a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-4 t-mb-30 mb-lg-0">
+							<div class="row">
+								<div class="col-12 t-mb-30">
+									<div class="post">
+										<a target="blank" href="/${featuredArray[3].url}">
+										<img src="/upload/${featuredArray[3].image}" alt="blog" class="img-fluid w-100" />
+
+										<div class="post--right-content t-flex-100 t-pt-15">
+											<ul class="list d-flex align-items-center">
+												<li class="t-mr-16">
+													<a target="blank" href="/${featuredArray[3].url}"
+														class="t-link t-link--light tag tag--skew tag-alpha text-uppercase">
+														<span class="tag__skew-reverse">
+															${featuredArray[3].category}
+														</span>
+													</a>
+												</li>
+												<li>
+													<a target="blank" href="/${featuredArray[3].url}"
+														class="t-link t-link--secondary ex-sm-text text-capitalize">
+														<span class="las la-clock sm-text"></span>
+														10 min read
+													</a>
+												</li>
+											</ul>
+											<h5 class="post__title post__title-sm t-mt-10 mb-0">
+												<a target="blank" href="/${featuredArray[3].url}" class="t-link t-link--secondary">
+													${featuredArray[3].title}
+												</a>
+											</h5>
+										</div>
+										</a>
+									</div>
+								</div>
+								<div class="col-12">
+									<div class="post">
+										<a target="blank" href="/${featuredArray[4].url}">
+										<img src="/upload/${featuredArray[4].image}" alt="blog" class="img-fluid w-100" />
+
+										<div class="post--right-content t-flex-100 t-pt-15">
+											<ul class="list d-flex align-items-center">
+												<li class="t-mr-16">
+													<a target="blank" href="/${featuredArray[4].url}" 
+														class="t-link t-link--light tag tag--skew tag-epsilon text-uppercase">
+														<span class="tag__skew-reverse">
+															${featuredArray[4].category}
+														</span>
+													</a>
+												</li>
+												<li>
+													<a target="blank" href="/${featuredArray[4].url}"
+														class="t-link t-link--secondary ex-sm-text text-capitalize">
+														<span class="las la-clock sm-text"></span>
+														10 min read
+													</a>
+												</li>
+											</ul>
+											<h5 class="post__title post__title-sm t-mt-10 mb-0">
+												<a target="blank" href="/${featuredArray[4].url}" class="t-link t-link--secondary">
+													${featuredArray[4].title}
+												</a>
+											</h5>
+										</div>
+										</a>
+									</div>
+								</div>
+							</div>
+						</div>`;
+
+			todays += `<div class="col-lg-8 t-mb-30 mb-lg-0">
+								<div class="post">
+									<img src="/upload/${todaysArray[0].image}" alt="blog" class="img-fluid w-100" />
+
+									<div class="post--right-content t-flex-100 t-pt-15">
+										<ul class="list d-flex align-items-center">
+											<li class="t-mr-16">
+												<a target="blank" href="/${todaysArray[0].url}"
+													class="t-link t-link--light tag tag--skew tag-beta text-uppercase">
+													<span class="tag__skew-reverse">
+														${todaysArray[0].category}
+													</span>
+												</a>
+											</li>
+											<li class="t-mr-16">
+												<a target="blank" href="/${todaysArray[0].url}" class="t-link t-link--secondary ex-sm-text text-capitalize">
+													<span class="las la-calendar-alt sm-text"></span>
+													${todaysArray[0].date}
+												</a>
+											</li>
+											<li>
+												<a target="blank" href="/${todaysArray[0].url}" class="t-link t-link--secondary ex-sm-text text-capitalize">
+													<span class="las la-clock sm-text"></span>
+													10 min read
+												</a>
+											</li>
+										</ul>
+										<h3 class="post__title t-mt-10">
+											<a target="blank" href="/${todaysArray[0].url}" class="t-link t-link--secondary">
+												${todaysArray[0].title}
+											</a>
+										</h3>
+										<p class="mb-0">
+											${todaysArray[0].shortdescription}
+										</p>
+									</div>
+								</div>
+							</div>
+
+							<div class="col-lg-4">
+								<div class="row">
+									<div class="col-12 t-mb-30">
+										<div class="post">
+											<img src="/upload/${todaysArray[1].image}" alt="blog" class="img-fluid w-100" />
+
+											<div class="post--right-content t-flex-100 t-pt-15">
+												<ul class="list d-flex align-items-center">
+													<li class="t-mr-16">
+														<a target="blank" href="/${todaysArray[1].url}"
+															class="t-link t-link--light tag tag--skew tag-zeta text-uppercase">
+															<span class="tag__skew-reverse">
+																${todaysArray[1].category}
+															</span>
+														</a>
+													</li>
+													<li>
+														<a target="blank" href="/${todaysArray[1].url}"
+															class="t-link t-link--secondary ex-sm-text text-capitalize">
+															<span class="las la-calendar-alt sm-text"></span>
+															${todaysArray[1].date}
+														</a>
+													</li>
+												</ul>
+												<h5 class="post__title post__title-sm t-mt-10 mb-0">
+													<a target="blank" href="/${todaysArray[1].url}" class="t-link t-link--secondary">
+														${todaysArray[1].title}
+													</a>
+												</h5>
+											</div>
+										</div>
+									</div>
+									<div class="col-12">
+										<div class="post">
+											<img src="/upload/${todaysArray[2].image}" alt="blog" class="img-fluid w-100" />
+
+											<div class="post--right-content t-flex-100 t-pt-15">
+												<ul class="list d-flex align-items-center">
+													<li class="t-mr-16">
+														<a target="blank" href="/${todaysArray[2].url}"
+															class="t-link t-link--light tag tag--skew tag-gamma text-uppercase">
+															<span class="tag__skew-reverse">
+																${todaysArray[2].category}
+															</span>
+														</a>
+													</li>
+													<li>
+														<a target="blank" href="/${todaysArray[2].url}"
+															class="t-link t-link--secondary ex-sm-text text-capitalize">
+															<span class="las la-calendar-alt sm-text"></span>
+															${todaysArray[2].date}
+														</a>
+													</li>
+												</ul>
+												<h5 class="post__title post__title-sm t-mt-10 mb-0">
+													<a target="blank" href="/${todaysArray[2].url}" class="t-link t-link--secondary">
+														${todaysArray[2].title}
+													</a>
+												</h5>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>`;
+
+			//for (var j = i; i < clr.length; i++) {
+			for (var i = trendingArray.length - 1; i >= 0; i--) {
+				trending += `<div class="col-md-6 col-lg-3 t-mb-30 mb-lg-0">
+							<div class="post post--in">
+								<img src="/upload/${trendingArray[i].image}" alt="blog" class="img-fluid w-100" />
+								<a target="blank" href="/${trendingArray[i].url}" class="post__overlay t-link"></a>
+								<div class="post--in-content">
+									<ul class="list d-flex align-items-center">
+										<li class="t-mr-16">
+											<a target="blank" href="/${trendingArray[i].url}"
+												class="t-link t-link--light tag tag--skew ${clr[i].skewBg} text-uppercase">
+												<span class="tag__skew-reverse">
+													${trendingArray[i].category}
+												</span>
+											</a>
+										</li>
+										<li>
+											<a target="blank" href="/${trendingArray[i].url}" class="t-link t-link--light ex-sm-text">
+												<span class="las la-calendar-alt sm-text"></span>
+												${trendingArray[i].date}
+											</a>
+										</li>
+									</ul>
+									<h5 class="post__title post__title-sm mb-0 t-mt-10">
+										<a target="blank" href="/${trendingArray[i].url}" class="t-link t-link--light">
+											${trendingArray[i].title}
+										</a>
+									</h5>
+								</div>
+							</div>
+						</div>`;
+
+				arr.push("x");
+				//to set the no.of blogs displayed
+				if (arr.length === 4) {
+					break;
+				}
+			}
+
+			function loopCategory(catName, catVar, catArray, catCount, catClr) {
+				for (var i = catArray.length - 1; i >= 0; i--) {
+					catVar += `<div class="col-12 t-mt-30 t-mb-30">
+									<div class="post post--right">
+										<div class="post--right-img t-flex-100 t-mr-16">
+											<img src="/upload/${catArray[i].image}" alt="blog" class="img-fluid w-100" />
+										</div>
+										<div class="post--right-content t-flex-100">
+											<ul class="list d-flex align-items-center">
+												<li class="t-mr-16">
+													<a target="blank" href="/${catArray[i].url}"
+														class="t-link t-link--light tag tag--skew ${catClr} text-uppercase">
+														<span class="tag__skew-reverse">
+															${catArray[i].category}
+														</span>
+													</a>
+												</li>
+												<li class="d-none d-md-flex">
+													<a target="blank" href="/${catArray[i].url}"
+														class="t-link t-link--secondary ex-sm-text text-capitalize">
+														<span class="las la-calendar-alt m-text"></span>
+														${catArray[i].date}
+													</a>
+												</li>
+											</ul>
+
+											<h5 class="post__title post__title-xmin t-mt-10 t-mb-10">
+												<a target="blank" href="/${catArray[i].url}" class="t-link t-link--secondary">
+													${catArray[i].title}
+												</a>
+											</h5>
+											<ul class="list d-none d-md-flex align-items-center">
+												<li>
+													<a target="blank" href="/${catArray[i].url}"
+														class="t-link t-link--secondary ex-sm-text text-capitalize">
+														<span class="las la-clock sm-text"></span>
+														10 min read
+													</a>
+												</li>
+											</ul>
+										</div>
+									</div>
+								</div>`;
+					catCount.push("x");
+					//to set the no.of blogs displayed
+					if (catCount.length === 3) {
+						break;
+					}
+				}
+				document.getElementById(catName).innerHTML = catVar;
+			}
+
+			document.getElementById("hero").innerHTML = hero;
+
+			document.getElementById("popular").innerHTML = popular;
+			document.getElementById("featured").innerHTML = featured;
+			document.getElementById("trending").innerHTML = trending;
+			document.getElementById("todays").innerHTML = todays;
+		};
+	</script>
+
+<script src="search.js" ></script>
+
+</body>
+
+</html>

@@ -1,0 +1,45 @@
+<h2>HEADER2</h2><p><b>BOLD TEXT</b></p><p><span style="font-family: &quot;Comic Sans MS&quot;;">CURSIVE</span></p><p><span style="font-family: &quot;Comic Sans MS&quot;;"><u>UNDERLINE</u></span></p><p><a href="http://LINK" target="_blank">LINK</a></p><p><br></p><p><br></p>
+
+
+
+#MAIN files are ::
+in panel;;;;
+1.) blogs-admin-jq.ejs
+2.) blog-edit.ejs
+3.) login.ejs
+4.) dashboard.ejs
+5.) enquiry.ejs
+rest is previous code
+
+in front..
+1.) index.html
+2.) category-single.ejs
+3.) blog-details.ejs
+4.) error.ejs
+5.) blog-post.html
+6.) contact.html
+
+
+//when any route has been typed which is not right,,,make a function on page loaD TYO CHECK IS THAT IS ONE OF CATEGORY IF NOT THEN SEND IT TO 404 PAGE
+//ad the above this in every route that is using slug things::it amy be in admin/ ands in blogs/
+
+
+#TODO:in edit,article
+// you can also implememnt the thing that you included in category.js so that if the blog is present only then the page will load or else 404 page will be rendered
+
+
+
+
+##on server the chnaGES ARE MOSTLY MADE IN THE NAME OF DB AND USER ETC....
+
+
+cli id
+371526208721-u9ce3pinmkt2aa959r57j9u2q9crul09.apps.googleusercontent.com
+
+cli sec
+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
+
+
+
+have to remove the /blogs from every blog link
+in categoruy index and in blog single prev mnexty

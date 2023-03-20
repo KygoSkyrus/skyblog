@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+		<%-include('head.ejs') %> 
+</head>
+
+<body>
+    <style>
+        /* for the image in the content */
+        #content p img {
+            max-width: 768px;
+        }
+    </style>
+    <!-- Preloader -->
+    <div class="preloader js-preloader flex-center">
+        <div class="dots">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+        </div>
+    </div>
+    <!-- Preloader End -->
+
+     <!-- Navbar starts -->
+     <%-include('navbar.ejs') %> 
+     <!-- Navbar starts -->
+
+    <!-- Banner  -->
+    <!-- <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="t-pt-70 t-pb-70 t-bg-secondary">
+                    <h4 class="mt-0 t-text-light text-capitalize text-center">
+                        post details
+                    </h4>
+                    <ul class="list d-flex align-items-center justify-content-center pagi-nav">
+                        <li class="t-mr-30">
+                            <a href="#" class="t-link t-link--light text-capitalize">
+                                home
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="t-link t-link--light text-capitalize">
+                                post details
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div> -->
+    <!-- Banner End -->
+
+    <div class="t-pt-70 t-pb-70">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-9 t-mb-30 mb-lg-0">
+                    <div class="row">
+                        <div class="col-12" id="singleBlog">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 t-pt-70">
+                            <div class="row justify-content-between">
+                                <div class="col-md-5 t-mb-30 mb-md-0">
+                                    <h5 class="mt-0">
+                                        <a href="" id="prev-blog" class="t-link t-link--secondary">
+
+                                        </a>
+                                    </h5>
+                                    <a href="" id="prev-link" class="t-link t-link--secondary text-capitalize">
+                                        <span class="las la-arrow-left"></span>
+                                        previous post
+                                    </a>
+                                </div>
+                                <div class="col-md-5">
+                                    <h5 class="mt-0">
+                                        <a href="" id="next-blog" class="t-link t-link--secondary">
+
+                                        </a>
+                                    </h5>
+                                    <a href="" id="next-link" class="t-link t-link--secondary text-capitalize">
+                                        next post
+                                        <span class="las la-arrow-right"></span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div class="col-12 t-pt-70">
+                            <div id="comments" class="st-comments-area">
+                                <h4 class="mt-0">
+                                    2 Comments
+                                </h4>
+                            
+
+                                <ul class="st-comments-list">
+                                    <li>
+                                        <div class="st-comments">
+                                            <div class="st-comments__author ">
+                                                <img src="/assets/img/img-68.jpg" alt="SoftTech-IT"
+                                                    class="img-fluid st-comments__author-img">
+                                            </div>
+                                            <div class="st-comments__body">
+                                                <ul class="st-comments__info t-mb-16">
+                                                    <li>
+                                                        <h6 class="st-comments__title mb-0">
+                                                            <a href="#" class="st-comments__title-link">
+                                                                jhone doe
+                                                            </a>
+                                                        </h6>
+                                                    </li>
+                                                    <li>
+                                                        <span class="st-comments__date sm-text">
+                                                            March 06, 2020
+                                                        </span>
+                                                    </li>
+                                                    <li>
+                                                        <span class="st-comments__share">
+                                                            <span class="fas fa-reply"></span>
+                                                        </span>
+                                                    </li>
+                                                </ul>
+                                                <p class="sm-text">
+                                                    A wonderful serenity has taken possession of my entire soul, like
+                                                    these sweet mornings of spring which I enjoy with my whole heart.
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <ul class="st-comments__children">
+                                            <li>
+                                                <div class="st-comments">
+                                                    <div class="st-comments__author">
+                                                        <img src="/assets/img/img-69.jpg" alt="SoftTech-IT"
+                                                            class="img-fluid st-comments__author-img">
+                                                    </div>
+                                                    <div class="st-comments__body">
+                                                        <ul class="st-comments__info t-mb-16">
+                                                            <li>
+                                                                <h6 class="st-comments__title mb-0">
+                                                                    <a href="#" class="st-comments__title-link">
+                                                                        jhone doe
+                                                                    </a>
+                                                                </h6>
+                                                            </li>
+                                                            <li>
+                                                                <span class="st-comments__date sm-text">
+                                                                    March 06, 2020
+                                                                </span>
+                                                            </li>
+                                                            <li>
+                                                                <span class="st-comments__share">
+                                                                    <span class="fas fa-reply"></span>
+                                                                </span>
+                                                            </li>
+                                                        </ul>
+                                                        <p class="sm-text mb-0">
+                                                            A wonderful serenity has taken possession of my entire soul,
+                                                            like these sweet mornings of spring which I enjoy with my
+                                                            whole heart.
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <div class="st-comments">
+                                            <div class="st-comments__author ">
+                                                <img src="/assets/img/img-68.jpg" alt="SoftTech-IT"
+                                                    class="img-fluid st-comments__author-img">
+                                            </div>
+                                            <div class="st-comments__body">
+                                                <ul class="st-comments__info t-mb-16">
+                                                    <li>
+                                                        <h6 class="st-comments__title mb-0">
+                                                            <a href="#" class="st-comments__title-link">
+                                                                jhone doe
+                                                            </a>
+                                                        </h6>
+                                                    </li>
+                                                    <li>
+                                                        <span class="st-comments__date sm-text">
+                                                            March 06, 2020
+                                                        </span>
+                                                    </li>
+                                                    <li>
+                                                        <span class="st-comments__share">
+                                                            <span class="fas fa-reply"></span>
+                                                        </span>
+                                                    </li>
+                                                </ul>
+                                                <p class="sm-text">
+                                                    A wonderful serenity has taken possession of my entire soul, like
+                                                    these sweet mornings of spring which I enjoy with my whole heart.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div> -->
+
+
+
+                        <!-- post a comment -->
+
+                        <!-- <div class="col-12 t-pt-70">
+                            <h4 class="mt-0 text-capitalize">
+                                leave a reply
+                            </h4>
+                            <form action="#" class="st-comments__form">
+                                <input type="text" name="name" id="name" class="form-control t-mb-15"
+                                    placeholder="Enter Your Name">
+                                <input type="text" name="mail" id="mail" class="form-control t-mb-15"
+                                    placeholder="Enter Your Email">
+                                <textarea name="textarea" id="textarea" cols="30" rows="10"
+                                    placeholder="Write your text" class="form-control t-mb-15"></textarea>
+                                <button class="newsletter__button ">
+                                    post a comment
+                                    <span class="st-btn-icon">
+                                        <span class="las la-arrow-right"></span>
+                                    </span>
+                                </button>
+                            </form>
+                        </div> -->
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="section-title d-flex justify-content-between align-items-center">
+                                <div class="tag tag--skew tag-delta d-inline-block">
+                                    <h5 class="tag__skew-reverse t-text-light text-capitalize mt-0 mb-0">
+                                        stay connected
+                                    </h5>
+                                </div>
+                            </div>
+                            <ul class="list row t-mt-30">
+                                <li class="t-mr-16 t-mb-10">
+                                    <a href="#" class="t-link">
+                                        <span class="social-counter">
+                                            <span class="social-counter__icon social-counter__icon--be t-mr-8">
+                                                <span class="social-counter__icon-is">
+                                                    <i class="lab la-behance"></i>
+                                                </span>
+                                            </span>
+                                            <span class="social-counter__text">
+                                                <span class="social-counter__num">
+                                                    500
+                                                </span>
+                                                <span class="social-counter__follow sm-text text-capitalize">
+                                                    followers
+                                                </span>
+                                            </span>
+                                        </span>
+                                    </a>
+                                </li>
+                                <li class="t-mr-16 t-mb-10">
+                                    <a href="#" class="t-link">
+                                        <span class="social-counter">
+                                            <span class="social-counter__icon social-counter__icon--fb t-mr-8">
+                                                <span class="social-counter__icon-is">
+                                                    <i class="lab la-facebook-f"></i>
+                                                </span>
+                                            </span>
+                                            <span class="social-counter__text">
+                                                <span class="social-counter__num">
+                                                    300
+                                                </span>
+                                                <span class="social-counter__follow sm-text text-capitalize">
+                                                    followers
+                                                </span>
+                                            </span>
+                                        </span>
+                                    </a>
+                                </li>
+                                <li class="t-mr-16 t-mb-10">
+                                    <a href="#" class="t-link">
+                                        <span class="social-counter">
+                                            <span class="social-counter__icon social-counter__icon--tw t-mr-8">
+                                                <span class="social-counter__icon-is">
+                                                    <i class="lab la-twitter"></i>
+                                                </span>
+                                            </span>
+                                            <span class="social-counter__text">
+                                                <span class="social-counter__num">
+                                                    450
+                                                </span>
+                                                <span class="social-counter__follow sm-text text-capitalize">
+                                                    followers
+                                                </span>
+                                            </span>
+                                        </span>
+                                    </a>
+                                </li>
+                                <li class="t-mr-16 t-mb-10">
+                                    <a href="#" class="t-link">
+                                        <span class="social-counter">
+                                            <span class="social-counter__icon social-counter__icon--ins t-mr-8">
+                                                <span class="social-counter__icon-is">
+                                                    <i class="lab la-instagram"></i>
+                                                </span>
+                                            </span>
+                                            <span class="social-counter__text">
+                                                <span class="social-counter__num">
+                                                    500
+                                                </span>
+                                                <span class="social-counter__follow sm-text text-capitalize">
+                                                    followers
+                                                </span>
+                                            </span>
+                                        </span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="t-link">
+                                        <span class="social-counter">
+                                            <span class="social-counter__icon social-counter__icon--in t-mr-8">
+                                                <span class="social-counter__icon-is">
+                                                    <i class="lab la-linkedin-in"></i>
+                                                </span>
+                                            </span>
+                                            <span class="social-counter__text">
+                                                <span class="social-counter__num">
+                                                    500
+                                                </span>
+                                                <span class="social-counter__follow sm-text text-capitalize">
+                                                    followers
+                                                </span>
+                                            </span>
+                                        </span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-12 t-mt-30 text-center">
+                            <a href="#" class="t-link">
+                                <img src="/assets/img/ad-hr.jpg" alt="kotha" class="img-fluid w-100">
+                            </a>
+                        </div>
+                        <div class="col-12 t-mt-30">
+                            <div class="section-title">
+                                <div class="tag tag--skew tag-delta d-inline-block">
+                                    <h5 class="tag__skew-reverse t-text-light text-capitalize mt-0 mb-0">
+                                        other news
+                                    </h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 t-mt-30">
+                            <ul class="list">
+                                <li>
+                                    <div class="row no-gutters">
+                                        <div class="col-4">
+                                            <div class="post--right-img t-flex-100 t-mr-8">
+                                                <img src="/assets/img/img-26.jpg" alt="kotha" class="img-fluid w-100">
+                                            </div>
+                                        </div>
+                                        <div class="col-8">
+                                            <div class="post--right-content t-flex-100">
+                                                <ul class="list d-flex align-items-center">
+                                                    <li>
+                                                        <a href="#"
+                                                            class="t-link t-link--secondary ex-sm-text text-capitalize">
+                                                            <span class="las la-calendar-alt ex-sm-text"></span>
+                                                            25 october
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                                <h5 class="post__title post__title-xsm mt-0 mb-0 t-md-24-lg-14">
+                                                    <a href="blog-details.html" class="t-link t-link--secondary">
+                                                        The Tremendous
+                                                        improtance of Owning
+                                                        a perfect piece
+                                                    </a>
+                                                </h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="row no-gutters t-mt-30">
+                                        <div class="col-4">
+                                            <div class="post--right-img t-flex-100 t-mr-8">
+                                                <img src="/assets/img/img-27.jpg" alt="kotha" class="img-fluid w-100">
+                                            </div>
+                                        </div>
+                                        <div class="col-8">
+                                            <div class="post--right-content t-flex-100">
+                                                <ul class="list d-flex align-items-center">
+                                                    <li>
+                                                        <a href="#"
+                                                            class="t-link t-link--secondary ex-sm-text text-capitalize">
+                                                            <span class="las la-calendar-alt ex-sm-text"></span>
+                                                            25 october
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                                <h4 class="post__title post__title-xsm mt-0 mb-0 t-md-24-lg-14">
+                                                    <a href="blog-details.html" class="t-link t-link--secondary">
+                                                        The Tremendous
+                                                        improtance of Owning
+                                                        a perfect piece
+                                                    </a>
+                                                </h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="row no-gutters t-mt-30">
+                                        <div class="col-4">
+                                            <div class="post--right-img t-flex-100 t-mr-8">
+                                                <img src="/assets/img/img-28.jpg" alt="kotha" class="img-fluid w-100">
+                                            </div>
+                                        </div>
+                                        <div class="col-8">
+                                            <div class="post--right-content t-flex-100">
+                                                <ul class="list d-flex align-items-center">
+                                                    <li>
+                                                        <a href="#"
+                                                            class="t-link t-link--secondary ex-sm-text text-capitalize">
+                                                            <span class="las la-calendar-alt ex-sm-text"></span>
+                                                            25 october
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                                <h4 class="post__title post__title-xsm mt-0 mb-0 t-md-24-lg-14">
+                                                    <a href="blog-details.html" class="t-link t-link--secondary">
+                                                        The Tremendous
+                                                        improtance of Owning
+                                                        a perfect piece
+                                                    </a>
+                                                </h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="row no-gutters t-mt-30">
+                                        <div class="col-4">
+                                            <div class="post--right-img t-flex-100 t-mr-8">
+                                                <img src="/assets/img/img-29.jpg" alt="kotha" class="img-fluid w-100">
+                                            </div>
+                                        </div>
+                                        <div class="col-8">
+                                            <div class="post--right-content t-flex-100">
+                                                <ul class="list d-flex align-items-center">
+                                                    <li>
+                                                        <a href="#"
+                                                            class="t-link t-link--secondary ex-sm-text text-capitalize">
+                                                            <span class="las la-calendar-alt ex-sm-text"></span>
+                                                            25 october
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                                <h4 class="post__title post__title-xsm mt-0 mb-0 t-md-24-lg-14">
+                                                    <a href="blog-details.html" class="t-link t-link--secondary">
+                                                        The Tremendous
+                                                        improtance of Owning
+                                                        a perfect piece
+                                                    </a>
+                                                </h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-12 t-mt-30">
+                            <div class="section-title d-flex justify-content-between align-items-center">
+                                <div class="tag tag--skew tag-delta d-inline-block">
+                                    <h5 class="tag__skew-reverse t-text-light text-capitalize mt-0 mb-0">
+                                        categories
+                                    </h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 t-mt-30">
+                            <ul class="list category-list">
+                                <li class="t-mb-15">
+                                    <a href="#" class=" category-list__link w-100">
+                                        <span
+                                            class="t-link t-link--light tag tag--skew tag-epsilon text-uppercase t-mr-16">
+                                            <span class="tag__skew-reverse">
+                                                tech
+                                            </span>
+                                        </span>
+                                        <span class="category-list__text t-text-light text-capitalize">10 posts</span>
+                                    </a>
+                                </li>
+                                <li class="t-mb-15">
+                                    <a href="#" class=" category-list__link w-100">
+                                        <span
+                                            class="t-link t-link--light tag tag--skew tag-zeta text-uppercase t-mr-16">
+                                            <span class="tag__skew-reverse">
+                                                politics
+                                            </span>
+                                        </span>
+                                        <span class="category-list__text t-text-light text-capitalize">26 posts</span>
+                                    </a>
+                                </li>
+                                <li class="t-mb-15">
+                                    <a href="#" class=" category-list__link w-100">
+                                        <span
+                                            class="t-link t-link--light tag tag--skew tag-delta text-uppercase t-mr-16">
+                                            <span class="tag__skew-reverse">
+                                                sport
+                                            </span>
+                                        </span>
+                                        <span class="category-list__text t-text-light text-capitalize">36 posts</span>
+                                    </a>
+                                </li>
+                                <li class="t-mb-15">
+                                    <a href="#" class=" category-list__link w-100">
+                                        <span
+                                            class="t-link t-link--light tag tag--skew tag-beta text-uppercase t-mr-16">
+                                            <span class="tag__skew-reverse">
+                                                travel
+                                            </span>
+                                        </span>
+                                        <span class="category-list__text t-text-light text-capitalize">09 posts</span>
+                                    </a>
+                                </li>
+                                <li class="t-mb-15">
+                                    <a href="#" class=" category-list__link w-100">
+                                        <span
+                                            class="t-link t-link--light tag tag--skew tag-gamma text-uppercase t-mr-16">
+                                            <span class="tag__skew-reverse">
+                                                sport
+                                            </span>
+                                        </span>
+                                        <span class="category-list__text t-text-light text-capitalize">19 posts</span>
+                                    </a>
+                                </li>
+                                <li class="t-mb-15">
+                                    <a href="#" class=" category-list__link w-100">
+                                        <span
+                                            class="t-link t-link--light tag tag--skew tag-alpha text-uppercase t-mr-16">
+                                            <span class="tag__skew-reverse">
+                                                fashion
+                                            </span>
+                                        </span>
+                                        <span class="category-list__text t-text-light text-capitalize">22 posts</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer  -->
+    <footer class="t-bg-secondary footer">
+        <%-include('footer.ejs') %> 
+    </footer>
+    <!-- Footer End -->
+
+    <!-- jquery -->
+    <script src="/assets/js/jquery.js"></script>
+    <!-- Bootstrap -->
+    <script src="/assets/js/bootstrap.bundle.min.js"></script>
+    <!-- Nice Select -->
+    <script src="/assets/js/jquery.nice-select.min.js"></script>
+    <!-- Slick Slider  -->
+    <script src="/assets/js/slick.min.js"></script>
+    <!-- Main script -->
+    <script src="/assets/js/main.js"></script>
+
+
+    <script>
+
+
+
+        async function navabarCategory() {
+
+            const res1 = await fetch("/showCategory", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({}),
+            });
+
+            const data = await res1.json();
+            //console.log(data1);
+
+            //for setting category
+            let ulCategory = "";
+            let footerCat = '';
+
+
+
+            let catinnav = ["tech", "lifestyle", "business", "travel"];//categories that are in navbar
+
+            let arrAllCat = [];
+            for (var i = 0; i < data.length; i++) {
+                arrAllCat.push(data[i].category)
+            }
+           // console.log(arrAllCat)
+
+            var final = arrAllCat.filter(function (item) {
+                return !catinnav.includes(item);
+            })
+           // console.log('final', final)
+
+
+            for (var i = 0; i < final.length; i++) {
+
+                ulCategory += `<li class="sub-menu__item">
+            										<a target="blank" href="/category/${final[i]}"
+            											class="t-link sub-menu__link text-uppercase">
+            											${final[i]}
+            										</a>
+            									</li>`;
+                if (i < 5) {
+                    footerCat += `<li class="t-mb-10">
+								<a href="/category/${final[i]}" class="t-link text-capitalize t-link--light sm-text">
+									${final[i]}
+								</a>
+							    </li>`;
+                }
+
+            }
+
+            document.getElementById("footerCat").innerHTML = footerCat;//for setting the categories in footer
+            document.getElementById("ulCategory").innerHTML = ulCategory;//for setting the categories in navbar 
+        }
+
+
+
+
+
+
+        window.onload = async function () {
+
+
+            var months = ["January", "February", "March", "April", "May", "June",
+                "July", "August", "September", "October", "November", "December"];
+
+            var dateObj = new Date();
+            var month = dateObj.getUTCMonth() + 1; //months from 1-12
+            var day = dateObj.getUTCDate();
+            var year = dateObj.getUTCFullYear();
+
+            mm = months[month - 1];
+            newdate = mm + " " + day + ", " + year;
+            document.getElementById("date").innerText = newdate;
+
+
+            navabarCategory();
+
+
+
+
+            const link = document.baseURI;
+            var blogurl = link.substring(
+                link.lastIndexOf("/") + 1,
+                link.length
+            );
+          //  console.log(blogurl);
+
+            const res = await fetch("/singleblog", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ blogurl }),
+            });
+
+            const data = await res.json();
+            const pdd = data[0].id - 1;
+            const ndd = data[0].id + 1;
+           // console.log(data);
+            //console.log(idd)
+
+            setTimeout(async function () {
+               // console.log(pdd);
+                const res = await fetch("/prev", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ pdd }),
+                });
+
+                const dataP = await res.json();
+               // console.log("data", dataP);
+
+                document.getElementById("prev-blog").innerHTML = dataP.title;
+                document.getElementById("prev-blog").setAttribute("href", `/${dataP.url}`);
+                document.getElementById("prev-link").setAttribute("href", `/${dataP.url}`);
+
+            }, 1000);
+
+            setTimeout(async function () {
+              //  console.log(ndd);
+                const res = await fetch("/next", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ ndd }),
+                });
+
+                const dataN = await res.json();
+              //  console.log(dataN);
+
+                document.getElementById("next-blog").innerHTML =
+                    dataN.title;
+                document.getElementById("next-blog").setAttribute("href", `/blogs/${dataN.url}`);
+                document
+                    .getElementById("next-link")
+                    .setAttribute("href", `/blogs/${dataN.url}`);
+            }, 1000);
+
+            let html = "";
+            for (var i = 0; i < data.length; i++) {
+                html += `<div class="post">
+                                <img src="/upload/${data[i].image}" alt="kotha" class="img-fluid w-100">
+
+                                <div class="post--right-content t-flex-100 t-pt-15">
+                                    <ul class="list d-flex align-items-center">
+                                        <li class="t-mr-16">
+                                            <a href="#"
+                                                class="t-link t-link--light tag tag--skew tag-beta text-uppercase">
+                                                <span class="tag__skew-reverse">
+                                                    travel
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li class="t-mr-16">
+                                            <a href="#" class="t-link t-link--secondary ex-sm-text text-capitalize">
+                                                <span class="las la-calendar-alt sm-text"></span>
+                                                ${data[i].date}
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="t-link t-link--secondary ex-sm-text text-capitalize">
+                                                <span class="las la-clock sm-text"></span>
+                                                10 min read
+                                            </a>
+                                        </li>
+                                    </ul>
+                                    <h3 class="post__title t-mt-10">
+                                        <a href="" class="t-link t-link--secondary">
+                                            ${data[i].title}
+                                        </a>
+                                    </h3>
+                                    <div id="content">${data[i].detail}</div>
+                                </div>
+                            </div>`;
+            }
+
+            document.getElementById("singleBlog").innerHTML = html;
+
+            //to hide prev and next blog when there isn't one
+            setTimeout(async function () {
+                if (document.getElementById("prev-blog").innerText === "") {
+                    document.getElementById("prev-link").style.display = "none";
+                }
+                if (document.getElementById("next-blog").innerText === "") {
+                    document.getElementById("next-link").style.display = "none";
+                }
+            }, 2000);
+
+        };
+    </script>
+
+
+<script>
+    function getBlogFromSearch() {
+        var value = $("#search").val();
+
+        var container = $(".results"); //result container
+        var srch = $(".srch"); //search button
+
+        let reslt = document.getElementById("results");
+        reslt.classList.remove("dnone");
+
+        var formdata1 = new FormData();
+
+        formdata1.append("val", value);
+
+       // console.log(value);
+
+        $.ajax({
+            url: "/searchblog",
+            data: formdata1,
+            contentType: false,
+            processData: false,
+            type: "POST",
+            success: function (data) {
+               // console.log(data);
+                let resultsdata = "";
+
+                //if there is no result then this will show
+                if (data.length === 0) {
+                   // console.log("is zero");
+                    resultsdata += `<section class="" style="padding:8px; text-align:center;background:#14213d;color:white;">No related blogs found!!!</section>`;
+                }
+
+                for (var i = 0; i < data.length; i++) {
+                    resultsdata += `<a href="/${data[i].url}" target="_blank"><section class="results-data">${data[i].title}</section></a>`;
+                }
+                $(".results").html(resultsdata);
+
+                $(document).click(function (e) {
+                    // if the target of the click isn't the container nor a descendant of the container
+                    if (
+                        !container.is(e.target) &&
+                        container.has(e.target).length === 0
+                    ) {
+                        if (!srch.is(e.target)) {
+                            reslt.classList.add("dnone");
+                        }
+                    }
+                });
+            },
+        });
+    }
+</script>
+
+
+
+</body>
+
+
+</html>

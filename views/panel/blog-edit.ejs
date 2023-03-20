@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+  <title>Blog</title>
+  <!-- App favicon -->
+  <link rel="shortcut icon" href="../assets/img/favicon.png" />
+  <!--Global Styles(used by all pages)-->
+  <link href="/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="/assets/plugins/metisMenu/metisMenu.min.css" rel="stylesheet" />
+  <link href="/assets/plugins/fontawesome/css/all.min.css" rel="stylesheet" />
+  <link href="/assets/plugins/typicons/src/typicons.min.css" rel="stylesheet" />
+  <link href="/assets/plugins/themify-icons/themify-icons.min.css" rel="stylesheet" />
+  <!--Third party Styles(used by this page)-->
+  <link href="/assets/plugins/glyphicons/glyphicons.css" rel="stylesheet" />
+  <!--Third party Styles(used by this page)-->
+  <link href="/assets/plugins/summernote/summernote.css" rel="stylesheet" />
+  <link href="/assets/plugins/summernote/summernote-bs4.css" rel="stylesheet" />
+  <!--Third party Styles(used by this page)-->
+  <link href="/assets/plugins/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" />
+  <!--Third party Styles(used by this page)-->
+  <link href="/assets/plugins/select2/dist/css/select2.min.css" rel="stylesheet">
+  <link href="/assets/plugins/select2-bootstrap4/dist/select2-bootstrap4.min.css" rel="stylesheet">
+  <link href="/assets/plugins/jquery.sumoselect/sumoselect.min.css" rel="stylesheet">
+  <link href="/assets/dist/css/select.html" rel="stylesheet" type="text/css" />
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+    crossorigin="anonymous"></script>
+
+  <!--Start Your Custom Style Now-->
+  <link href="/assets/dist/css/style.css" rel="stylesheet" />
+  <style>
+    .note-editor {
+      z-index: 0;
+    }
+
+    .modal-backdrop {
+      z-index: -1 !important;
+      /* position: absolute !important; */
+    }
+
+    .modal {
+
+      background: rgba(0, 0, 0, 0.65);
+    }
+
+    .modal-dialog {
+      margin-top: 10%;
+    }
+
+    #change {
+      overflow-y: hidden;
+      margin-top: 0;
+    }
+  </style>
+</head>
+
+<body class="fixed">
+  <!-- Page Loader -->
+  <div class="page-loader-wrapper">
+    <div class="loader">
+      <div class="preloader">
+        <div class="spinner-layer pl-green">
+          <div class="circle-clipper left">
+            <div class="circle"></div>
+          </div>
+          <div class="circle-clipper right">
+            <div class="circle"></div>
+          </div>
+        </div>
+      </div>
+      <p>Please wait...</p>
+    </div>
+  </div>
+  <!-- #END# Page Loader -->
+
+  <!--change password Modal -->
+  <div class="modal fade" id="change" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered mt-0">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Change Password</h5>
+          <button type="button" id="close" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="
+                background-color: inherit;
+                border: none;
+                outline: none;
+                cursor: pointer;
+              ">
+            <i class="fa fa-window-close fa-2x"></i>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="d-flex align-items-center justify-content-center text-center">
+            <div class="form-wrapper m-auto" style="width: 100%">
+              <div class="form-container my-4" style="max-width: unset">
+                <div class="panel" style="border: none; box-shadow: none">
+                  <form class="register-form">
+                    <div class="form-group">
+                      <input type="text" class="form-control" id="uname" placeholder="username" />
+                    </div>
+                    <div class="form-group">
+                      <input type="password" class="form-control" id="password" placeholder="Old Password" />
+                    </div>
+                    <div class="form-group">
+                      <input type="password" class="form-control" id="newPassword" placeholder="New Password" />
+                    </div>
+                    <section class="btn btn-success btn-block" onclick="cpswrd()">
+                      Change password
+                    </section>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!--  manage category Modal -->
+  <div class="modal fade" id="manageCat" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered mt-0">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Categories</h5>
+          <button type="button" id="close" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="
+       background-color: inherit;
+       border: none;
+       outline: none;
+       cursor: pointer;
+     ">
+            <i class="fa fa-window-close fa-2x"></i>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="d-flex align-items-center justify-content-center text-center">
+            <div class="form-wrapper m-auto" style="width: 100%">
+              <div class="form-container my-4" style="max-width: unset">
+                <div class="panel" style="border: none; box-shadow: none">
+                  <form class="register-form">
+                    <div class="form-group">
+                      <input type="text" class="form-control" id="cat" placeholder="add category" />
+                    </div>
+                    <section class="btn btn-success btn-block" onclick="addCat()">
+                      Add category
+                    </section>
+                  </form>
+                </div>
+              </div>
+
+              <div id="catInModal" class="mb-4 d-flex flex-wrap">
+                <p>wswfefe</p>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    /* for categories in modal */
+    .catinmodal {
+      width: 48%;
+      padding: 10px;
+      background: #e1e1e1;
+      margin: 4px;
+      border-radius: 4px;
+      cursor: pointer;
+      text-transform: capitalize;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .catinmodal:hover {
+      color: white;
+      background: #070c17;
+      transition: all 0.8s;
+    }
+
+    .catinmodal:hover #ii {
+      color: rgb(255, 0, 0);
+      transition: all 0.8s;
+    }
+
+
+
+    /* for super categories */
+
+
+    .wrapper11 {
+      display: flex;
+      background: #fff;
+      height: auto;
+      width: 100%;
+      align-items: center;
+      /* justify-content: space-evenly; */
+      border-radius: 5px;
+      padding: 9px 11px;
+      border: 1px solid #e4e5e7;
+      /* height: calc(1.8em + .75rem + 2px); */
+    }
+
+    .wrapper11 .option {
+      background: #fff;
+      height: 100%;
+      width: fit-content;
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly;
+      margin: 0 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      padding: 4px 10px;
+      border: 2px solid lightgrey;
+      transition: all 0.3s ease;
+    }
+
+    .wrapper11 .option .dot {
+      height: 14px;
+      width: 14px;
+      background: #d9d9d9;
+      border-radius: 50%;
+      position: relative;
+    }
+
+    .wrapper11 .option .dot::before {
+      position: absolute;
+      content: "";
+      top: 3px;
+      left: 3px;
+      width: 8px;
+      height: 8px;
+      background: #0069d9;
+      border-radius: 50%;
+      opacity: 0;
+      transform: scale(1.5);
+      transition: all 0.3s ease;
+    }
+
+    input[type="radio"] {
+      display: none;
+    }
+
+    #option1:checked:checked~.option1,
+    #option2:checked:checked~.option2,
+    #option3:checked:checked~.option3,
+    #option4:checked:checked~.option4,
+    #option5:checked:checked~.option5 {
+      border-color: #0069d9;
+      background: #0069d9;
+    }
+
+    #option1:checked:checked~.option1 .dot,
+    #option2:checked:checked~.option2 .dot,
+    #option3:checked:checked~.option3 .dot,
+    #option4:checked:checked~.option4 .dot,
+    #option5:checked:checked~.option5 .dot {
+      background: #fff;
+    }
+
+    #option1:checked:checked~.option1 .dot::before,
+    #option2:checked:checked~.option2 .dot::before,
+    #option3:checked:checked~.option3 .dot::before,
+    #option4:checked:checked~.option4 .dot::before,
+    #option5:checked:checked~.option5 .dot::before {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .wrapper .option span {
+      /* font-size: 20px; */
+      color: #808080;
+    }
+
+    #option1:checked:checked~.option1 span,
+    #option2:checked:checked~.option2 span,
+    #option3:checked:checked~.option3 span,
+    #option4:checked:checked~.option4 span,
+    #option5:checked:checked~.option5 span {
+      color: #fff;
+    }
+
+    @media (max-width:768px) {
+      .wrapper11 {
+        flex-direction: column;
+        justify-content: unset;
+      }
+
+      .wrapper11 .option {
+        width: 100%;
+        justify-content: unset;
+      }
+
+      .catinmodal {
+        margin: 2px;
+      }
+    }
+  </style>
+
+
+  <div class="wrapper">
+    <!-- Sidebar  -->
+    <nav class="sidebar sidebar-bunker">
+      <!-- <div class="sidebar-header">
+          <a href="index.html" class="logo "
+            ><img src="../assets/images/Beautiful-Beginnings.png" height="60px" alt=""
+          /> Beautiful Beginnings</a>
+        </div> -->
+      <!--/.sidebar header-->
+      <div class="profile-element d-flex align-items-center flex-shrink-0">
+        <div class="avatar online">
+          <img src="/assets/dist/img/avatar5.png" class="img-fluid rounded-circle" alt="" />
+        </div>
+        <div class="profile-text">
+          <h6 class="m-0">Admin</h6>
+          <section class="adminName" style="color: #28a745!important;"></section>
+        </div>
+      </div>
+      <!--/.profile element-->
+
+      <div class="sidebar-body">
+        <nav class="sidebar-nav">
+          <ul class="metismenu">
+            <li class="nav-label">Main Menu</li>
+            <!-- <li>
+                <a class="has-arrow material-ripple" href="#">
+                  <i class="typcn typcn-home-outline mr-2"></i>
+                  Dashboard
+                </a>
+              </li> -->
+
+            <li class="" class="dropdown-item">
+              <a class="material-ripple" href="/admin/dashboard" style="color: #fff">
+                <i class="typcn typcn-home-outline mr-2"></i>
+                Dashboard
+              </a>
+            </li>
+            <li class="mm-active">
+              <a class="material-ripple" href="" style="color: #fff">
+                <i class="typcn typcn-clipboard mr-2"></i>
+                Blogs
+              </a>
+            </li>
+            <li class="" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#manageCat">
+              <a class="material-ripple" style="color: #fff">
+                <i class="typcn typcn-archive mr-2"></i>
+                Manage Category
+              </a>
+            </li>
+            <li class="" class="dropdown-item">
+              <a class="material-ripple" href="/admin/messages" style="color: #fff">
+                <i class="typcn typcn-mail mr-2"></i>
+                Enquiry
+              </a>
+            </li>
+
+            <!-- <li class="">
+                <a
+                  class="material-ripple"
+                  href="/messages"
+                  style="
+                    color: #fff;
+                  "
+                >
+                  <i class="typcn typcn-clipboard mr-2"></i>
+                  Messages
+                </a>
+              </li> -->
+          </ul>
+        </nav>
+      </div>
+      <!-- sidebar-body -->
+    </nav>
+    <!-- Page Content  -->
+    <div class="content-wrapper">
+      <div class="main-content">
+        <nav class="navbar-custom-menu navbar navbar-expand-lg m-0">
+          <div class="sidebar-toggle-icon" id="sidebarCollapse">
+            sidebar toggle<span></span>
+          </div>
+          <!--/.sidebar toggle icon-->
+          <div class="d-flex flex-grow-1">
+            <ul class="navbar-nav flex-row align-items-center ml-auto">
+              <li class="nav-item dropdown user-menu">
+                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
+                  <!--<img src="/assets/dist/img/user2-160x160.png" alt="">-->
+                  <i class="typcn typcn-user-add-outline"></i>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right">
+                  <div class="dropdown-header d-sm-none">
+                    <a href="#" class="header-arrow"><i class="icon ion-md-arrow-back"></i></a>
+                  </div>
+                  <div class="user-header">
+                    <div class="img-user">
+                      <img src="/assets/dist/img/avatar5.png" alt="" />
+                    </div>
+                    <!-- img-user -->
+                    <h6>Admin</h6>
+                    <section class="adminName" style="color: #28a745!important;"></section>
+                    <!-- <span
+                        ><a
+                          href="cdn-cgi/l/email-protection.html"
+                          class="__cf_email__"
+                          data-cfemail="1a7f627b776a767f5a7d777b737634797577"
+                          >[email&#160;protected]</a
+                        ></span> -->
+                  </div>
+                  <!-- user-header -->
+                  <span class="dropdown-item" data-bs-toggle="modal" data-bs-target="#change" style="cursor: pointer"><i
+                      class="typcn typcn-edit"></i> Change Password</span>
+                  <span onclick="logout()" class="dropdown-item" style="cursor:pointer;"><i
+                      class="typcn typcn-key-outline"></i> Sign
+                    Out</span>
+                </div>
+                <!--/.dropdown-menu -->
+              </li>
+            </ul>
+            <!--/.navbar nav-->
+            <div class="nav-clock">
+              <div class="time">
+                <span class="time-hours"></span>
+                <span class="time-min"></span>
+                <span class="time-sec"></span>
+              </div>
+            </div>
+            <!-- nav-clock -->
+          </div>
+        </nav>
+        <!--/.navbar-->
+
+
+        <div class="body-content">
+          <div class="card mb-4">
+            <div class="card-header">
+              <div class="d-flex justify-content-between align-items-center">
+                <div>
+                  <h6 class="fs-17 font-weight-600 mb-0">Update Blog</h6>
+                </div>
+                <div class="text-right">
+                  <div class="actions">
+                    <a href="" class="action-item" onclick="function fun(){location.reload()}"><i
+                        class="ti-reload"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <!-- <div class="row">
+                  <div class="col-md-12 col-md-offset-3">
+                    <div
+                      class="alert alert-info alert-dismissible"
+                      role="alert"
+                    >
+                      <button
+                        type="button"
+                        class="close"
+                        data-dismiss="alert"
+                        aria-label="Close"
+                      >
+                        <span aria-hidden="true">×</span>
+                      </button>
+                      In this input group, you can use four types of icons.
+                      Example <strong>glyphicon</strong>,
+                      <strong>fontawesome</strong>,
+                      <strong>Themify Icons</strong> &
+                      <strong>Pe-icon-7-stroke</strong>
+                    </div>
+                  </div>
+                </div> -->
+              <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 p-l-30 p-r-30">
+                  <span id="frm">
+                    <input type="number" class="form-control" name="bid" id="bid" placeholder=""
+                      style="visibility: hidden; position: absolute" />
+                    <div class="form-group">
+                      <label for="title" class="font-weight-600">Title</label>
+                      <input type="text" class="form-control" name="title" id="title" placeholder="Enter Title"
+                        onchange="settingUrl()" />
+                    </div>
+                    <div class="form-group">
+                      <label for="url" class="font-weight-600">Project Url</label>
+                      <input type="text" class="form-control" name="url" id="url" placeholder="Project URL" />
+                    </div>
+
+                    <div class="form-group ">
+                      <label for="category" class="font-weight-600">Category</label>
+                      <div class="">
+                        <select class="form-control basic-single" name="category" id="category">
+                          <optgroup label="Select Category" id="optgroup">
+                          </optgroup>
+                        </select>
+                      </div>
+                    </div>
+
+                    <label for="select" class="font-weight-600">Select</label>
+                    <div class="form-group wrapper11">
+
+                      <input type="radio" name="select" id="option1" value="featured blogs">
+                      <input type="radio" name="select" id="option2" value="trending blogs">
+                      <input type="radio" name="select" id="option3" value="popular blogs">
+                      <input type="radio" name="select" id="option4" value="todays blogs">
+                      <input type="radio" name="select" id="option5" value="none" />
+
+                      <label for="option1" class="option option1">
+                        <div class="dot"></div>
+                        <span>&nbsp;Featured Blogs</span>
+                      </label>
+                      <label for="option2" class="option option2">
+                        <div class="dot"></div>
+                        <span>&nbsp;Trending Blogs</span>
+                      </label>
+                      <label for="option3" class="option option3">
+                        <div class="dot"></div>
+                        <span>&nbsp;Popular Blogs</span>
+                      </label>
+                      <label for="option4" class="option option4">
+                        <div class="dot"></div>
+                        <span>&nbsp;Todays Blogs</span>
+                      </label>
+                      <label for="option5" class="option option5">
+                        <div class="dot"></div>
+                        <span>&nbsp;None</span>
+                      </label>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="summernote" class="font-weight-600">Blog Content</label>
+                      <input id="summernote" name="summernote" />
+                    </div>
+
+                    <div class="form-group">
+                      <label for="shortdesc" class="font-weight-600">Short Description</label>
+                      <textarea name="shortdesc" placeholder="" class="form-control" id="shortdesc" rows="3"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="image" class="font-weight-600">File</label>
+                      <input type="file" name="image" id="image" class="custom-input-file"
+                        data-multiple-caption="{count} files selected" accept="image/*" multiple />
+                      <label for="image">
+                        <i class="fa fa-upload"></i>
+                        <span>Choose a file…</span>
+                      </label>
+                      <div id="displayimg" style="width: 100px; height: 100px"></div>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="author" class="font-weight-600">Author Name</label>
+                      <input type="text" class="form-control" name="author" id="author" placeholder="Author Name" />
+                    </div>
+
+                    <div class="form-group">
+                      <label for="metatitle" class="font-weight-600">Meta Title</label>
+                      <input type="text" class="form-control" name="metatitle" id="metatitle"
+                        placeholder="Meta Title" />
+                    </div>
+
+                    <div class="form-group">
+                      <label for="metakeyword" class="font-weight-600">Meta Keyword</label>
+                      <input type="text" class="form-control" name="metakeyword" id="metakeyword"
+                        placeholder="Meta Keyword" />
+                    </div>
+
+                    <div class="form-group">
+                      <label for="metadesc" class="font-weight-600">Meta Description</label>
+                      <input type="text" class="form-control" name="metadesc" id="metadesc"
+                        placeholder="Meta Description" />
+                    </div>
+                    <!-- <input type="submit" value="Update" style="
+                          background-color: #28a745;
+                          border: none;
+                          outline: none;
+                          padding: 5px 12px;
+                          font-size: 14px;
+                          color: white;
+                          border-radius: 4px;
+                          box-shadow: 0 2px 6px 0 rgb(40 167 69 / 50%);
+                          cursor: pointer;
+                        " /> -->
+                    <button id="go"
+                      style="background-color: #28a745;border: none;outline: none;padding: 5px 20px;font-size: 14px;color: white;border-radius: 4px;box-shadow: 0 2px 6px 0 rgb(40 167 69 / 50%);cursor: pointer;">UPDATE</button>
+                  </span>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-6 p-l-30 p-r-30"></div>
+              </div>
+            </div>
+          </div>
+
+          <!--Page length options-->
+        </div>
+        <!--/.body content-->
+      </div>
+      <!--/.main content-->
+      <!--/.footer content-->
+      <div class="overlay"></div>
+    </div>
+    <!--/.wrapper-->
+  </div>
+  <!--Global script(used by all pages)-->
+
+  <script>
+
+
+    async function addCat() {
+      var cat = document.getElementById("cat").value;
+      console.log(cat);
+
+      const res = await fetch("/addCategory", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          cat,
+        }),
+      });
+
+      const data = await res.json();
+      console.log(data);
+      if (data.message === "alreadyExists") {
+        alert("category already exists");
+      } else if (data.message === "categoryAdded") {
+        location.reload();
+      }
+    }
+
+    async function deleteCategory(id) {
+      console.log(id);
+
+      const res = await fetch("/deleteCategory", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id }),
+      });
+
+      const data = await res.json();
+      console.log(data);
+      if (data.message === "deleted") {
+        location.reload();
+      }
+    }
+
+
+
+    async function fetchCategory() {
+
+      const res = await fetch("/showCategory", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({}),
+      });
+
+      const data = await res.json();
+      console.log(data);
+
+      //for setting options category
+      let options = "";
+      let span = ""
+      for (var i = 0; i < data.length; i++) {
+        options += `<option value="${data[i].category}">${data[i].category}</option>`;
+        span += `<section class="catinmodal" onclick="deleteCategory('${data[i].id}')">${data[i].category}&nbsp;&nbsp;<i class="fa fa-trash" id="ii" /></i></section>`;
+      }
+
+
+      document.getElementById("optgroup").innerHTML = options;
+      document.getElementById("catInModal").innerHTML = span;//for the modal
+
+    }
+
+    async function getAdminName() {
+      $.ajax({
+        url: "/getAdminName",
+        data: "",
+        contentType: false,
+        processData: false,
+        type: "POST",
+        success: function (data) {
+          $('.adminName').text(data.admin);
+        },
+      });
+    }
+
+
+    window.onload = async function () {
+
+      fetchCategory();
+      getAdminName();
+
+      const link = document.baseURI;
+      var blogurl = link.substring(
+        link.lastIndexOf("/") + 1,
+        link.length
+      );
+      console.log(blogurl);
+
+
+      const res = await fetch("/blogedit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ blogurl }),
+      });
+
+      const data = await res.json();
+      console.log(data);
+
+      // const title = document.getElementById("id").value=data[0].title;
+      const title = (document.getElementById("title").value = data[0].title);
+      const url = (document.getElementById("url").value = data[0].url);
+
+      const optgroup = document.getElementById("category").value = data[0].category;
+
+
+
+      const ee = document.querySelectorAll("input[value='featured blogs']");
+
+      var allInputs = document.getElementsByTagName("input");
+      var results = [];
+      for (var x = 0; x < allInputs.length; x++) {
+        if (allInputs[x].value == data[0].type) {
+          results.push(allInputs[x]);
+        }
+      }
+
+
+      const rr = results[0].getAttribute("id");
+
+      document.getElementById(rr).setAttribute('checked', 'checked');//rr has the id
+
+      //for setting the color of label text to white 
+      document.querySelectorAll(`label[for='${rr}']`)[0].children[1].style.color = "white";
+
+
+      //summernote
+      const summernote = document.querySelector(".note-editable").innerHTML = data[0].detail;
+
+      const shortdesc = (document.getElementById("shortdesc").value = data[0].shortdescription);
+
+      const author = (document.getElementById("author").value = data[0].authorname);
+      const metatitle = (document.getElementById("metatitle").value = data[0].metatitle);
+      const metakeyword = (document.getElementById("metakeyword").value =
+        data[0].metakeywords);
+      const metadesc = (document.getElementById("metadesc").value =
+        data[0].metadescription);
+      const bid = (document.getElementById("bid").value = data[0].id);
+
+      document.getElementById(
+        "displayimg"
+      ).style.background = `url('/upload/${data[0].image}')`;
+      document.getElementById("displayimg").style.backgroundPosition =
+        "center";
+      document.getElementById("displayimg").style.backgroundSize = "contain";
+      document.getElementById("displayimg").style.backgroundRepeat =
+        "no-repeat";
+
+      //const image = (document.getElementById("image").value = data[0].image); //this is causing problems also this is not neeeded only showing the image is fine and if the user wants to change then the other image will be seleceted and that will be its value
+
+    };
+  </script>
+
+  <script>
+    async function deleteBlog(id) {
+      console.log(id);
+      const res = await fetch("/deleteblog", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          id,
+        }),
+      });
+
+      const data = await res.json();
+      console.log(data);
+    }
+  </script>
+  <script>
+    function settingUrl() {
+      var title = document.getElementById("title").value;
+      str = title.replace(/\s+/g, "-").toLowerCase();
+      document.getElementById("url").value = str;
+    }
+  </script>
+
+  <script>
+    async function cpswrd() {
+      console.log("cpswrd function ran");
+
+      const uname = document.getElementById("uname").value;
+      const password = document.getElementById("password").value;
+      const newPassword = document.getElementById("newPassword").value;
+      console.log(uname, password, newPassword);
+
+      const res = await fetch("/cpswrd", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          uname,
+          password,
+          newPassword,
+        }),
+      });
+
+      const data = await res.json();
+      if (data.message == "changed") {
+        alert("Password changed successfully!");
+        document.getElementById("password").value = "";
+        document.getElementById("newPassword").value = "";
+        document.getElementById("close").click();
+      }
+    }
+  </script>
+
+  <script>
+    async function logout() {
+      console.log("logout function ran");
+      const res = await fetch("/logout", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({}),
+      });
+
+      const data = await res.json();
+      console.log(data);
+      if (data.message == "loggedOut") {
+        location.reload();
+      }
+    }
+  </script>
+
+  <!-- <script data-cfasync="false" src="cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script> -->
+  <script src="/assets/plugins/jQuery/jquery-3.4.1.min.js"></script>
+  <script src="/assets/dist/js/popper.min.js"></script>
+  <script src="/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+  <script src="/assets/plugins/metisMenu/metisMenu.min.js"></script>
+  <script src="/assets/plugins/perfect-scrollbar/dist/perfect-scrollbar.min.js"></script>
+  <!-- Third Party Scripts(used by this page)-->
+  <script src="/assets/plugins/summernote/summernote.min.js"></script>
+  <script src="/assets/plugins/summernote/summernote-bs4.min.js"></script>
+  <!-- Third Party Scripts(used by this page)-->
+  <script src="/assets/plugins/datatables/dataTables.min.js"></script>
+  <script src="/assets/plugins/datatables/dataTables.bootstrap4.min.js"></script>
+  <script src="/assets/plugins/select2/dist/js/select2.min.js"></script>
+  <script src="/assets/plugins/jquery.sumoselect/jquery.sumoselect.min.js"></script>
+  <!--Page Active Scripts(used by this page)-->
+  <script src="/assets/dist/js/pages/demo.select2.js"></script>
+  <script src="/assets/dist/js/pages/demo.jquery.sumoselect.js"></script>
+  <script src="/assets/dist/js/pages/newsletter.active.js"></script>
+  <!--Page Active Scripts(used by this page)-->
+  <!-- <script src="/assets/plugins/datatables/data-advanced.active.js"></script> -->
+  <!--Page Active Scripts(used by this page)-->
+  <script src="/assets/dist/js/pages/forms-basic.active.js"></script>
+  <!--Page Active Scripts(used by this page)-->
+  <script src="/assets/plugins/summernote/summernote.active.js"></script>
+
+  <!--Page Scripts(used by all page)-->
+  <script src="/assets/dist/js/sidebar.js"></script>
+
+
+</body>
+
+
+<script>
+
+  $("#go").on("click", function () {
+    console.log("update");
+
+    var image = $("#image")[0].files[0];
+
+    var bid = $('#bid').val()
+    var title = $("#title").val();
+    var url = $("#url").val();
+
+    var category = $("#category").val();
+    var select = $("input[type=radio][name=select]:checked").val();
+
+    var shortdesc = $("#shortdesc").val();
+    var author = $("#author").val();
+
+    var metatitle = $("#metatitle").val();
+    var metakeyword = $("#metakeyword").val();
+    var metadesc = $("#metadesc").val();
+
+    var hvalue = $(".note-editable").html(); //summernote
+
+
+
+    let allimg = document.querySelector('.note-editable').getElementsByTagName('img');
+    console.log('allimng', allimg)
+
+    let totalsize = 0;
+
+    for (var i = 0; i < allimg.length; i++) {
+      base64String = allimg[i].getAttribute("src");//base64 data
+
+      var stringLength = base64String.length - 'data:image/png;base64,'.length;
+      var sizeInBytes = 4 * Math.ceil((stringLength / 3)) * 0.5624896334383812;
+      var sizeInKb = sizeInBytes / 1000000;
+      totalsize += sizeInKb;
+    }
+
+
+    console.log(
+      image,
+      title,
+      url,
+      category,
+      select,
+      shortdesc,
+      author,
+      metatitle,
+      metakeyword,
+      metadesc
+    );
+    console.log(hvalue);
+
+    var formdata = new FormData();
+    formdata.append("image", image);
+    formdata.append("bid", bid)
+    formdata.append("title", title);
+    formdata.append("url", url);
+    formdata.append("category", category);
+    formdata.append("select", select);
+    formdata.append("shortdesc", shortdesc);
+    formdata.append("author", author);
+    formdata.append("metatitle", metatitle);
+    formdata.append("metakeyword", metakeyword);
+    formdata.append("metadesc", metadesc);
+
+
+
+    var formdata1 = new FormData();
+    formdata1.append("summernote", hvalue);
+
+    formdata1.append("bid", bid);
+    formdata1.append("title", title);
+    formdata1.append("url", url);
+    formdata1.append("category", category);
+    formdata1.append("select", select);
+    formdata1.append("shortdesc", shortdesc);
+    formdata1.append("author", author);
+    formdata1.append("metatitle", metatitle);
+    formdata1.append("metakeyword", metakeyword);
+    formdata1.append("metadesc", metadesc);
+
+    console.log(formdata1);
+
+
+
+
+    if (totalsize > 2) {
+      alert("Image size is too big!");
+      //document.querySelector('.note-editor').style.border = "2px solid #db0000";
+    } else {
+
+      $.ajax({
+        url: "/blogeditsubmit",
+        data: formdata,
+        contentType: false,
+        processData: false,
+        type: "POST",
+        success: function (data) {
+          location.reload();
+        },
+      });
+
+      setTimeout(function () {
+        $.ajax({
+          url: "/blogdataEditor",
+          data: formdata1,
+          contentType: false,
+          processData: false,
+          type: "POST",
+          success: function (data) {
+            location.reload();
+          },
+        });
+      }, 4000);
+    }
+
+
+  });
+</script>
+
+
+</html>

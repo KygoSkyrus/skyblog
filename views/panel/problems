@@ -1,0 +1,10 @@
+problems so far
+
+
+--if the image file input is empty the process wont stop ,,,solve that,,,at the moment you have marked it as rewquire to avoid this situation.
+
+
+--show image on blog edit page
+
+
+--also in the blog edit page the i,\mage is required which shoul'nd be the like that (its forcing to upload the image again)
