@@ -733,11 +733,10 @@
                                 <td>${data[i].category}</td>
                                 <td>${data[i].type}</td>
                                 <td>${data[i].image}</td>
-                                <td><label class="switch"><input  onclick="blogVisibility(${data[i].id},event)" id="checkbox${data[i].id}" type="checkbox" ${data[i].status} ><span class="slider round"></span></label>
+                                <td><label class="switch"><input  onclick="blogVisibility('${data[i]._id}',event)" id="checkbox${data[i]._id}" type="checkbox" ${data[i].status} ><span class="slider round"></span></label>
 </td>
                                 <td style="display: flex;border: none;justify-content: center;"><a href="/admin/blog-edit/${data[i].url
-                    }" target="blank" ><button style="background: #09660c;"><i class="fa fa-pen"></i></button></a><button onclick='deleteBlog(${data[i].id
-                    })' style="background: #d50606;"><i class="fa fa-trash" ></i></button></td>
+                    }" target="blank" ><button style="background: #09660c;"><i class="fa fa-pen"></i></button></a><button onclick='deleteBlog("${data[i]._id}")' style="background: #d50606;"><i class="fa fa-trash" ></i></button></td>
                             </tr>`;
             }
 

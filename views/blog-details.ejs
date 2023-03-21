@@ -669,46 +669,48 @@
             });
 
             const data = await res.json();
-            const pdd = data[0].id - 1;
-            const ndd = data[0].id + 1;
+            console.log('bd',data)
+            //this wont work
+            const pdd = data[0]?._id - 1;
+            const ndd = data[0]?._id + 1;
            // console.log(data);
             //console.log(idd)
 
-            setTimeout(async function () {
-               // console.log(pdd);
-                const res = await fetch("/prev", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ pdd }),
-                });
+            // setTimeout(async function () {
+            //    // console.log(pdd);
+            //     const res = await fetch("/prev", {
+            //         method: "POST",
+            //         headers: { "Content-Type": "application/json" },
+            //         body: JSON.stringify({ pdd }),
+            //     });
 
-                const dataP = await res.json();
-               // console.log("data", dataP);
+            //     const dataP = await res.json();
+            //    // console.log("data", dataP);
 
-                document.getElementById("prev-blog").innerHTML = dataP.title;
-                document.getElementById("prev-blog").setAttribute("href", `/${dataP.url}`);
-                document.getElementById("prev-link").setAttribute("href", `/${dataP.url}`);
+            //     document.getElementById("prev-blog").innerHTML = dataP.title;
+            //     document.getElementById("prev-blog").setAttribute("href", `/${dataP.url}`);
+            //     document.getElementById("prev-link").setAttribute("href", `/${dataP.url}`);
 
-            }, 1000);
+            // }, 1000);
 
-            setTimeout(async function () {
-              //  console.log(ndd);
-                const res = await fetch("/next", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ ndd }),
-                });
+            // setTimeout(async function () {
+            //   //  console.log(ndd);
+            //     const res = await fetch("/next", {
+            //         method: "POST",
+            //         headers: { "Content-Type": "application/json" },
+            //         body: JSON.stringify({ ndd }),
+            //     });
 
-                const dataN = await res.json();
-              //  console.log(dataN);
+            //     const dataN = await res.json();
+            //   //  console.log(dataN);
 
-                document.getElementById("next-blog").innerHTML =
-                    dataN.title;
-                document.getElementById("next-blog").setAttribute("href", `/blogs/${dataN.url}`);
-                document
-                    .getElementById("next-link")
-                    .setAttribute("href", `/blogs/${dataN.url}`);
-            }, 1000);
+            //     document.getElementById("next-blog").innerHTML =
+            //         dataN.title;
+            //     document.getElementById("next-blog").setAttribute("href", `/blogs/${dataN.url}`);
+            //     document
+            //         .getElementById("next-link")
+            //         .setAttribute("href", `/blogs/${dataN.url}`);
+            // }, 1000);
 
             let html = "";
             for (var i = 0; i < data.length; i++) {
@@ -748,6 +750,7 @@
                             </div>`;
             }
 
+            console.log('html',html)
             document.getElementById("singleBlog").innerHTML = html;
 
             //to hide prev and next blog when there isn't one

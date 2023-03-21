@@ -8,7 +8,6 @@ const blogSchema = new mongoose.Schema({
     },
     detail:{
         type: String,
-        required: true
     },
     url:{
         type: String,
@@ -24,7 +23,6 @@ const blogSchema = new mongoose.Schema({
     },
     type:{
         type: String,
-        required: true
     },
     authorname:{
         type: String,
@@ -32,7 +30,6 @@ const blogSchema = new mongoose.Schema({
     },
     shortdescription:{
         type: String,
-        required: true
     },
     metatitle:{
         type: String,

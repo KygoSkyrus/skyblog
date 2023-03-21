@@ -80,7 +80,7 @@ app.get("/", (req, res) => {
 // });
 
 //this recive the note editor content 4sec after the rest of the form data submits
-app.post("/blogdataEditor", upload.single("image"), (req, res) => {
+app.post("/blogdataEditor", upload.single("image"),async (req, res) => {
   const details = req.body;
   console.log("editor", details);
 
@@ -88,12 +88,14 @@ app.post("/blogdataEditor", upload.single("image"), (req, res) => {
     console.log("yes", details.summernote.length);
 
     try {
-      var sql = `UPDATE blog SET detail = '${details.summernote}' WHERE title = '${details.title}' AND url = '${details.url}' AND shortdescription = '${details.shortdesc}' AND authorname = '${details.author}' AND metatitle = '${details.metatitle}' AND metakeywords = '${details.metakeyword}' AND metadescription = '${details.metadesc}' `;
-      con.query(sql, function (err, result) {
-        if (err) throw err;
+let result =await BLOG.findOneAndUpdate( { title: details.title,url:details.url,shortdescription:details.shortdesc,authorname:details.author,metatitle:details.metatitle,metakeywords:details.metakeyword,metadescription: details.metadesc,},{detail: details.summernote },{ new: true })
+
+      // var sql = `UPDATE blog SET detail = '${details.summernote}' WHERE title = '${details.title}' AND url = '${details.url}' AND shortdescription = '${details.shortdesc}' AND authorname = '${details.author}' AND metatitle = '${details.metatitle}' AND metakeywords = '${details.metakeyword}' AND metadescription = '${details.metadesc}' `;
+      //con.query(sql, function (err, result) {
+      //  if (err) throw err;
         console.log("summernote added", result);
         res.redirect("/admin/blogs-management");
-      });
+      //});
     } catch (err) {
       console.log(err);
     }
@@ -101,12 +103,12 @@ app.post("/blogdataEditor", upload.single("image"), (req, res) => {
 });
 
 //blog form data
-app.post("/blogdata", upload.single("image"), (req, res) => {
+app.post("/blogdata", upload.single("image"),async (req, res) => {
   const details = req.body;
   console.log("DD", details);
 
   const tempPath = req.file.path;
-  console.log(tempPath);
+  console.log('temppatrh',tempPath);
 
   const targetPath = path.join(
     __dirname,
@@ -140,27 +142,44 @@ app.post("/blogdata", upload.single("image"), (req, res) => {
   var date = new Date().toLocaleDateString();
 
   try {
-    var sql = `INSERT INTO blog (title, url, category, type, shortdescription, image, authorname, metatitle, metakeywords, metadescription,date, status) VALUES ?`;
-    var values = [
-      [
-        details.title,
-        details.url,
-        details.category,
-        details.select,
-        details.shortdesc,
-        req.file.originalname,
-        details.author,
-        details.metatitle,
-        details.metakeyword,
-        details.metadesc,
-        date,
-        "checked"
-      ],
-    ];
-    con.query(sql, [values], function (err, result) {
-      if (err) throw err;
-      console.log("user registered!!!", result);
-    });
+
+    let blog= await new BLOG({ 
+      title: details.title,
+      url:details.url,
+      category:details.category,
+      type:details.select,
+      shortdescription:details.shortdesc,
+      authorname:details.author,
+      image:req.file.originalname,
+      metatitle:details.metatitle,
+      metakeywords:details.metakeyword,
+      metadescription: details.metadesc,
+      date:date,
+    status:"checked"})
+    blog.save().then(res=>console.log('res',res))
+
+
+    //var sql = `INSERT INTO blog (title, url, category, type, shortdescription, image, authorname, metatitle, metakeywords, metadescription,date, status) VALUES ?`;
+    //var values = [
+    //   [
+    //     details.title,
+    //     details.url,
+    //     details.category,
+    //     details.select,
+    //     details.shortdesc,
+    //     req.file.originalname,
+    //     details.author,
+    //     details.metatitle,
+    //     details.metakeyword,
+    //     details.metadesc,
+    //     date,
+    //     "checked"
+    //   ],
+    // ];
+    //con.query(sql, [values], function (err, result) {
+      //if (err) throw err;
+      //console.log("user registered!!!", result);
+   // });
   } catch (err) {
     console.log(err);
   }
@@ -172,14 +191,15 @@ app.post("/deleteblog", async (req, res) => {
   console.log(details);
 
   try {
-    var sql = `DELETE FROM blog WHERE id = ${details.id}`;
-    con.query(sql, function (err, result) {
-      if (err) throw err;
-      //console.log(result);
-      console.log("Number of records deleted: " + result.affectedRows);
-      res.redirect("/blogs-management");
-      // res.redirect(req.originalUrl)
-    });
+    // var sql = `DELETE FROM blog WHERE id = ${details.id}`;
+    // con.query(sql, function (err, result) {
+    //   if (err) throw err;
+    let resp=await BLOG.deleteOne({_id:details.id})
+   console.log(resp)
+       console.log("Number of records deleted: " + resp.deletedCount);
+      //res.redirect("/blogs-management");
+       //res.redirect(req.originalUrl)
+    //});
   } catch (err) {
     console.log(err);
   }
@@ -188,17 +208,19 @@ app.post("/deleteblog", async (req, res) => {
 //seeting blogs visibility
 app.post("/blogVisibility", async (req, res) => {
   const details = req.body;
-  console.log(details);
+  console.log('visibilityyyyy',details);
 
   try {
-    var sql = `UPDATE blog SET status = '${details.val}' WHERE id = '${details.id}'`;
-    con.query(sql, function (err, result) {
-      if (err) throw err;
+    // var sql = `UPDATE blog SET status = '${details.val}' WHERE id = '${details.id}'`;
+    // con.query(sql, function (err, result) {
+    //   if (err) throw err;
       //console.log(result);
-      console.log("Number of rows affected: " + result.affectedRows);
+      //findByIdAndUpdate: is the alternatice to directly use id 
+      let result = await BLOG.findOneAndUpdate({_id:details.id},{status:details.val},{new:true})
+      console.log("result in visibility", result);
       //res.redirect("/blogs-management");
       // res.redirect(req.originalUrl)
-    });
+   // });
   } catch (err) {
     console.log(err);
   }
@@ -213,13 +235,15 @@ app.post("/singleblog", async (req, res) => {
   console.log("single blog", details);
 
   try {
-    con.query(
-      `SELECT * FROM blog  WHERE url = '${details.blogurl}' `,
-      function (err, result, fields) {
-        if (err) throw err;
+    // con.query(
+    //   `SELECT * FROM blog  WHERE url = '${details.blogurl}' `,
+    //   function (err, result, fields) {
+    //     if (err) throw err;
+    let result = await BLOG.find({url:details.blogurl})
+    console.log('sb res',result)
         res.send(result);
-      }
-    );
+    //   }
+    // );
   } catch (err) {
     console.log("error", err);
   }
@@ -271,20 +295,22 @@ app.post("/next", async (req, res) => {
   }
 });
 
+//not working
 //for editing a  blog( this send back the data related to a specific blog to the blog edit page)
 app.post("/blogedit", async (req, res) => {
   const details = req.body;
   console.log("bid", details);
 
   try {
-    con.query(
-      `SELECT * FROM blog  WHERE url = '${details.blogurl}' `,
-      function (err, result, fields) {
-        if (err) throw err;
-        console.log(result);
+    //con.query(
+     // `SELECT * FROM blog  WHERE url = '${details.blogurl}' `,
+     // function (err, result, fields) {
+      //  if (err) throw err;
+      let result = await BLOG.find({url:details.blogurl})
+        console.log('url',result);
         res.send(result);
-      }
-    );
+     // }
+    //);
   } catch (err) {
     console.log(err);
   }
