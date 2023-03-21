@@ -724,11 +724,12 @@
 
 var auth2;
 var googleUser; // The current user
-
-gapi.load('auth2', function(){
+//this is not working
+let x=await gapi.load('auth2', function(){
     auth2 = gapi.auth2.init({
         client_id: '371526208721-u9ce3pinmkt2aa959r57j9u2q9crul09.apps.googleusercontent.com'
     });
+    console.log('auth2',auth2)
     auth2.isSignedIn.listen(signinChanged);
 });  
 

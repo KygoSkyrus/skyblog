@@ -17,6 +17,7 @@ const ADMIN=require("./schema/admin")
 const BLOG=require("./schema/blog")
 const CONTACT =require("./schema/contact")
 const CATEGORY = require("./schema/category")
+const USERBLOG=require("./schema/userblog")
 
 dotenv.config({ path: './env/config.env' });
 app.set("view engine", "ejs");
@@ -357,24 +358,27 @@ app.post("/blogeditsubmit", upload.single("image"), (req, res) => {
 //deleting messages records (contact form)
 app.post("/deleteMessage", async (req, res) => {
   const details = req.body;
-  console.log(details.id);
+  console.log('deleet messsage',details.id);
 
   try {
-    var sql = `DELETE FROM contact WHERE id = ${details.id}`;
-    con.query(sql, function (err, result) {
-      if (err) throw err;
-      console.log("Number of records deleted: " + result.affectedRows);
-      res.send({ affectedRows: result.affectedRows });
+    //var sql = `DELETE FROM contact WHERE id = ${details.id}`;
+    //con.query(sql, function (err, result) {
+    //  if (err) throw err;
+    let result=await CONTACT.deleteOne({_id:details.id})
+    console.log(result)
+      console.log("Number of records deleted: " + result.deletedCount);
+      res.send({ deletedCount: result.deletedCount });
       //add feature to tell frontend that record has been deleted
-    });
+    //});
   } catch (err) {
     console.log(err);
   }
 });
 
+//not touching userblog now until google auth fixes
 //usersBlog (blogs send by the users inserted into db in two phase)
 //this recive the note editor content 4sec after the rest of the form data submits
-app.post("/usersblogdataEditor", upload.single("image"), (req, res) => {
+app.post("/usersblogdataEditor", upload.single("image"), async(req, res) => {
   const details = req.body;
   console.log("editor", details);
 
@@ -382,21 +386,26 @@ app.post("/usersblogdataEditor", upload.single("image"), (req, res) => {
     console.log("yes", details.summernote.length);
 
     try {
-      var sql = `UPDATE usersblog SET detail = '${details.summernote}' WHERE  email = '${details.email}' AND title = '${details.title}' AND url = '${details.url}' AND shortdescription = '${details.shortdesc}' AND authorname = '${details.author}' AND metatitle = '${details.metatitle}' AND metakeywords = '${details.metakeyword}' AND metadescription = '${details.metadesc}' `;
-      con.query(sql, function (err, result) {
+//incomplete 
+      //let result =await USERBLOG.findOneAndUpdate( { email:details.email,title: details.title,url:details.url,shortdescription:details.shortdesc,authorname:details.author,metatitle:details.metatitle,metakeywords:details.metakeyword,metadescription: details.metadesc,},{detail: details.summernote },{ new: true })
+
+
+      //var sql = `UPDATE usersblog SET detail = '${details.summernote}' WHERE  email = '${details.email}' AND title = '${details.title}' AND url = '${details.url}' AND shortdescription = '${details.shortdesc}' AND authorname = '${details.author}' AND metatitle = '${details.metatitle}' AND metakeywords = '${details.metakeyword}' AND metadescription = '${details.metadesc}' `;
+      //con.query(sql, function (err, result) {
         console.log("last errrrr");
         if (err) throw err;
         console.log("last errrrr dnt run");
         console.log("summernote added", result);
         res.redirect("back");
-      });
+      //});
     } catch (err) {
       console.log(err);
     }
   }
 });
+
 //usersblog form data
-app.post("/usersblogdata", upload.single("image"), (req, res) => {
+app.post("/usersblogdata", upload.single("image"), async (req, res) => {
   const details = req.body;
   console.log("DD", details);
 
@@ -406,26 +415,40 @@ app.post("/usersblogdata", upload.single("image"), (req, res) => {
     var date = new Date().toLocaleDateString();
 
     try {
-      var sql = `INSERT INTO usersblog (email, title, url, category, type, shortdescription, authorname, metatitle, metakeywords, metadescription,date) VALUES ?`;
-      var values = [
-        [
-          details.email,
-          details.title,
-          details.url,
-          details.category,
-          details.select,
-          details.shortdesc,
-          details.author,
-          details.metatitle,
-          details.metakeyword,
-          details.metadesc,
-          date,
-        ],
-      ];
-      con.query(sql, [values], function (err, result) {
-        if (err) throw err;
+//incomplete 
+      let userblog= await new USERBLOG({ email:details.email,
+        title: details.title,
+        url:details.url,
+        category:details.category,
+        type:details.select,
+        shortdescription:details.shortdesc,
+        authorname:details.author,
+        metatitle:details.metatitle,
+        metakeywords:details.metakeyword,
+        metadescription: details.metadesc,
+        date:date,})
+      userblog.save()
+
+      //var sql = `INSERT INTO usersblog (email, title, url, category, type, shortdescription, authorname, metatitle, metakeywords, metadescription,date) VALUES ?`;
+      //var values = [
+      //   [
+      //     details.email,
+      //     details.title,
+      //     details.url,
+      //     details.category,
+      //     details.select,
+      //     details.shortdesc,
+      //     details.author,
+      //     details.metatitle,
+      //     details.metakeyword,
+      //     details.metadesc,
+      //     date,
+      //   ],
+      // ];
+      //con.query(sql, [values], function (err, result) {
+      //  if (err) throw err;
         console.log("data inserted!!!", result);
-      });
+     // });
     } catch (err) {
       console.log(err);
     }
@@ -598,14 +621,16 @@ app.post("/searchblog", upload.single("image"), async (req, res) => {
     if (value.val == "") {
       res.send({}); //an empty data object is sent
     } else {
-      con.query(
-        `SELECT * FROM blog WHERE title Like '%${value.val}%'`,
-        function (err, result, fields) {
-          if (err) throw err;
-          //console.log(result);
+     // con.query(
+      //  `SELECT * FROM blog WHERE title Like '%${value.val}%'`,
+      //  function (err, result, fields) {
+      //    if (err) throw err;
+
+      let result =await BLOG.find({"title":{"$regex":value.val, "$options": "i"}})
+          console.log('search res',result);
           res.send(result);
-        }
-      );
+       // }
+     // );
     }
   } catch (err) {
     console.log(err);
@@ -621,7 +646,7 @@ app.post("/admin/login", urlencodedParser, async (req, res) => {
     // var sql = `SELECT * FROM admin WHERE username = '${credentials.userName}' AND password = '${credentials.password}'`;
 
     const result = await ADMIN.find({ username: credentials.userName,password:credentials.password })
-console.log('res for admin',result)
+    //console.log('res for admin',result)
    // con.query(sql, function (err, result) {
    //   if (err) throw err;
 
@@ -655,17 +680,19 @@ app.post("/cpswrd", async (req, res) => {
 
   try {
     //to update a record
-    var sql = `UPDATE admin SET password = '${details.newPassword}' WHERE password = '${details.password}' AND username= '${details.uname}' `;
-    con.query(sql, function (err, result) {
-      if (err) throw err;
-      console.log(result);
-      if (result.affectedRows >= 1) {
+    // var sql = `UPDATE admin SET password = '${details.newPassword}' WHERE password = '${details.password}' AND username= '${details.uname}' `;
+    // con.query(sql, function (err, result) {
+    //   if (err) throw err;
+    let result =await ADMIN.findOneAndUpdate( { username:details.uname ,password: details.password},{password: details.newPassword },{ new: true })
+    // If `new` isn't true, `findOneAndUpdate()` will return the document as it was _before_ it was updated.
+      //console.log(result);
+      if (result) {
         console.log("password changed!!!");
         res.send({ message: "changed" });
       } else {
         console.log("something went wrong");
       }
-    });
+   // });
   } catch (err) {
     console.log(err);
   }

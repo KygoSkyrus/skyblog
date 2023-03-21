@@ -42,6 +42,7 @@ router.post("/message", urlencodedParser, (req, res) => {
     };
  
     console.log(mailOptions); 
+  //send main option is commented now,,due to testing i guess, although the messages will be saved in db
   //  res.redirect('back');
   //   smtpTransport.sendMail(mailOptions, function (error, info) {
   //     if (error) {
@@ -53,20 +54,17 @@ router.post("/message", urlencodedParser, (req, res) => {
   //     }
   //   });
 
-    var con = mysql.createConnection({ 
-      host: "localhost",
-      user: "root",
-      password: "",
-      database: "bloggingsite",
-    });
+  
 
     //to insert a record
-    var sql = `INSERT INTO contact (name, email, phone, note) VALUES ('${details.name}','${details.mail}','${details.phone}','${details.textarea}')`;
-    con.query(sql, function (err, result) {
-      if (err) throw err;
+    let contact = new CONTACT({name:details.name,email:details.mail,phone:details.phone,note:details.textarea})
+    contact.save();
+    //var sql = `INSERT INTO contact (name, email, phone, note) VALUES ('${details.name}','${details.mail}','${details.phone}','${details.textarea}')`;
+    //con.query(sql, function (err, result) {
+    //  if (err) throw err;
       console.log("record inserted!!!");
       res.redirect('back')
-    });
+    //});
   } catch (err) {
     console.log(err);
   }

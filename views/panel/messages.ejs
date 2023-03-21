@@ -590,8 +590,7 @@
                                 <td>${data[i].email}</td>
                                 <td>${data[i].phone}</td>
                                 <td>${data[i].note}</td>
-                                <td style="display: flex;border: none;justify-content: center;"><button onclick='deleteMessage(${data[i].id
-                    })' style="background: #d50606;"><i class="fa fa-trash" ></i></button></td>
+                                <td style="display: flex;border: none;justify-content: center;"><button onclick='deleteMessage("${data[i]._id}")' style="background: #d50606;"><i class="fa fa-trash" ></i></button></td>
                             </tr>`;
             }
 
