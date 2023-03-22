@@ -7,7 +7,13 @@ const path = require("path");
 const fs = require("fs");
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
+const uuid = require('uuid-v4');
 const cloudinary = require('cloudinary').v2;
+const saltedMd5=require('salted-md5')
+
+const {initializeApp,cert}= require('firebase-admin/app');
+const { getStorage } = require('firebase-admin/storage');
+const serviceAccount = require('./shopp-itt-firebase-adminsdk-jlq2q-3afe33d836.json');
 
 const articles = require("./routes/articles");
 const blogEdit = require("./routes/edit");
@@ -42,7 +48,15 @@ cloudinary.config({
   api_key: "592295652843153",
   api_secret: "nFU-aijI0cNa3FOQ8JafSWh2cZY"
 });
- 
+
+//firebase config
+initializeApp({
+  credential: cert(serviceAccount),
+  storageBucket: 'shopp-itt.appspot.com'
+});
+const bucket = getStorage().bucket();
+
+
 const db = process.env.dbURI;
 //useNewUrlParser flag to allow users to fall back to the old parser if they find a bug in the new parser.
 //useUnifiedTopology: Set to true to opt in to using the MongoDB driver's new connection management engine. 
@@ -54,16 +68,13 @@ mongoose.connect(db, {
 }).catch((err) => console.log(err));
 
 
-const upload = multer({
-  dest: "./views/upload",
-});
+//uncomment this in case you stop using cloud upload
+// const upload = multer({
+//   dest: "./views/upload",
+// });
+//setting it to empty bcz with destination defined it will upload the files at that destination and also set the path of the file to that
+const upload = multer({});
 
-var con = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "",
-  database: "bloggingsite",
-});
 
 app.use("/category", categorySingle); //for all category routes
 app.use("/", articles); //every route from the blogrouter will be added as suffuc of the /blogs
@@ -110,6 +121,9 @@ let result =await BLOG.findOneAndUpdate( { title: details.title,url:details.url,
   }
 });
 
+
+
+
 //blog form data[creates a new blog from admin side]
 app.post("/blogdata", upload.single("image"),async (req, res) => {
   const details = req.body;
@@ -117,16 +131,39 @@ app.post("/blogdata", upload.single("image"),async (req, res) => {
 
   const tempPath = req.file.path;
   console.log('temppatrh',tempPath);
-
-
+ 
 
 //this takes the path of the imgae from local machine(ie temppath) and the name by which it will be stored on cloud
-const res1 =await cloudinary.uploader.upload( tempPath , {public_id: req.file.originalname})
+//const res1 =await cloudinary.uploader.upload( tempPath , {public_id: req.file.originalname})
 //console.log('res1',res1)
-let imgUrl=res1.secure_url;
+//let imgUrl=res1.secure_url;
+const metadata = {
+  metadata: {
+    // This line is very important. It's to create a download token.
+    firebaseStorageDownloadTokens: uuid()
+  },
+  contentType: 'image/png',
+  cacheControl: 'public, max-age=31536000',
+};
+const name = saltedMd5(req.file.originalname, 'SUPER-S@LT!')
+const fileName = name + path.extname(req.file.originalname)
+console.log('path',fileName)
+console.log('path2',req.file.destination)
+console.log('path2',req.file.originalname)
+console.log('pathfinal',req.file.destination+'/'+req.file.originalname)
 
+let y="./logo.png"
+//second way::working but you need exact path of the image
+//  let x =await bucket.upload(y, {
+//   // Support for HTTP requests made with `Accept-Encoding: gzip`
+//   gzip: true,
+//   metadata: metadata,
+// });
 
+//first way::WORKING
+let x=await bucket.file(fileName).createWriteStream().end(req.file.buffer)
 
+console.log('xxxxxxxxxxx',x)
   // const targetPath = path.join(
   //   __dirname,
   //   `./views/upload/${req.file.originalname}`
@@ -160,20 +197,20 @@ let imgUrl=res1.secure_url;
 
    try {
 
-    let blog= await new BLOG({ 
-      title: details.title,
-      url:details.url,
-      category:details.category,
-      type:details.select,
-      shortdescription:details.shortdesc,
-      authorname:details.author,
-      image:imgUrl,
-      metatitle:details.metatitle,
-      metakeywords:details.metakeyword,
-      metadescription: details.metadesc,
-      date:date,
-    status:"checked"})
-    blog.save().then(res=>console.log('res',res))
+    // let blog= await new BLOG({ 
+    //   title: details.title,
+    //   url:details.url,
+    //   category:details.category,
+    //   type:details.select,
+    //   shortdescription:details.shortdesc,
+    //   authorname:details.author,
+    //   image:imgUrl,
+    //   metatitle:details.metatitle,
+    //   metakeywords:details.metakeyword,
+    //   metadescription: details.metadesc,
+    //   date:date,
+    // status:"checked"})
+    // blog.save().then(res=>console.log('res',res))
 
 
     //var sql = `INSERT INTO blog (title, url, category, type, shortdescription, image, authorname, metatitle, metakeywords, metadescription,date, status) VALUES ?`;
