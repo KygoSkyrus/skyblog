@@ -100,7 +100,7 @@ router.post("/show", async (req, res) => {
 
 
     let ret =await BLOG.find({})
-    console.log("blogs",ret)
+    //console.log("blogs",ret)
 
     const filteredArray = ret.filter(obj => obj.status !== '1');//only sending the blogs that are marked visible
     res.send(filteredArray);
@@ -115,7 +115,7 @@ router.post("/show2", async (req, res) => {
   try {
     
     let ret =await BLOG.find({})
-    console.log("BLOGS",ret)
+    //console.log("BLOGS",ret)
     res.send(ret)
   } catch (err) {
     console.log(err);

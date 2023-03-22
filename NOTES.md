@@ -7,6 +7,8 @@
 - image upload might be a problem,
 - google sign in is not working
 - prev and next are now owrkibg,,acyually ealier is was increment and decrementing of these two,,now have to add a new field in db which will increment when new documnet is inserted :: have toun commnet pre v and next from html file also,,blog-details.ejs
+- blog edit is not working,,gotta fix the image upload syustem,,either user gridfs or a cloud storage
+- hav to add response tpo all the mongodb queries.let user know if its failing or passing
 
 ## todo
 - add loader when like when the admin posts a blog bcz there it waits 4 sec for summernote

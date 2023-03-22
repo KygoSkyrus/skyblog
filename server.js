@@ -7,6 +7,7 @@ const path = require("path");
 const fs = require("fs");
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
+const cloudinary = require('cloudinary').v2;
 
 const articles = require("./routes/articles");
 const blogEdit = require("./routes/edit");
@@ -35,6 +36,12 @@ const handleError = (err, res) => {
   res.status(500).contentType("text/plain").end("Oops! Something went wrong!");
 };
 
+// Configuration 
+cloudinary.config({
+  cloud_name: "dbxybtpmk",
+  api_key: "592295652843153",
+  api_secret: "nFU-aijI0cNa3FOQ8JafSWh2cZY"
+});
  
 const db = process.env.dbURI;
 //useNewUrlParser flag to allow users to fall back to the old parser if they find a bug in the new parser.
@@ -79,6 +86,7 @@ app.get("/", (req, res) => {
 //   res.sendFile(__dirname + "/views/blog-post.html");
 // });
 
+//this is the admin blog edit,,[it is just to update the summernote]
 //this recive the note editor content 4sec after the rest of the form data submits
 app.post("/blogdataEditor", upload.single("image"),async (req, res) => {
   const details = req.body;
@@ -102,7 +110,7 @@ let result =await BLOG.findOneAndUpdate( { title: details.title,url:details.url,
   }
 });
 
-//blog form data
+//blog form data[creates a new blog from admin side]
 app.post("/blogdata", upload.single("image"),async (req, res) => {
   const details = req.body;
   console.log("DD", details);
@@ -110,38 +118,47 @@ app.post("/blogdata", upload.single("image"),async (req, res) => {
   const tempPath = req.file.path;
   console.log('temppatrh',tempPath);
 
-  const targetPath = path.join(
-    __dirname,
-    `./views/upload/${req.file.originalname}`
-  );
+
+
+//this takes the path of the imgae from local machine(ie temppath) and the name by which it will be stored on cloud
+const res1 =await cloudinary.uploader.upload( tempPath , {public_id: req.file.originalname})
+//console.log('res1',res1)
+let imgUrl=res1.secure_url;
+
+
+
+  // const targetPath = path.join(
+  //   __dirname,
+  //   `./views/upload/${req.file.originalname}`
+  // );
 
   // for uploading image  file in the folder(only the .png etc files will be saved)
-  if (
-    path.extname(req.file.originalname).toLowerCase() === ".png" ||
-    path.extname(req.file.originalname).toLowerCase() === ".jpg" ||
-    path.extname(req.file.originalname).toLowerCase() === ".jpeg" ||
-    path.extname(req.file.originalname).toUpperCase() === ".PNG" ||
-    path.extname(req.file.originalname).toUpperCase() === ".JPG" ||
-    path.extname(req.file.originalname).toUpperCase() === ".JPEG"
-  ) {
-    fs.rename(tempPath, targetPath, (err) => {
-      if (err) return handleError(err, res);
-      console.log("image uploaded");
-      //res.redirect("/admin/blogs-management");
-    });
-  } else {
-    fs.unlink(tempPath, (err) => {
-      if (err) return handleError(err, res);
-      res
-        .status(403)
-        .contentType("text/plain")
-        .end("Only .png .jpg .jpeg files are allowed!");
-    });
-  }
+  // if (    
+  //   path.extname(req.file.originalname).toLowerCase() === ".png" ||
+  //   path.extname(req.file.originalname).toLowerCase() === ".jpg" ||
+  //   path.extname(req.file.originalname).toLowerCase() === ".jpeg" ||
+  //   path.extname(req.file.originalname).toUpperCase() === ".PNG" ||
+  //   path.extname(req.file.originalname).toUpperCase() === ".JPG" ||
+  //   path.extname(req.file.originalname).toUpperCase() === ".JPEG"
+  // ) {
+  //   fs.rename(tempPath, targetPath, (err) => {
+  //     if (err) return handleError(err, res);
+  //     console.log("image uploaded");
+  //     //res.redirect("/admin/blogs-management");
+  //   });
+  // } else {
+  //   fs.unlink(tempPath, (err) => {
+  //     if (err) return handleError(err, res);
+  //     res
+  //       .status(403)
+  //       .contentType("text/plain")
+  //       .end("Only .png .jpg .jpeg files are allowed!");
+  //   });
+  // }
 
-  var date = new Date().toLocaleDateString();
+   var date = new Date().toLocaleDateString();
 
-  try {
+   try {
 
     let blog= await new BLOG({ 
       title: details.title,
@@ -150,7 +167,7 @@ app.post("/blogdata", upload.single("image"),async (req, res) => {
       type:details.select,
       shortdescription:details.shortdesc,
       authorname:details.author,
-      image:req.file.originalname,
+      image:imgUrl,
       metatitle:details.metatitle,
       metakeywords:details.metakeyword,
       metadescription: details.metadesc,
@@ -197,6 +214,13 @@ app.post("/deleteblog", async (req, res) => {
     let resp=await BLOG.deleteOne({_id:details.id})
    console.log(resp)
        console.log("Number of records deleted: " + resp.deletedCount);
+
+
+       //for deleting image from cloud
+       let resp1=await cloudinary.uploader.destroy(resp.image, function(error,result) {
+        console.log(result, error) 
+      }) 
+console.log('del resp1',resp1)
       //res.redirect("/blogs-management");
        //res.redirect(req.originalUrl)
     //});
@@ -295,7 +319,7 @@ app.post("/next", async (req, res) => {
   }
 });
 
-//not working
+//[admin blog] send the slected blog to edit page
 //for editing a  blog( this send back the data related to a specific blog to the blog edit page)
 app.post("/blogedit", async (req, res) => {
   const details = req.body;
@@ -316,8 +340,9 @@ app.post("/blogedit", async (req, res) => {
   }
 });
 
-//edited blog submission
-app.post("/blogeditsubmit", upload.single("image"), (req, res) => {
+//not working
+//edited blog submission [this is the admin blog][updates the chnages in the blog]
+app.post("/blogeditsubmit", upload.single("image"), async (req, res) => {
   const details = req.body;
   console.log("blogeditsubmit", details);
 
@@ -327,13 +352,17 @@ app.post("/blogeditsubmit", upload.single("image"), (req, res) => {
     var date = new Date().toLocaleDateString();
 
     try {
-      var sql = `UPDATE blog SET title = '${details.title}', url = '${details.url}', category = '${details.category}', type = '${details.select}', shortdescription = '${details.shortdesc}', authorname = '${details.author}', metatitle = '${details.metatitle}', metakeywords = '${details.metakeyword}', metadescription = '${details.metadesc}',date = '${date}' WHERE id = '${details.bid}' `;
 
-      con.query(sql, function (err, result) {
-        if (err) throw err;
-        console.log("user registered!!!", result);
+      let result =await BLOG.findOneAndUpdate( { title: details.title,url:details.url,category:details.category,type:details.select,shortdescription:details.shortdesc,image:details.image,authorname:details.author,metatitle:details.metatitle,metakeywords:details.metakeyword,metadescription: details.metadesc,date:date},{_id: details.bid },{ new: true })
+
+
+      //var sql = `UPDATE blog SET title = '${details.title}', url = '${details.url}', category = '${details.category}', type = '${details.select}', shortdescription = '${details.shortdesc}', authorname = '${details.author}', metatitle = '${details.metatitle}', metakeywords = '${details.metakeyword}', metadescription = '${details.metadesc}',date = '${date}' WHERE id = '${details.bid}' `;
+
+     // con.query(sql, function (err, result) {
+        //if (err) throw err;
+        console.log("blog edited!!!", result);
         //res.redirect("/admin/blogs-management");
-      });
+      //});
     } catch (err) {
       console.log(err);
     }
@@ -370,11 +399,14 @@ app.post("/blogeditsubmit", upload.single("image"), (req, res) => {
     var date = new Date().toLocaleDateString();
 
     try {
-      var sql = `UPDATE blog SET title = '${details.title}', url = '${details.url}', category = '${details.category}', type = '${details.select}', shortdescription = '${details.shortdesc}', image = '${req.file.originalname}', authorname = '${details.author}', metatitle = '${details.metatitle}', metakeywords = '${details.metakeyword}', metadescription = '${details.metadesc}',date = '${date}' WHERE id = '${details.bid}' `;
-      con.query(sql, function (err, result) {
-        if (err) throw err;
-        console.log("user registered!!!", result);
-      });
+
+      let result =await BLOG.findOneAndUpdate( { title: details.title,url:details.url,category:details.category,type:details.select,shortdescription:details.shortdesc, image :req.file.originalname,authorname:details.author,metatitle:details.metatitle,metakeywords:details.metakeyword,metadescription: details.metadesc,date:date},{_id: details.bid },{ new: true })
+
+      //var sql = `UPDATE blog SET title = '${details.title}', url = '${details.url}', category = '${details.category}', type = '${details.select}', shortdescription = '${details.shortdesc}', image = '${req.file.originalname}', authorname = '${details.author}', metatitle = '${details.metatitle}', metakeywords = '${details.metakeyword}', metadescription = '${details.metadesc}',date = '${date}' WHERE id = '${details.bid}' `;
+      //con.query(sql, function (err, result) {
+      //  if (err) throw err;
+        console.log("blog edited!!!", result);
+      //});
     } catch (err) {
       console.log(err);
     }
@@ -403,7 +435,7 @@ app.post("/deleteMessage", async (req, res) => {
 
 //not touching userblog now until google auth fixes
 //usersBlog (blogs send by the users inserted into db in two phase)
-//this recive the note editor content 4sec after the rest of the form data submits
+//this recive the note editor content 4sec after the rest of the form data submits[for userblog summernote]
 app.post("/usersblogdataEditor", upload.single("image"), async(req, res) => {
   const details = req.body;
   console.log("editor", details);
@@ -430,7 +462,7 @@ app.post("/usersblogdataEditor", upload.single("image"), async(req, res) => {
   }
 });
 
-//usersblog form data
+//usersblog form data[this adds the new blog from user]
 app.post("/usersblogdata", upload.single("image"), async (req, res) => {
   const details = req.body;
   console.log("DD", details);
