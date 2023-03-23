@@ -1,5 +1,4 @@
 const express = require("express");
-const mysql = require("mysql");
 const app = express();
 const cookieParser = require("cookie-parser");
 const multer = require("multer");
@@ -7,13 +6,12 @@ const path = require("path");
 const fs = require("fs");
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
-const uuid = require('uuid-v4');
-const cloudinary = require('cloudinary').v2;
-const saltedMd5=require('salted-md5')
-
-const {initializeApp,cert}= require('firebase-admin/app');
-const { getStorage } = require('firebase-admin/storage');
-const serviceAccount = require('./shopp-itt-firebase-adminsdk-jlq2q-3afe33d836.json');
+//node needed npm
+// const uuid = require('uuid-v4');
+// const cloudinary = require('cloudinary').v2;
+// const {initializeApp,cert}= require('firebase-admin/app');
+// const { getStorage } = require('firebase-admin/storage');
+// const serviceAccount = require('./shopp-itt-firebase-adminsdk-jlq2q-3afe33d836.json');
 
 const articles = require("./routes/articles");
 const blogEdit = require("./routes/edit");
@@ -43,18 +41,17 @@ const handleError = (err, res) => {
 };
 
 // Configuration 
-cloudinary.config({
-  cloud_name: "dbxybtpmk",
-  api_key: "592295652843153",
-  api_secret: "nFU-aijI0cNa3FOQ8JafSWh2cZY"
-});
-
-//firebase config
-initializeApp({
-  credential: cert(serviceAccount),
-  storageBucket: 'shopp-itt.appspot.com'
-});
-const bucket = getStorage().bucket();
+// cloudinary.config({
+//   cloud_name: "dbxybtpmk",
+//   api_key: "592295652843153",
+//   api_secret: "nFU-aijI0cNa3FOQ8JafSWh2cZY"
+// });
+// //firebase config
+// initializeApp({
+//   credential: cert(serviceAccount),
+//   storageBucket: 'shopp-itt.appspot.com'
+// });
+// const bucket = getStorage().bucket();
 
 
 const db = process.env.dbURI;
@@ -299,28 +296,29 @@ app.post("/singleblog", async (req, res) => {
   }
 });
 
+//not in use,,,using only one api,,,send all the blogs and then filter it out at the frontend..also dlete other common apis whihc are doing same thing,,
 //for showing previous blog records
-app.post("/prev", async (req, res) => {
-  const details = req.body;
-  console.log("prev id", details);
+// app.post("/prev", async (req, res) => {
+//   const details = req.body;
+//   console.log("prev id", details);
  
-  try {
-    con.query(`SELECT * FROM blog `, function (err, result, fields) {
-      if (err) throw err;
-      console.log(result);
+//   try {
+//     con.query(`SELECT * FROM blog `, function (err, result, fields) {
+//       if (err) throw err;
+//       console.log(result);
 
-      for (var i = result.length - 1; i >= 0; i--) {
-        if (result[i].id <= details.pdd) {
-          console.log(i, result[i]);
-          res.send(result[i]);
-          return;
-        }
-      }
-    });
-  } catch (err) {
-    console.log("error", err);
-  }
-});
+//       for (var i = result.length - 1; i >= 0; i--) {
+//         if (result[i].id <= details.pdd) {
+//           console.log(i, result[i]);
+//           res.send(result[i]);
+//           return;
+//         }
+//       }
+//     });
+//   } catch (err) {
+//     console.log("error", err);
+//   }
+// });
 
 //for showing next blog records
 app.post("/next", async (req, res) => {
@@ -328,18 +326,24 @@ app.post("/next", async (req, res) => {
   console.log("next id", details);
 
   try {
-    con.query(`SELECT * FROM blog `, function (err, result, fields) {
-      if (err) throw err;
-      console.log(result);
+    // con.query(`SELECT * FROM blog `, function (err, result, fields) {
+    //   if (err) throw err;
 
-      for (var i = 0; i < result.length; i++) {
-        if (result[i].id >= details.ndd) {
-          console.log(i, result[i]);
-          res.send(result[i]);
-          return;
-        }
-      }
-    });
+    let result= await BLOG.find({})
+
+      console.log(result);
+      console.log('erttrer',result.length )
+      res.send(result);
+      // for (var i = 0; i < result.length; i++) {
+      //   console.log('bcc',result[i] )
+      //   console.log('bc',result[i].blogcount )
+      //   if (result[i].blogcount >= details.ndd) {
+      //     console.log(i, result[i]);
+      //     //res.send(result[i]);
+      //     return;
+      //   }
+      // }
+    //});
   } catch (err) {
     console.log("error", err);
   }
@@ -459,7 +463,7 @@ app.post("/deleteMessage", async (req, res) => {
   }
 });
 
-//not touching userblog now until google auth fixes
+//------------------------USERBLOG-----------------------------
 //usersBlog (blogs send by the users inserted into db in two phase)
 //this recive the note editor content 4sec after the rest of the form data submits[for userblog summernote]
 app.post("/usersblogdataEditor", upload.single("image"), async(req, res) => {
@@ -470,14 +474,13 @@ app.post("/usersblogdataEditor", upload.single("image"), async(req, res) => {
     console.log("yes", details.summernote.length);
 
     try {
-//incomplete 
-      //let result =await USERBLOG.findOneAndUpdate( { email:details.email,title: details.title,url:details.url,shortdescription:details.shortdesc,authorname:details.author,metatitle:details.metatitle,metakeywords:details.metakeyword,metadescription: details.metadesc,},{detail: details.summernote },{ new: true })
+      let result =await USERBLOG.findOneAndUpdate( { email:details.email,title: details.title,url:details.url,shortdescription:details.shortdesc,authorname:details.author,metatitle:details.metatitle,metakeywords:details.metakeyword,metadescription: details.metadesc,},{detail: details.summernote },{ new: true })
 
 
       //var sql = `UPDATE usersblog SET detail = '${details.summernote}' WHERE  email = '${details.email}' AND title = '${details.title}' AND url = '${details.url}' AND shortdescription = '${details.shortdesc}' AND authorname = '${details.author}' AND metatitle = '${details.metatitle}' AND metakeywords = '${details.metakeyword}' AND metadescription = '${details.metadesc}' `;
       //con.query(sql, function (err, result) {
-        console.log("last errrrr");
-        if (err) throw err;
+        // console.log("last errrrr");
+        // if (err) throw err;
         console.log("last errrrr dnt run");
         console.log("summernote added", result);
         res.redirect("back");
@@ -499,7 +502,6 @@ app.post("/usersblogdata", upload.single("image"), async (req, res) => {
     var date = new Date().toLocaleDateString();
 
     try {
-//incomplete 
       let userblog= await new USERBLOG({ email:details.email,
         title: details.title,
         url:details.url,
@@ -531,7 +533,7 @@ app.post("/usersblogdata", upload.single("image"), async (req, res) => {
       // ];
       //con.query(sql, [values], function (err, result) {
       //  if (err) throw err;
-        console.log("data inserted!!!", result);
+       // console.log("data inserted!!!", result);
      // });
     } catch (err) {
       console.log(err);
@@ -571,32 +573,49 @@ app.post("/usersblogdata", upload.single("image"), async (req, res) => {
     var date = new Date().toLocaleDateString();
 
     try {
-      var sql = `INSERT INTO usersblog (email,title, url, category, type, shortdescription, image, authorname, metatitle, metakeywords, metadescription,date) VALUES ?`;
-      var values = [
-        [
-          details.email,
-          details.title,
-          details.url,
-          details.category,
-          details.select,
-          details.shortdesc,
-          req.file.originalname,
-          details.author,
-          details.metatitle,
-          details.metakeyword,
-          details.metadesc,
-          date,
-        ],
-      ];
-      con.query(sql, [values], function (err, result) {
-        if (err) throw err;
-        console.log("data inserted!!!", result);
-      });
+
+      let userblog= await new USERBLOG({ email:details.email,
+        title: details.title,
+        url:details.url,
+        category:details.category,
+        type:details.select,
+        shortdescription:details.shortdesc,
+        image:"",
+        authorname:details.author,
+        metatitle:details.metatitle,
+        metakeywords:details.metakeyword,
+        metadescription: details.metadesc,
+        date:date,})
+      userblog.save()
+
+      // var sql = `INSERT INTO usersblog (email,title, url, category, type, shortdescription, image, authorname, metatitle, metakeywords, metadescription,date) VALUES ?`;
+      // var values = [
+      //   [
+      //     details.email,
+      //     details.title,
+      //     details.url,
+      //     details.category,
+      //     details.select,
+      //     details.shortdesc,
+      //     req.file.originalname,
+      //     details.author,
+      //     details.metatitle,
+      //     details.metakeyword,
+      //     details.metadesc,
+      //     date,
+      //   ],
+      // ];
+      // con.query(sql, [values], function (err, result) {
+      //   if (err) throw err;
+      //   console.log("data inserted!!!", result);
+      // });
     } catch (err) {
       console.log(err);
     }
   }
 });
+//------------------------USERBLOG-----------------------------
+
 
 //catergory RElated
 
@@ -637,7 +656,7 @@ app.post("/addCategory",async (req, res) => {
        // var sql = `INSERT INTO category (category) VALUES ('${details.cat}')`;
        // con.query(sql, function (err, result) {
         //  if (err) throw err;
-        let category=new CATEGORY({category:details.cat})
+        let category=new CATEGORY({category:details.cat.toLowerCase()})
         category.save()//saving category in db
           console.log("category inserted!!!");
           res.send({ message: "categoryAdded" });
@@ -649,7 +668,7 @@ app.post("/addCategory",async (req, res) => {
           console.log("detcat", details.cat);
           console.log("rescat", result[i].category);
 
-          if (result[i].category == details.cat) {
+          if (result[i].category == details.cat.toLowerCase()) {
             console.log("it exists at", result[i]);
             answer += "exist";
             res.send({ message: "alreadyExists" }); //putting this will give error that cannoit set header after they are snet ,this might be bcz of the loop,,so whne the it loops for the first time and and its not the same ,,they are counting it asthe first time that res.send has apppear
@@ -663,7 +682,7 @@ app.post("/addCategory",async (req, res) => {
         //  var sql = `INSERT INTO category (category) VALUES ('${details.cat}')`;
         //  con.query(sql, function (err, result) {
          //   if (err) throw err;
-         let category=new CATEGORY({category:details.cat})
+         let category=new CATEGORY({category:details.cat.toLowerCase()})
          category.save()//saving category in db
          //console.log("categories ",r)
             console.log("category inserted!!!");

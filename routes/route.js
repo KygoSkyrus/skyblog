@@ -1,6 +1,5 @@
 const express = require("express");
 const router = express("router");
-const mysql = require("mysql");
 const nodemailer = require("nodemailer");
 var bodyParser = require("body-parser");
 var urlencodedParser = bodyParser.urlencoded({ extended: false });

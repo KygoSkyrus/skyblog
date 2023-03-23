@@ -12,7 +12,6 @@ const userblogSchema = new mongoose.Schema({
     },
     detail:{
         type: String,
-        required: true
     },
     url:{
         type: String,
@@ -36,7 +35,6 @@ const userblogSchema = new mongoose.Schema({
     },
     shortdescription:{
         type: String,
-        required: true
     },
     metatitle:{
         type: String,

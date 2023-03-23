@@ -1,6 +1,5 @@
 const express = require("express");
 const router = express("router");
-const mysql = require("mysql");
 
 const CATEGORY = require("../schema/category")
 

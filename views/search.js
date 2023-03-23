@@ -30,7 +30,7 @@ function getBlogFromSearch() {
             }
 
             for (var i = 0; i < data.length; i++) {
-                resultsdata += `<a href="/blogs/${data[i].url}" target="_blank"><section class="results-data">${data[i].title}</section></a>`;
+                resultsdata += `<a href="/${data[i].url}" target="_blank"><section class="results-data">${data[i].title}</section></a>`;
             }
             $(".results").html(resultsdata);
 
