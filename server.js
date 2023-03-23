@@ -130,44 +130,20 @@ app.post("/blogdata", upload.single("image"),async (req, res) => {
   console.log("DD", details);
 
   const tempPath = req.file.path;
-  console.log('temppatrh',tempPath);
- 
+  console.log('temppath',tempPath);
 
-//this takes the path of the imgae from local machine(ie temppath) and the name by which it will be stored on cloud
-//const res1 =await cloudinary.uploader.upload( tempPath , {public_id: req.file.originalname})
-//console.log('res1',res1)
-//let imgUrl=res1.secure_url;
-const metadata = {
-  metadata: {
-    // This line is very important. It's to create a download token.
-    firebaseStorageDownloadTokens: uuid()
-  },
-  contentType: 'image/png',
-  cacheControl: 'public, max-age=31536000',
-};
-const name = saltedMd5(req.file.originalname, 'SUPER-S@LT!')
-const fileName = name + path.extname(req.file.originalname)
-console.log('path',fileName)
-console.log('path2',req.file.destination)
-console.log('path2',req.file.originalname)
-console.log('pathfinal',req.file.destination+'/'+req.file.originalname)
 
-let y="./logo.png"
-//second way::working but you need exact path of the image
-//  let x =await bucket.upload(y, {
-//   // Support for HTTP requests made with `Accept-Encoding: gzip`
-//   gzip: true,
-//   metadata: metadata,
-// });
 
+//firebase storage
+// const file = getStorage().bucket().file(req.file.originalname);
+// await file.save(req.file.buffer, { contentType: 'image/png'});
 //first way::WORKING
-let x=await bucket.file(fileName).createWriteStream().end(req.file.buffer)
+// let x=await bucket.file(fileName).createWriteStream().end(req.file.buffer)
+// console.log('piblicurl', file.publicUrl());
+// console.log('piblicurl', file);
+// console.log('piblicurl', file);
 
-console.log('xxxxxxxxxxx',x)
-  // const targetPath = path.join(
-  //   __dirname,
-  //   `./views/upload/${req.file.originalname}`
-  // );
+
 
   // for uploading image  file in the folder(only the .png etc files will be saved)
   // if (    
@@ -197,20 +173,29 @@ console.log('xxxxxxxxxxx',x)
 
    try {
 
-    // let blog= await new BLOG({ 
-    //   title: details.title,
-    //   url:details.url,
-    //   category:details.category,
-    //   type:details.select,
-    //   shortdescription:details.shortdesc,
-    //   authorname:details.author,
-    //   image:imgUrl,
-    //   metatitle:details.metatitle,
-    //   metakeywords:details.metakeyword,
-    //   metadescription: details.metadesc,
-    //   date:date,
-    // status:"checked"})
-    // blog.save().then(res=>console.log('res',res))
+
+    //this takes the path of the imgae from local machine(ie temppath) and the name by which it will be stored on cloud
+// const res1 =await cloudinary.uploader.upload( req.file.buffer , {public_id: req.file.originalname})
+// console.log('res1',res1)
+// let imgUrl=res1.secure_url;
+
+
+
+
+    let blog= await new BLOG({ 
+      title: details.title,
+      url:details.url,
+      category:details.category,
+      type:details.select,
+      shortdescription:details.shortdesc,
+      authorname:details.author,
+      image:"",
+      metatitle:details.metatitle,
+      metakeywords:details.metakeyword,
+      metadescription: details.metadesc,
+      date:date,
+    status:"checked"})
+    blog.save().then(res=>console.log('res',res))
 
 
     //var sql = `INSERT INTO blog (title, url, category, type, shortdescription, image, authorname, metatitle, metakeywords, metadescription,date, status) VALUES ?`;
@@ -238,8 +223,8 @@ console.log('xxxxxxxxxxx',x)
     console.log(err);
   }
 });
-
-//deleting blog records
+//https://picsum.photos/400/300
+//deleting blog records q
 app.post("/deleteblog", async (req, res) => {
   const details = req.body;
   console.log(details);
@@ -248,16 +233,20 @@ app.post("/deleteblog", async (req, res) => {
     // var sql = `DELETE FROM blog WHERE id = ${details.id}`;
     // con.query(sql, function (err, result) {
     //   if (err) throw err;
+
+    //mongodb
     let resp=await BLOG.deleteOne({_id:details.id})
    console.log(resp)
        console.log("Number of records deleted: " + resp.deletedCount);
 
 
        //for deleting image from cloud
-       let resp1=await cloudinary.uploader.destroy(resp.image, function(error,result) {
-        console.log(result, error) 
-      }) 
-console.log('del resp1',resp1)
+      //  let resp1=await cloudinary.uploader.destroy("WhatsApp Image 2023-03-09 at 12.43.24 PM", function(error,result) {
+      //   console.log(result, error) 
+      // }) 
+     //console.log('del resp1',resp1)
+
+
       //res.redirect("/blogs-management");
        //res.redirect(req.originalUrl)
     //});
@@ -314,7 +303,7 @@ app.post("/singleblog", async (req, res) => {
 app.post("/prev", async (req, res) => {
   const details = req.body;
   console.log("prev id", details);
-
+ 
   try {
     con.query(`SELECT * FROM blog `, function (err, result, fields) {
       if (err) throw err;

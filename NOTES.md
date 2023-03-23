@@ -17,3 +17,4 @@ NOTE::
 
 ## todo
 - add loader when like when the admin posts a blog bcz there it waits 4 sec for summernote
+- fix category lowercase issue {it should be either in lowercase or uppercase}
